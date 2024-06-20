@@ -107,7 +107,6 @@ private:
         window = glfwCreateWindow(WIDTH, HEIGHT, "Vulkan", nullptr, nullptr);
         glfwSetWindowUserPointer(window, this);
         glfwSetFramebufferSizeCallback(window, framebufferResizeCallback);
-        // Task 03
         glfwSetKeyCallback(window, key_callback);
         glfwSetInputMode(window, GLFW_STICKY_MOUSE_BUTTONS, 1);
         glfwSetCursorPosCallback(window, cursorPosition_callback);
@@ -158,7 +157,6 @@ private:
     void mainLoop() {
         while (!glfwWindowShouldClose(window)) {
             glfwPollEvents();
-            // Task 03 translateViewMatrix();
             translateViewMatrix();
             drawFrame();
         }

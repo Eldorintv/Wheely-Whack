@@ -22,6 +22,8 @@ static bool m_usePrevCursorPosition{ false };
 
 static glm::mat4 viewMatrix = glm::lookAt(glm::vec3(2.0f, 2.0f, 2.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 1.0f));
 
+
+// camera movement
 static void translateViewMatrix() {
     glm::mat4 translate(1.0f);
 
