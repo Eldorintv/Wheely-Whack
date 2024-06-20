@@ -2,6 +2,7 @@
 #define TINYOBJLOADER_IMPLEMENTATION
 
 #include "WWInclude.h"
+#include "WWencoder.h"
 
 
 const uint32_t WIDTH = 800;
@@ -1031,8 +1032,9 @@ private:
 };
 
 int main() {
-    //_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
     HelloTriangleApplication app;
+
+    //Encoder enc;
 
     try {
         app.run();
@@ -1041,6 +1043,5 @@ int main() {
         std::cerr << e.what() << std::endl;
         return EXIT_FAILURE;
     }
-    //_CrtDumpMemoryLeaks();
     return EXIT_SUCCESS;
 }
