@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Resource Files\Dependencies">
+      <UniqueIdentifier>{89441edb-f635-4128-b20b-0268622d325b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WheelyWonkaS_main.cpp">
@@ -23,5 +26,10 @@
     <ClInclude Include="WWInclude.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="glfw\glfw-3.2.1.bin.WIN64\lib-vc2015\glfw3.dll">
+      <Filter>Resource Files\Dependencies</Filter>
+    </CopyFileToFolders>
   </ItemGroup>
 </Project>
