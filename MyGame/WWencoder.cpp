@@ -1,5 +1,6 @@
 #include "WWencoder.h"
 
+
 UDPSend6 sender;
 //UDPReceive6 receiver;
 SwsContext* ctx = nullptr;

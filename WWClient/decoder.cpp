@@ -168,7 +168,7 @@ void Decoder::readParseDecode(char* buffer, int len) {
 
 
 uint8_t* Decoder::decode(AVCodecContext* dec_ctx, AVFrame* frame, AVPacket* pkt) {
-	char buf[1024];
+	//char buf[1024];
 	int ret;
 
 	ret = avcodec_send_packet(dec_ctx, pkt);
