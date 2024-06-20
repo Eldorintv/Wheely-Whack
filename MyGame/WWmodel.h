@@ -1,5 +1,5 @@
-#ifndef MODEL_H
-#define MODEL_H
+#ifndef WWMODEL_H
+#define WWMODEL_H
 
 #include "WWInclude.h"
 
