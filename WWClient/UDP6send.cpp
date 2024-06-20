@@ -1,6 +1,3 @@
-
-
-
 #include "UDP6Send.h"
 
 extern "C" {

@@ -6,5 +6,14 @@
 #include "WWmodel.h"
 #include "WWtexture.h"
 
+extern "C" {
+#include "libavutil/imgutils.h"
+#include "libavcodec/avcodec.h"
+#include "libswscale/swscale.h"
+#include "libavformat/avformat.h"
+#include "libavutil/opt.h"
+#include "libavutil/timestamp.h"
+}
+
 #endif
 
