@@ -16,6 +16,18 @@
     <Filter Include="Resource Files\Dependencies">
       <UniqueIdentifier>{89441edb-f635-4128-b20b-0268622d325b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\media">
+      <UniqueIdentifier>{13ee64cd-029b-41d1-928b-b8875e3ea9c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\media\models">
+      <UniqueIdentifier>{600ec501-f356-405c-b800-125aa5ba5e1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\media\textures">
+      <UniqueIdentifier>{743b22dc-00ff-4061-8335-6f7715d1ca62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\media\shaders">
+      <UniqueIdentifier>{7de05cee-17b5-405c-92e6-e42ad4fc8a08}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WheelyWonkaS_main.cpp">
@@ -31,5 +43,59 @@
     <CopyFileToFolders Include="glfw\glfw-3.2.1.bin.WIN64\lib-vc2015\glfw3.dll">
       <Filter>Resource Files\Dependencies</Filter>
     </CopyFileToFolders>
+  </ItemGroup>
+  <ItemGroup>
+    <Object Include="media\models\cube_medium.obj">
+      <Filter>Resource Files\media\models</Filter>
+    </Object>
+    <Object Include="media\models\cube_small.obj">
+      <Filter>Resource Files\media\models</Filter>
+    </Object>
+    <Object Include="media\models\sphere.obj">
+      <Filter>Resource Files\media\models</Filter>
+    </Object>
+    <Object Include="media\models\viking_room.obj">
+      <Filter>Resource Files\media\models</Filter>
+    </Object>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="media\textures\paper.jpg">
+      <Filter>Resource Files\media\textures</Filter>
+    </Image>
+    <Image Include="media\textures\viking_room.png">
+      <Filter>Resource Files\media\textures</Filter>
+    </Image>
+    <Image Include="media\textures\water.png">
+      <Filter>Resource Files\media\textures</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="media\shaders\26_shader_depth.frag">
+      <Filter>Resource Files\media\shaders</Filter>
+    </None>
+    <None Include="media\shaders\26_shader_depth.vert">
+      <Filter>Resource Files\media\shaders</Filter>
+    </None>
+    <None Include="media\shaders\bp_shader.frag">
+      <Filter>Resource Files\media\shaders</Filter>
+    </None>
+    <None Include="media\shaders\bp_shader.vert">
+      <Filter>Resource Files\media\shaders</Filter>
+    </None>
+    <None Include="media\shaders\compile_shaders.bat">
+      <Filter>Resource Files\media\shaders</Filter>
+    </None>
+    <None Include="media\shaders\frag.spv">
+      <Filter>Resource Files\media\shaders</Filter>
+    </None>
+    <None Include="media\shaders\fragBP.spv">
+      <Filter>Resource Files\media\shaders</Filter>
+    </None>
+    <None Include="media\shaders\vert.spv">
+      <Filter>Resource Files\media\shaders</Filter>
+    </None>
+    <None Include="media\shaders\vertBP.spv">
+      <Filter>Resource Files\media\shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>
