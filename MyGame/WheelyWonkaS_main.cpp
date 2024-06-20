@@ -1,4 +1,8 @@
+#define STB_IMAGE_IMPLEMENTATION
+#define TINYOBJLOADER_IMPLEMENTATION
+
 #include "WWInclude.h"
+
 
 const uint32_t WIDTH = 800;
 const uint32_t HEIGHT = 600;

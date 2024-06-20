@@ -15,5 +15,17 @@ extern "C" {
 #include "libavutil/timestamp.h"
 }
 
+#include "..\WWClient\UDP6send.h"
+#include "..\WWClient\UDP6receive.h"
+
+// std::min did not work due to some macro overwriting (from UDPsend6.h), so undefining min max here 
+#ifdef min
+#undef min
+#endif
+
+#ifdef max
+#undef max
+#endif
+
 #endif
 

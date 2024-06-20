@@ -63,7 +63,7 @@ int UDPSend6::send(char* buffer, int len) {
 	size_t bytesSent{ 0 };
 
 	while (bytesSent < len) {
-		int packetLength = (len - bytesSent) < MAX_PACKET_SIZE ? (len - bytesSent) : MAX_PACKET_SIZE;
+		int packetLength = (len - bytesSent) < MAX_PACKET_SIZE ? static_cast<int>(len - bytesSent) : MAX_PACKET_SIZE;
 
 		memcpy(sendbuffer, &header, sizeof(header));
 		memcpy(sendbuffer + sizeof(header), buffer + bytesSent, packetLength);

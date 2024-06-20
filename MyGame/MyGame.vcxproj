@@ -19,9 +19,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\WWClient\UDP6send.cpp" />
     <ClCompile Include="WheelyWonkaS_main.cpp" />
+    <ClCompile Include="WWencoder.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="WWencoder.h" />
     <ClInclude Include="WWkeybinds.h" />
     <ClInclude Include="WWmodel.h" />
     <ClInclude Include="WWhelpers.h" />
@@ -158,14 +161,14 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>glfw\glfw-3.2.1.bin.WIN64\include;glm;stb;$(VULKAN_SDK)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\WWClient\external\SFML\SFML-2.6.1\include;..\WWClient\external\threadpool;..\WWClient\external\glfw\include;..\WWClient\external\Assimp\include;..\WWClient\external\ffmpeg\include;..\WWClient\external\irrKlang\include;glfw\glfw-3.2.1.bin.WIN64\include;glm;stb;$(VULKAN_SDK)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(VULKAN_SDK)\Lib;glfw\glfw-3.2.1.bin.WIN64\lib-vc2015;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>vulkan-1.lib;glfw3dll.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(VULKAN_SDK)\Lib;glfw\glfw-3.2.1.bin.WIN64\lib-vc2015;..\WWClient\external\SFML\SFML-2.6.1\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>..\WWClient\external\Assimp\lib\x64\Release\assimp-vc140-mt.lib;..\WWClient\external\ffmpeg\lib\avcodec.lib;..\WWClient\external\ffmpeg\lib\avformat.lib;..\WWClient\external\ffmpeg\lib\avutil.lib;..\WWClient\external\ffmpeg\lib\swscale.lib;..\WWClient\external\ffmpeg\lib\swresample.lib;..\WWClient\external\glfw\lib-vc2022\glfw3.lib;kernel32.lib;user32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;..\WWClient\external\SFML\SFML-2.6.1\lib\sfml-graphics.lib;..\WWClient\external\SFML\SFML-2.6.1\lib\sfml-audio.lib;..\WWClient\external\SFML\SFML-2.6.1\lib\sfml-window.lib;..\WWClient\external\SFML\SFML-2.6.1\lib\sfml-system.lib;vulkan-1.lib;glfw3dll.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -176,7 +179,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>glfw\glfw-3.2.1.bin.WIN64\include;glm;stb;$(VULKAN_SDK)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\WWClient\external\SFML\SFML-2.6.1\include;..\WWClient\external\threadpool;..\WWClient\external\glfw\include;..\WWClient\external\Assimp\include;..\WWClient\external\ffmpeg\include;..\WWClient\external\irrKlang\include;glfw\glfw-3.2.1.bin.WIN64\include;glm;stb;$(VULKAN_SDK)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <DebugInformationFormat>None</DebugInformationFormat>
     </ClCompile>
@@ -185,8 +188,8 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(VULKAN_SDK)\Lib;glfw\glfw-3.2.1.bin.WIN64\lib-vc2015;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>vulkan-1.lib;glfw3dll.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(VULKAN_SDK)\Lib;glfw\glfw-3.2.1.bin.WIN64\lib-vc2015;..\WWClient\external\SFML\SFML-2.6.1\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>..\WWClient\external\Assimp\lib\x64\Release\assimp-vc140-mt.lib;..\WWClient\external\ffmpeg\lib\avcodec.lib;..\WWClient\external\ffmpeg\lib\avformat.lib;..\WWClient\external\ffmpeg\lib\avutil.lib;..\WWClient\external\ffmpeg\lib\swscale.lib;..\WWClient\external\ffmpeg\lib\swresample.lib;..\WWClient\external\glfw\lib-vc2022\glfw3.lib;kernel32.lib;user32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;..\WWClient\external\SFML\SFML-2.6.1\lib\sfml-graphics.lib;..\WWClient\external\SFML\SFML-2.6.1\lib\sfml-audio.lib;..\WWClient\external\SFML\SFML-2.6.1\lib\sfml-window.lib;..\WWClient\external\SFML\SFML-2.6.1\lib\sfml-system.lib;vulkan-1.lib;glfw3dll.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
