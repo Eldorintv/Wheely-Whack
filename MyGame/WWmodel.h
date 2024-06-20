@@ -1,7 +1,7 @@
 #ifndef WWMODEL_H
 #define WWMODEL_H
 
-#include "WWInclude.h"
+#include "WWhelpers.h"
 
 extern VkRenderPass renderPass;
 extern VkDescriptorSetLayout descriptorSetLayout;
@@ -150,8 +150,8 @@ private:
     }
 
     void createGraphicsPipeline() {
-        auto vertShaderCode = readFile("shaders/vertBP.spv");
-        auto fragShaderCode = readFile("shaders/fragBP.spv");
+        auto vertShaderCode = readFile("../MyGame/media/shaders/vertBP.spv");
+        auto fragShaderCode = readFile("../MyGame/media/shaders/fragBP.spv");
 
         VkShaderModule vertShaderModule = createShaderModule(vertShaderCode);
         VkShaderModule fragShaderModule = createShaderModule(fragShaderCode);

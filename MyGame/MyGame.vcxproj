@@ -22,7 +22,11 @@
     <ClCompile Include="WheelyWonkaS_main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="WWkeybinds.h" />
+    <ClInclude Include="WWmodel.h" />
+    <ClInclude Include="WWhelpers.h" />
     <ClInclude Include="WWInclude.h" />
+    <ClInclude Include="WWtexture.h" />
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="glfw\glfw-3.2.1.bin.WIN64\lib-vc2015\glfw3.dll">

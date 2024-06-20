@@ -1,7 +1,7 @@
 #ifndef WWTEXTURE_H
 #define WWTEXTURE_H
 
-#include "WWInclude.h"
+#include "WWhelpers.h"
 
 class Texture : VulkanHelper {
 public:

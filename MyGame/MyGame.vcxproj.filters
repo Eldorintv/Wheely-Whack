@@ -38,6 +38,18 @@
     <ClInclude Include="WWInclude.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="WWhelpers.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WWmodel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WWtexture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WWkeybinds.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="glfw\glfw-3.2.1.bin.WIN64\lib-vc2015\glfw3.dll">
