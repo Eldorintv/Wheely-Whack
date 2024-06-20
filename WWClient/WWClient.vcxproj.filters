@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Resource Files\Dependencies">
+      <UniqueIdentifier>{e07098ce-aef3-4faa-af08-ebc31e5c45d2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="UDP6receive.h">
@@ -21,10 +24,63 @@
     <ClInclude Include="decoder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="videoDisplay.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="UDP6send.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="UDP6receive.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="decoder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="reciever_main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UDP6send.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="external\ffmpeg\bin\avcodec-60.dll">
+      <Filter>Resource Files\Dependencies</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="external\ffmpeg\bin\avdevice-60.dll">
+      <Filter>Resource Files\Dependencies</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="external\ffmpeg\bin\avfilter-9.dll">
+      <Filter>Resource Files\Dependencies</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="external\ffmpeg\bin\avformat-60.dll">
+      <Filter>Resource Files\Dependencies</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="external\ffmpeg\bin\avutil-58.dll">
+      <Filter>Resource Files\Dependencies</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="external\ffmpeg\bin\postproc-57.dll">
+      <Filter>Resource Files\Dependencies</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="external\SFML\SFML-2.6.1\bin\sfml-audio-2.dll">
+      <Filter>Resource Files\Dependencies</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="external\SFML\SFML-2.6.1\bin\sfml-graphics-2.dll">
+      <Filter>Resource Files\Dependencies</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="external\SFML\SFML-2.6.1\bin\sfml-system-2.dll">
+      <Filter>Resource Files\Dependencies</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="external\SFML\SFML-2.6.1\bin\sfml-window-2.dll">
+      <Filter>Resource Files\Dependencies</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="external\ffmpeg\bin\swresample-4.dll">
+      <Filter>Resource Files\Dependencies</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="external\ffmpeg\bin\swscale-7.dll">
+      <Filter>Resource Files\Dependencies</Filter>
+    </CopyFileToFolders>
   </ItemGroup>
 </Project>
