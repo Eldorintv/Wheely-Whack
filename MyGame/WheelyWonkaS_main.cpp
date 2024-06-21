@@ -171,6 +171,8 @@ private:
         createSyncObjects();
 
         createStagingBuffer();
+        // start process of encoder
+        encoder.codecReady = encoder.setUpCodec(swapChainExtent.width, swapChainExtent.height);
     }
 
     void mainLoop() {
@@ -813,7 +815,7 @@ private:
     }
 
     void createStagingBuffer() {
-        commandBuffer = beginSingleTimeCommands();
+        //commandBuffer = beginSingleTimeCommands();
         bufferSize = swapChainExtent.width * swapChainExtent.height * 4;
 
         createBuffer(bufferSize, VK_BUFFER_USAGE_TRANSFER_DST_BIT, VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT, stagingBuffer, stagingBufferMemory);
@@ -895,6 +897,8 @@ private:
         auto now = std::chrono::system_clock::now();
         if (now - lastExecuted >= FPS_INTERVAL) {
 
+            // TO DO
+            // maybe make multi - use command buffer?
             commandBuffer = beginSingleTimeCommands();
             transitionImageLayout(swapChainImages[imageIndex], VK_FORMAT_B8G8R8A8_SRGB, VK_IMAGE_LAYOUT_PRESENT_SRC_KHR, VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL);
 
@@ -908,9 +912,9 @@ private:
             // here encode
             uint8_t* mappedData = static_cast<uint8_t*>(data);
 
-            if (!encoder.codecReady) {
-                encoder.codecReady = encoder.setUpCodec(swapChainExtent.width, swapChainExtent.height);
-            }
+            //if (!encoder.codecReady) {
+            //    encoder.codecReady = encoder.setUpCodec(swapChainExtent.width, swapChainExtent.height);
+            //}
 
             encoder.encodeFrameFromDataImage(mappedData);
             lastExecuted = std::chrono::system_clock::now();

@@ -19,5 +19,8 @@ extern "C" {
 }
 
 #include <regex>
+#include <queue>
+#include <mutex>
+#include <condition_variable>
 
 #endif
