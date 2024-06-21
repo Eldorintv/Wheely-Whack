@@ -39,6 +39,9 @@
     <ClCompile Include="..\WWClient\UDP6send.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\WWClient\UDP6receive.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WWInclude.h">

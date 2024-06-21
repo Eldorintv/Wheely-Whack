@@ -1082,10 +1082,52 @@ private:
     }
 };
 
+
+extern std::chrono::milliseconds FPS_INTERVAL;
+
+void receiveReport() {
+    startWinsock();
+    UDPReceive6 receiver;
+    receiver.init(51337);
+
+    while (true) {
+        char buf[65000];
+        double ptime;
+        auto ret = receiver.receive(buf, sizeof buf, &ptime);
+        buf[ret] = '\0';
+        printf("Receiver Report: \n% s", buf);
+
+        std::string stringBuf(buf);
+        std::string packetLostString = "packet loss rate: ";
+        std::regex format(packetLostString + R"(\s*([\d]+\.[\d]{2}))"); // do not touch anymore
+
+        std::smatch match;
+        if (std::regex_search(stringBuf, match, format)) {
+            if (match.size() == 2) {
+                std::string packetsLostRate = match[1];
+                double rate = std::stod(packetsLostRate);
+
+                //std::cout << "This is the lost packet rate: " << rate << "\n";
+                if (rate > 5) {
+                    //reduces the fps if loss rate is higher than 5%
+                    int msDelay = 50;
+                    FPS_INTERVAL = std::chrono::milliseconds(msDelay) + FPS_INTERVAL;
+                }
+                // only goes one way for now
+
+            }
+        }
+
+        std::this_thread::sleep_for(std::chrono::seconds(3));
+    }
+    WSACleanup();
+}
+
 int main() {
+
     HelloTriangleApplication app;
 
-    //Encoder enc;
+    std::thread receiveThread(receiveReport);
 
     try {
         app.run();
@@ -1094,5 +1136,8 @@ int main() {
         std::cerr << e.what() << std::endl;
         return EXIT_FAILURE;
     }
+
+    receiveThread.join();
+
     return EXIT_SUCCESS;
 }

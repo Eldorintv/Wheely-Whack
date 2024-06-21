@@ -91,7 +91,6 @@ static void sendReceiverReport(int len, UDPReceive6& receiver) {
 }
 
 void receiveFrames(UDPReceive6& receiver) {
-	std::cout << "Received something?\n";
 
 	char buf[65'000];
 	// might need to increase, moved to heap and using memcpy_s
@@ -103,7 +102,6 @@ void receiveFrames(UDPReceive6& receiver) {
 	//int packetCounter{ 1 };
 
 	while (true) {
-		std::cout << "While startet\n";
 		double ptime;
 		auto ret = receiver.receive(buf, sizeof buf, &ptime);
 		RTHeader_t* pheader = (RTHeader_t*)buf;
@@ -181,7 +179,6 @@ void queueToUINT8() {
 	int pauseBetweenQueuePopInMiliseconds{ 20 };
 
 	while (true) {
-		std::cout << "This while quuueue TO UINT8 works\n";
 		std::vector<char> frame;
 
 		{

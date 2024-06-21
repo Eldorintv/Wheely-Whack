@@ -18,4 +18,6 @@ extern "C" {
 #include "libavutil/timestamp.h"
 }
 
+#include <regex>
+
 #endif

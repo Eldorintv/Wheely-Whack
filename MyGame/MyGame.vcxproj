@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\WWClient\UDP6receive.cpp" />
     <ClCompile Include="..\WWClient\UDP6send.cpp" />
     <ClCompile Include="WheelyWonkaS_main.cpp" />
     <ClCompile Include="WWencoder.cpp" />
