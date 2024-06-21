@@ -107,6 +107,12 @@ private:
 
     std::vector<Model> models;
 
+    VkBuffer stagingBuffer;
+    VkDeviceMemory stagingBufferMemory;
+    VkDeviceSize bufferSize;
+
+    VkBufferImageCopy region = {};
+
    
 
 
@@ -163,6 +169,17 @@ private:
         createDescriptorSets();
         createCommandBuffers();
         createSyncObjects();
+        bufferSize = swapChainExtent.width * swapChainExtent.height * 4;
+        createBuffer(bufferSize, VK_BUFFER_USAGE_TRANSFER_DST_BIT, VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT, stagingBuffer, stagingBufferMemory);
+        region.bufferOffset = 0;
+        region.bufferRowLength = 0;
+        region.bufferImageHeight = 0;
+        region.imageSubresource.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
+        region.imageSubresource.mipLevel = 0;
+        region.imageSubresource.baseArrayLayer = 0;
+        region.imageSubresource.layerCount = 1;
+        region.imageOffset = { 0, 0, 0 };
+        region.imageExtent = { swapChainExtent.width, swapChainExtent.height, 1 };
     }
 
     void mainLoop() {
@@ -219,6 +236,10 @@ private:
             vkDestroyFence(device, inFlightFences[i], nullptr);
         }
 
+        // stagingBuffer
+        vkDestroyBuffer(device, stagingBuffer, nullptr);
+        vkFreeMemory(device, stagingBufferMemory, nullptr);
+
         vkDestroyCommandPool(device, commandPool, nullptr);
 
         vkDestroyDevice(device, nullptr);
@@ -233,6 +254,8 @@ private:
         glfwDestroyWindow(window);
 
         glfwTerminate();
+
+        
     }
 
     void recreateSwapChain() {
@@ -860,48 +883,38 @@ private:
             throw std::runtime_error("failed to present swap chain image!");
         }
 
-        VkBuffer stagingBuffer;
-        VkDeviceMemory stagingBufferMemory;
-        VkDeviceSize bufferSize = swapChainExtent.width * swapChainExtent.height * 4;
-        createBuffer(bufferSize, VK_BUFFER_USAGE_TRANSFER_DST_BIT, VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT, stagingBuffer, stagingBufferMemory);
-
-        VkCommandBuffer commandBuffer = beginSingleTimeCommands();
-
-        VkBufferImageCopy region = {};
-        region.bufferOffset = 0;
-        region.bufferRowLength = 0;
-        region.bufferImageHeight = 0;
-        region.imageSubresource.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
-        region.imageSubresource.mipLevel = 0;
-        region.imageSubresource.baseArrayLayer = 0;
-        region.imageSubresource.layerCount = 1;
-        region.imageOffset = { 0, 0, 0 };
-        region.imageExtent = { swapChainExtent.width, swapChainExtent.height, 1 };
-
-        transitionImageLayout(swapChainImages[imageIndex], VK_FORMAT_B8G8R8A8_SRGB, VK_IMAGE_LAYOUT_PRESENT_SRC_KHR, VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL);
-
-        vkCmdCopyImageToBuffer(commandBuffer, swapChainImages[imageIndex], VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL, stagingBuffer, 1, &region);
-
-        endSingleTimeCommands(commandBuffer);
-
-        void* data;
-        vkMapMemory(device, stagingBufferMemory, 0, bufferSize, 0, &data);
-
-        // here encode
-        uint8_t* mappedData = static_cast<uint8_t*>(data);
-
-        if (!encoder.codecReady) {
-            encoder.codecReady = encoder.setUpCodec(swapChainExtent.width, swapChainExtent.height);
-        }
         auto now = std::chrono::system_clock::now();
         if (now - lastExecuted >= FPS_INTERVAL) {
+
+            
+
+            VkCommandBuffer commandBuffer = beginSingleTimeCommands();
+
+            transitionImageLayout(swapChainImages[imageIndex], VK_FORMAT_B8G8R8A8_SRGB, VK_IMAGE_LAYOUT_PRESENT_SRC_KHR, VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL);
+
+            vkCmdCopyImageToBuffer(commandBuffer, swapChainImages[imageIndex], VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL, stagingBuffer, 1, &region);
+
+            endSingleTimeCommands(commandBuffer);
+
+            void* data;
+            vkMapMemory(device, stagingBufferMemory, 0, bufferSize, 0, &data);
+
+            // here encode
+            uint8_t* mappedData = static_cast<uint8_t*>(data);
+
+            if (!encoder.codecReady) {
+                encoder.codecReady = encoder.setUpCodec(swapChainExtent.width, swapChainExtent.height);
+            }
+
             encoder.encodeFrameFromDataImage(mappedData);
             lastExecuted = std::chrono::system_clock::now();
-        }
 
-        vkUnmapMemory(device, stagingBufferMemory);
-        vkDestroyBuffer(device, stagingBuffer, nullptr);
-        vkFreeMemory(device, stagingBufferMemory, nullptr);
+            vkUnmapMemory(device, stagingBufferMemory);
+
+            //vkUnmapMemory(device, stagingBufferMemory);
+            //vkDestroyBuffer(device, stagingBuffer, nullptr);
+            //vkFreeMemory(device, stagingBufferMemory, nullptr);
+        }
 
         currentFrame = (currentFrame + 1) % MAX_FRAMES_IN_FLIGHT;
     }
