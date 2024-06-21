@@ -905,7 +905,8 @@ private:
 
         auto now = std::chrono::system_clock::now();
         if (now - lastExecuted >= FPS_INTERVAL) {
-
+            lastExecuted = now;
+            std::cout << "in draw and encoding now\n";
             // TO DO
             // maybe make multi - use command buffer?
             commandBufferImageCopy = beginSingleTimeCommands();
@@ -924,10 +925,11 @@ private:
             {
                 std::lock_guard<std::mutex> lock(encQueueMutex);
                 encQueue.push(std::move(mappedData));
+                std::cout << "in draw and encoding now\n";
             }
             encQueueCondition.notify_one();
 
-            lastExecuted = std::chrono::system_clock::now();
+            //lastExecuted = std::chrono::system_clock::now();
 
             vkUnmapMemory(device, stagingBufferMemory);
 
@@ -1128,7 +1130,7 @@ private:
             encoder.encodeFrameFromDataImage(frame);
 
             // checks queue twice as fast + sanity 1 ms
-            std::this_thread::sleep_for(std::chrono::milliseconds((FPS_INTERVAL / 2) + std::chrono::milliseconds(1)));
+            //std::this_thread::sleep_for(std::chrono::milliseconds((FPS_INTERVAL / 2) + std::chrono::milliseconds(1)));
 
         }
 
