@@ -117,7 +117,7 @@ void encode(AVCodecContext* enc_ctx, AVFrame* frame, AVPacket* pkt,
 		}
 
 
-		//std::cout << "Sending with UDP: packet " << pkt->pts << " size:" << pkt->size << "\n";
+		std::cout << "Sending with UDP: packet " << pkt->pts << " size:" << pkt->size << "\n";
 		sender.send((char*)pkt->data, pkt->size);
 
 

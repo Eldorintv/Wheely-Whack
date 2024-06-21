@@ -18,6 +18,10 @@ VkDescriptorSetLayout descriptorSetLayout;
 
 const int MAX_FRAMES_IN_FLIGHT = 2;
 
+Encoder encoder;
+std::chrono::milliseconds FPS_INTERVAL(30);
+auto lastExecuted = std::chrono::system_clock::now();
+
 const std::vector<const char*> validationLayers = {
     "VK_LAYER_KHRONOS_validation"
 };
@@ -102,6 +106,8 @@ private:
     std::vector<Texture> textures;
 
     std::vector<Model> models;
+
+   
 
 
     void initWindow() {
@@ -744,6 +750,7 @@ private:
 
         vkCmdEndRenderPass(commandBuffer);
 
+
         if (vkEndCommandBuffer(commandBuffer) != VK_SUCCESS) {
             throw std::runtime_error("failed to record command buffer!");
         }
@@ -852,6 +859,50 @@ private:
         else if (result != VK_SUCCESS) {
             throw std::runtime_error("failed to present swap chain image!");
         }
+
+        VkBuffer stagingBuffer;
+        VkDeviceMemory stagingBufferMemory;
+        VkDeviceSize bufferSize = swapChainExtent.width * swapChainExtent.height * 4;
+        createBuffer(bufferSize, VK_BUFFER_USAGE_TRANSFER_DST_BIT, VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT, stagingBuffer, stagingBufferMemory);
+
+        VkCommandBuffer commandBuffer = beginSingleTimeCommands();
+
+        VkBufferImageCopy region = {};
+        region.bufferOffset = 0;
+        region.bufferRowLength = 0;
+        region.bufferImageHeight = 0;
+        region.imageSubresource.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
+        region.imageSubresource.mipLevel = 0;
+        region.imageSubresource.baseArrayLayer = 0;
+        region.imageSubresource.layerCount = 1;
+        region.imageOffset = { 0, 0, 0 };
+        region.imageExtent = { swapChainExtent.width, swapChainExtent.height, 1 };
+
+        transitionImageLayout(swapChainImages[imageIndex], VK_FORMAT_B8G8R8A8_SRGB, VK_IMAGE_LAYOUT_PRESENT_SRC_KHR, VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL);
+
+        vkCmdCopyImageToBuffer(commandBuffer, swapChainImages[imageIndex], VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL, stagingBuffer, 1, &region);
+
+        endSingleTimeCommands(commandBuffer);
+
+        void* data;
+        vkMapMemory(device, stagingBufferMemory, 0, bufferSize, 0, &data);
+
+        // here encode
+        uint8_t* mappedData = static_cast<uint8_t*>(data);
+
+        if (!encoder.codecReady) {
+            //startWinsock();
+            encoder.codecReady = encoder.setUpCodec(swapChainExtent.width, swapChainExtent.height);
+        }
+        auto now = std::chrono::system_clock::now();
+        if (now - lastExecuted >= FPS_INTERVAL) {
+            encoder.encodeFrameFromDataImage(mappedData);
+            lastExecuted = std::chrono::system_clock::now();
+        }
+
+        vkUnmapMemory(device, stagingBufferMemory);
+        vkDestroyBuffer(device, stagingBuffer, nullptr);
+        vkFreeMemory(device, stagingBufferMemory, nullptr);
 
         currentFrame = (currentFrame + 1) % MAX_FRAMES_IN_FLIGHT;
     }
