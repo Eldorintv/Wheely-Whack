@@ -816,7 +816,7 @@ private:
             UniformBufferObject ubo{};
             ubo.model = models[i].modelMatrix;
             ubo.view = viewMatrix;
-            ubo.proj = glm::perspective(glm::radians(45.0f), swapChainExtent.width / (float)swapChainExtent.height, 0.1f, 10.0f);
+            ubo.proj = glm::perspective(glm::radians(45.0f), swapChainExtent.width / (float)swapChainExtent.height, 0.1f, 20.0f);
             ubo.proj[1][1] *= -1;
 
             void* dest = static_cast<char*>(uniformBuffersMapped[currentImage]) + i * sizeof(UniformBufferObject);
