@@ -113,7 +113,7 @@ private:
 
     VkBufferImageCopy region = {};
 
-   
+    VkCommandBuffer commandBuffer;
 
 
     void initWindow() {
@@ -169,17 +169,8 @@ private:
         createDescriptorSets();
         createCommandBuffers();
         createSyncObjects();
-        bufferSize = swapChainExtent.width * swapChainExtent.height * 4;
-        createBuffer(bufferSize, VK_BUFFER_USAGE_TRANSFER_DST_BIT, VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT, stagingBuffer, stagingBufferMemory);
-        region.bufferOffset = 0;
-        region.bufferRowLength = 0;
-        region.bufferImageHeight = 0;
-        region.imageSubresource.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
-        region.imageSubresource.mipLevel = 0;
-        region.imageSubresource.baseArrayLayer = 0;
-        region.imageSubresource.layerCount = 1;
-        region.imageOffset = { 0, 0, 0 };
-        region.imageExtent = { swapChainExtent.width, swapChainExtent.height, 1 };
+
+        createStagingBuffer();
     }
 
     void mainLoop() {
@@ -235,6 +226,7 @@ private:
             vkDestroySemaphore(device, imageAvailableSemaphores[i], nullptr);
             vkDestroyFence(device, inFlightFences[i], nullptr);
         }
+
 
         // stagingBuffer
         vkDestroyBuffer(device, stagingBuffer, nullptr);
@@ -820,6 +812,23 @@ private:
         }
     }
 
+    void createStagingBuffer() {
+        commandBuffer = beginSingleTimeCommands();
+        bufferSize = swapChainExtent.width * swapChainExtent.height * 4;
+
+        createBuffer(bufferSize, VK_BUFFER_USAGE_TRANSFER_DST_BIT, VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT, stagingBuffer, stagingBufferMemory);
+
+        region.bufferOffset = 0;
+        region.bufferRowLength = 0;
+        region.bufferImageHeight = 0;
+        region.imageSubresource.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
+        region.imageSubresource.mipLevel = 0;
+        region.imageSubresource.baseArrayLayer = 0;
+        region.imageSubresource.layerCount = 1;
+        region.imageOffset = { 0, 0, 0 };
+        region.imageExtent = { swapChainExtent.width, swapChainExtent.height, 1 };
+    }
+
     void drawFrame() {
         vkWaitForFences(device, 1, &inFlightFences[currentFrame], VK_TRUE, UINT64_MAX);
 
@@ -886,15 +895,12 @@ private:
         auto now = std::chrono::system_clock::now();
         if (now - lastExecuted >= FPS_INTERVAL) {
 
-            
-
-            VkCommandBuffer commandBuffer = beginSingleTimeCommands();
-
+            commandBuffer = beginSingleTimeCommands();
             transitionImageLayout(swapChainImages[imageIndex], VK_FORMAT_B8G8R8A8_SRGB, VK_IMAGE_LAYOUT_PRESENT_SRC_KHR, VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL);
 
             vkCmdCopyImageToBuffer(commandBuffer, swapChainImages[imageIndex], VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL, stagingBuffer, 1, &region);
-
             endSingleTimeCommands(commandBuffer);
+            
 
             void* data;
             vkMapMemory(device, stagingBufferMemory, 0, bufferSize, 0, &data);
@@ -911,9 +917,6 @@ private:
 
             vkUnmapMemory(device, stagingBufferMemory);
 
-            //vkUnmapMemory(device, stagingBufferMemory);
-            //vkDestroyBuffer(device, stagingBuffer, nullptr);
-            //vkFreeMemory(device, stagingBufferMemory, nullptr);
         }
 
         currentFrame = (currentFrame + 1) % MAX_FRAMES_IN_FLIGHT;
