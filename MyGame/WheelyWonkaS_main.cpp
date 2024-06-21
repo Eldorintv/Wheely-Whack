@@ -21,6 +21,10 @@ const int MAX_FRAMES_IN_FLIGHT = 2;
 //Encoder encoder;
 std::chrono::milliseconds FPS_INTERVAL(30);
 auto lastExecuted = std::chrono::system_clock::now();
+// encoder and gpu copy queue
+std::queue<uint8_t*> encQueue;
+std::mutex encQueueMutex;
+std::condition_variable encQueueCondition;
 
 const std::vector<const char*> validationLayers = {
     "VK_LAYER_KHRONOS_validation"
@@ -59,7 +63,10 @@ public:
     void run() {
         initWindow();
         initVulkan();
+        std::thread encodingThread(&HelloTriangleApplication::encoderQueueAndUDPSend, this);
         mainLoop();
+        encodeOn = false;
+        encodingThread.join();
         cleanup();
     }
 
@@ -115,10 +122,7 @@ private:
 
     VkCommandBuffer commandBufferImageCopy;
 
-    // encoder and gpu copy queue
-    std::queue<std::vector<char>> encQueue;
-    std::mutex encQueueMutex;
-    std::condition_variable encQueueCondition;
+    std::atomic<bool> encodeOn = true;
 
 
     void initWindow() {
@@ -917,6 +921,12 @@ private:
             uint8_t* mappedData = static_cast<uint8_t*>(data);
 
             //encoder.encodeFrameFromDataImage(mappedData);
+            {
+                std::lock_guard<std::mutex> lock(encQueueMutex);
+                encQueue.push(std::move(mappedData));
+            }
+            encQueueCondition.notify_one();
+
             lastExecuted = std::chrono::system_clock::now();
 
             vkUnmapMemory(device, stagingBufferMemory);
@@ -1105,13 +1115,27 @@ private:
         encoder.codecReady = encoder.setUpCodec(swapChainExtent.width, swapChainExtent.height);
 
         //encoder.encodeFrameFromDataImage(uint8_t* dataImage);
-        while (true) {
+        while (encodeOn) {
+            uint8_t* frame;
+            {
+                std::unique_lock<std::mutex> lock(encQueueMutex);
+                encQueueCondition.wait(lock, [] { return !encQueue.empty(); });
+
+                frame = encQueue.front();
+                encQueue.pop();
+            }
+
+            encoder.encodeFrameFromDataImage(frame);
+
+            // checks queue twice as fast + sanity 1 ms
+            std::this_thread::sleep_for(std::chrono::milliseconds((FPS_INTERVAL / 2) + std::chrono::milliseconds(1)));
 
         }
 
         // clean up
         encoder.encoderFinishProcess();
     }
+    
 };
 
 
