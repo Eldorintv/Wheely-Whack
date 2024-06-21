@@ -83,7 +83,7 @@ bool Encoder::setUpCodec(uint32_t extentWidth, uint32_t extentHeight) {
 	sender.init("::1", 50000);
 	//receiver.init(51337);
 
-	ctx = sws_getContext(c->width, c->height, AV_PIX_FMT_RGBA, c->width, c->height, AV_PIX_FMT_YUV420P, 0, 0, 0, 0);
+	ctx = sws_getContext(c->width, c->height, AV_PIX_FMT_BGRA, c->width, c->height, AV_PIX_FMT_YUV420P, 0, 0, 0, 0);
 
 	return true;
 }

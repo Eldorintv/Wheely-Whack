@@ -411,6 +411,7 @@ private:
 
         vkGetDeviceQueue(device, indices.graphicsFamily.value(), 0, &graphicsQueue);
         vkGetDeviceQueue(device, indices.presentFamily.value(), 0, &presentQueue);
+        // SEARCH::QUEUE
     }
 
     void createSwapChain() {
@@ -904,9 +905,8 @@ private:
         }
 
         auto now = std::chrono::system_clock::now();
-        if (now - lastExecuted >= FPS_INTERVAL) {
+        if (now - lastExecuted >= FPS_INTERVAL && encodeOn) {
             lastExecuted = now;
-            std::cout << "in draw and encoding now\n";
             // TO DO
             // maybe make multi - use command buffer?
             commandBufferImageCopy = beginSingleTimeCommands();
