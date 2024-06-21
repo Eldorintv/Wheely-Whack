@@ -18,7 +18,7 @@ VkDescriptorSetLayout descriptorSetLayout;
 
 const int MAX_FRAMES_IN_FLIGHT = 2;
 
-Encoder encoder;
+//Encoder encoder;
 std::chrono::milliseconds FPS_INTERVAL(30);
 auto lastExecuted = std::chrono::system_clock::now();
 
@@ -113,7 +113,12 @@ private:
 
     VkBufferImageCopy region = {};
 
-    VkCommandBuffer commandBuffer;
+    VkCommandBuffer commandBufferImageCopy;
+
+    // encoder and gpu copy queue
+    std::queue<std::vector<char>> encQueue;
+    std::mutex encQueueMutex;
+    std::condition_variable encQueueCondition;
 
 
     void initWindow() {
@@ -172,7 +177,7 @@ private:
 
         createStagingBuffer();
         // start process of encoder
-        encoder.codecReady = encoder.setUpCodec(swapChainExtent.width, swapChainExtent.height);
+        //encoder.codecReady = encoder.setUpCodec(swapChainExtent.width, swapChainExtent.height);
     }
 
     void mainLoop() {
@@ -899,12 +904,11 @@ private:
 
             // TO DO
             // maybe make multi - use command buffer?
-            commandBuffer = beginSingleTimeCommands();
+            commandBufferImageCopy = beginSingleTimeCommands();
             transitionImageLayout(swapChainImages[imageIndex], VK_FORMAT_B8G8R8A8_SRGB, VK_IMAGE_LAYOUT_PRESENT_SRC_KHR, VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL);
 
-            vkCmdCopyImageToBuffer(commandBuffer, swapChainImages[imageIndex], VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL, stagingBuffer, 1, &region);
-            endSingleTimeCommands(commandBuffer);
-            
+            vkCmdCopyImageToBuffer(commandBufferImageCopy, swapChainImages[imageIndex], VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL, stagingBuffer, 1, &region);
+            endSingleTimeCommands(commandBufferImageCopy);
 
             void* data;
             vkMapMemory(device, stagingBufferMemory, 0, bufferSize, 0, &data);
@@ -912,11 +916,7 @@ private:
             // here encode
             uint8_t* mappedData = static_cast<uint8_t*>(data);
 
-            //if (!encoder.codecReady) {
-            //    encoder.codecReady = encoder.setUpCodec(swapChainExtent.width, swapChainExtent.height);
-            //}
-
-            encoder.encodeFrameFromDataImage(mappedData);
+            //encoder.encodeFrameFromDataImage(mappedData);
             lastExecuted = std::chrono::system_clock::now();
 
             vkUnmapMemory(device, stagingBufferMemory);
@@ -1098,6 +1098,19 @@ private:
         std::cerr << "validation layer: " << pCallbackData->pMessage << std::endl;
 
         return VK_FALSE;
+    }
+
+    void encoderQueueAndUDPSend() {
+        Encoder encoder;
+        encoder.codecReady = encoder.setUpCodec(swapChainExtent.width, swapChainExtent.height);
+
+        //encoder.encodeFrameFromDataImage(uint8_t* dataImage);
+        while (true) {
+
+        }
+
+        // clean up
+        encoder.encoderFinishProcess();
     }
 };
 
