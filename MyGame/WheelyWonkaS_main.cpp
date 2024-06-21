@@ -925,7 +925,7 @@ private:
             {
                 std::lock_guard<std::mutex> lock(encQueueMutex);
                 encQueue.push(std::move(mappedData));
-                std::cout << "in draw and encoding now\n";
+                std::cout << "in draw and encoding now: " << encQueue.size() << "\n";
             }
             encQueueCondition.notify_one();
 

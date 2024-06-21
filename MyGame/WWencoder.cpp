@@ -83,7 +83,7 @@ bool Encoder::setUpCodec(uint32_t extentWidth, uint32_t extentHeight) {
 	sender.init("::1", 50000);
 	//receiver.init(51337);
 
-	ctx = sws_getContext(c->width, c->height, AV_PIX_FMT_BGRA, c->width, c->height, AV_PIX_FMT_YUV420P, 0, 0, 0, 0);
+	ctx = sws_getContext(c->width, c->height, AV_PIX_FMT_BGRA, c->width, c->height, AV_PIX_FMT_YUV420P, SWS_FAST_BILINEAR, 0, 0, 0);
 
 	return true;
 }
@@ -99,7 +99,7 @@ void encode(AVCodecContext* enc_ctx, AVFrame* frame, AVPacket* pkt,
 	}
 	//frame->pts;
 
-//printf("Send frame %3"PRId64"\n", frame->pts);
+	//printf("Send frame %3"PRId64"\n", frame->pts);
 
 	ret = avcodec_send_frame(enc_ctx, frame);
 	if (ret < 0) {
