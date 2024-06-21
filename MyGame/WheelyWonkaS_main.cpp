@@ -891,7 +891,6 @@ private:
         uint8_t* mappedData = static_cast<uint8_t*>(data);
 
         if (!encoder.codecReady) {
-            //startWinsock();
             encoder.codecReady = encoder.setUpCodec(swapChainExtent.width, swapChainExtent.height);
         }
         auto now = std::chrono::system_clock::now();
