@@ -196,6 +196,7 @@ public:
     }
 
     VkImageView createImageView(VkImage image, VkFormat format, VkImageAspectFlags aspectFlags, uint32_t layerCount = 1) {
+        std::cout << "layerCount in createImageView: " << layerCount << "\n";
         VkImageViewCreateInfo viewInfo{};
         viewInfo.sType = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO;
         viewInfo.image = image;
@@ -203,7 +204,9 @@ public:
             viewInfo.viewType = VK_IMAGE_VIEW_TYPE_2D;
         }
         else {
-            viewInfo.viewType = VK_IMAGE_VIEW_TYPE_2D;
+            // This should be on but doesnt work
+            viewInfo.viewType = VK_IMAGE_VIEW_TYPE_CUBE;
+            //viewInfo.viewType = VK_IMAGE_VIEW_TYPE_2D;
         }
         viewInfo.format = format;
         viewInfo.subresourceRange.aspectMask = aspectFlags;
