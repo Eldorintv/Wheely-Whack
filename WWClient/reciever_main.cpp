@@ -88,7 +88,7 @@ static void sendReceiverReport(int len, UDPReceive6& receiver, UDPSend6& sender)
 	}
 }
 
-void receiveFrames(UDPReceive6& receiver) {
+void receiveFrames(UDPReceive6& receiver, UDPSend6& sender) {
 
 	char buf[65'000];
 	// might need to increase, moved to heap and using memcpy_s
@@ -98,9 +98,6 @@ void receiveFrames(UDPReceive6& receiver) {
 	} _Analysis_assume_(tempBuffer != NULL);
 
 	//int packetCounter{ 1 };
-
-	UDPSend6 sender;
-	sender.init("::1", SEND_PORT_NUMBER);
 
 	while (true) {
 		double ptime;
@@ -211,9 +208,12 @@ int main() {
 	UDPReceive6 receiver;
 	receiver.init(RECV_PORT_NUMBER);
 
+	UDPSend6 sender;
+	sender.init("::1", SEND_PORT_NUMBER);
+
 
 	// Threads A -> Receiver, Thread B -> Presenter
-	std::thread A(receiveFrames, std::ref(receiver));
+	std::thread A(receiveFrames, std::ref(receiver), std::ref(sender));
 	//std::thread B(queueToPNG);
 	std::thread B(queueToUINT8);
 	std::thread C(displayWindow);
