@@ -91,15 +91,15 @@ private:
 
         std::vector<stbi_uc*> cubeMapImages = loadCubeMapImages(paths, texWidth, texHeight, texChannels);
 
-        VkDeviceSize imageSize = static_cast<VkDeviceSize>(texWidth) * texHeight * 4 * 6;
-
+        VkDeviceSize imageSize = static_cast<VkDeviceSize>(texWidth) * texHeight * 4;
+        VkDeviceSize cubeImageSize = imageSize * 6;
 
         VkBuffer stagingBuffer;
         VkDeviceMemory stagingBufferMemory;
-        createBuffer(imageSize, VK_BUFFER_USAGE_TRANSFER_SRC_BIT, VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT, stagingBuffer, stagingBufferMemory);
+        createBuffer(cubeImageSize, VK_BUFFER_USAGE_TRANSFER_SRC_BIT, VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT, stagingBuffer, stagingBufferMemory);
 
         void* data;
-        vkMapMemory(device, stagingBufferMemory, 0, imageSize, 0, &data);
+        vkMapMemory(device, stagingBufferMemory, 0, cubeImageSize, 0, &data);
         VkDeviceSize offset = 0;
         for (const auto& pixels : cubeMapImages) {
             memcpy(static_cast<char*>(data) + offset, pixels, static_cast<size_t>(imageSize));

@@ -163,7 +163,12 @@ private:
         textures.push_back(Texture::Load("../MyGame/media/textures/viking_room.png"));
         textures.push_back(Texture::Load("../MyGame/media/textures/water.png"));
         textures.push_back(Texture::Load("../MyGame/media/textures/paper.jpg"));
-        textures.push_back(Texture::Load("../MyGame/media/textures/bluecloud_bk.jpg"));
+        textures.push_back(Texture::LoadCubeMap("../MyGame/media/textures/bluecloud_ft.jpg", 
+            "../MyGame/media/textures/bluecloud_bk.jpg", 
+            "../MyGame/media/textures/bluecloud_up.jpg",
+            "../MyGame/media/textures/bluecloud_dn.jpg",
+            "../MyGame/media/textures/bluecloud_rt.jpg",
+            "../MyGame/media/textures/bluecloud_lf.jpg"));
 
         models.push_back(Model::LoadSkybox("../MyGame/media/models/skybox_cube.obj", 3));
 
