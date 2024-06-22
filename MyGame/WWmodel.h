@@ -80,6 +80,10 @@ public:
         modelMatrix = glm::translate(modelMatrix, v);
     }
 
+    void rotateModelMatrix(float angle, glm::vec3 axis) {
+        modelMatrix = glm::rotate(modelMatrix, glm::radians(angle), axis);
+    }
+
 private:
 
     void loadModel(const char* path) {
