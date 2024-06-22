@@ -40,9 +40,7 @@ auto last = std::chrono::system_clock::now();
 int framesReceived{ 0 };
 
 
-static void sendMessage(char byteRate[]) {
-	UDPSend6 sender;
-	sender.init("::1", SEND_PORT_NUMBER);
+static void sendMessage(char byteRate[], UDPSend6& sender) {
 
 
 	std::cout << "Sending receiver report\n";
@@ -55,7 +53,7 @@ static void sendMessage(char byteRate[]) {
 
 const std::chrono::seconds updateTimer(5);
 
-static void sendReceiverReport(int len, UDPReceive6& receiver) {
+static void sendReceiverReport(int len, UDPReceive6& receiver, UDPSend6& sender) {
 	bytesReceivedLast10Seconds += len;
 	framesReceived += 1;
 
@@ -85,7 +83,7 @@ static void sendReceiverReport(int len, UDPReceive6& receiver) {
 
 		sprintf_s(msg, "<< ! >>\ncurrent byte rate: %zu\ncurrent fps: %.2f\npacket loss rate: %.2f\n<< ! >>\n", byteRate, fps, packetLossRate);
 
-		sendMessage(msg);
+		sendMessage(msg, sender);
 
 	}
 }
@@ -100,6 +98,9 @@ void receiveFrames(UDPReceive6& receiver) {
 	} _Analysis_assume_(tempBuffer != NULL);
 
 	//int packetCounter{ 1 };
+
+	UDPSend6 sender;
+	sender.init("::1", SEND_PORT_NUMBER);
 
 	while (true) {
 		double ptime;
@@ -117,7 +118,7 @@ void receiveFrames(UDPReceive6& receiver) {
 			}
 			//printf("Packet % i recevied, size: % d \n", packetCounter++, len);
 			//decoder->readParseDecode(tempBuffer, len);
-			sendReceiverReport(len, receiver);
+			sendReceiverReport(len, receiver, sender);
 
 			std::vector<char> bufferForQueue(len);
 			std::copy(tempBuffer, tempBuffer + len, bufferForQueue.begin());
@@ -132,7 +133,7 @@ void receiveFrames(UDPReceive6& receiver) {
 		else {
 			//printf("Packet % i recevied, size: % d \n", packetCounter++, ret);
 			//decoder->readParseDecode(buf, ret);
-			sendReceiverReport(ret, receiver);
+			sendReceiverReport(ret, receiver, sender);
 
 			std::vector<char> bufferForQueue(ret);
 			std::copy(buf, buf + ret, bufferForQueue.begin());
