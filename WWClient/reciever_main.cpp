@@ -216,7 +216,7 @@ int main() {
 	std::thread A(receiveFrames, std::ref(receiver), std::ref(sender));
 	//std::thread B(queueToPNG);
 	std::thread B(queueToUINT8);
-	std::thread C(displayWindow);
+	std::thread C(displayWindow, std::ref(sender));
 
 	A.join();
 	B.join();

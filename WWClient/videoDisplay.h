@@ -24,41 +24,41 @@ enum class Direction {
     Right
 };
 
-void functionA(Direction d) {
-    switch (d) {
-    case Direction::Forward:
-        std::cout << "Forward Pressed!\n";
-        break;
-    case Direction::Left:
-        std::cout << "Left Pressed!\n";
-        break;
-    case Direction::Backward:
-        std::cout << "Backward Pressed!\n";
-        break;
-    case Direction::Right:
-        std::cout << "Right Pressed!\n";
-        break;
-    }
-}
+//void functionA(Direction d) {
+//    switch (d) {
+//    case Direction::Forward:
+//        std::cout << "Forward Pressed!\n";
+//        break;
+//    case Direction::Left:
+//        std::cout << "Left Pressed!\n";
+//        break;
+//    case Direction::Backward:
+//        std::cout << "Backward Pressed!\n";
+//        break;
+//    case Direction::Right:
+//        std::cout << "Right Pressed!\n";
+//        break;
+//    }
+//}
+//
+//void functionAFinish(Direction d) {
+//    switch (d) {
+//    case Direction::Forward:
+//        std::cout << "Forward Released!\n";
+//        break;
+//    case Direction::Left:
+//        std::cout << "Left Released!\n";
+//        break;
+//    case Direction::Backward:
+//        std::cout << "Backwards Released!\n";
+//        break;
+//    case Direction::Right:
+//        std::cout << "Right Released!\n";
+//        break;
+//    }
+//}
 
-void functionAFinish(Direction d) {
-    switch (d) {
-    case Direction::Forward:
-        std::cout << "Forward Released!\n";
-        break;
-    case Direction::Left:
-        std::cout << "Left Released!\n";
-        break;
-    case Direction::Backward:
-        std::cout << "Backwards Released!\n";
-        break;
-    case Direction::Right:
-        std::cout << "Right Released!\n";
-        break;
-    }
-}
-
-void displayWindow() {
+void displayWindow(UDPSend6& sender) {
     sf::RenderWindow window(sf::VideoMode(800, 600), "mySimpleGame");
     if (!texture.create(800, 600)) {
         fprintf(stderr, "VIDEO_DISPLAY: Error creating a texture\n");
@@ -68,7 +68,6 @@ void displayWindow() {
 
     // keyboard input - W-A-S-D
     std::array<bool, MaxKeys> keyStates = { false };
-
 
     while (window.isOpen())
     {
@@ -82,16 +81,21 @@ void displayWindow() {
                     keyStates[event.key.code] = true;
 
                     if (event.key.code == sf::Keyboard::W) {
-                        functionA(Direction::Forward);
+                        std::cout << "Sending receiver report\n";
+                        char buf[2] = "W";
+                        sender.send(buf, static_cast<int>(strlen(buf)));
                     }
                     if (event.key.code == sf::Keyboard::A) {
-                        functionA(Direction::Left);
+                        char buf[2] = "A";
+                        sender.send(buf, static_cast<int>(strlen(buf)));
                     }
                     if (event.key.code == sf::Keyboard::S) {
-                        functionA(Direction::Backward);
+                        char buf[2] = "S";
+                        sender.send(buf, static_cast<int>(strlen(buf)));
                     }
                     if (event.key.code == sf::Keyboard::D) {
-                        functionA(Direction::Right);
+                        char buf[2] = "D";
+                        sender.send(buf, static_cast<int>(strlen(buf)));
                     }
                 }
             }
@@ -99,16 +103,20 @@ void displayWindow() {
                 keyStates[event.key.code] = false;
 
                 if (event.key.code == sf::Keyboard::W) {
-                    functionAFinish(Direction::Forward);
+                    char buf[2] = "w";
+                    sender.send(buf, static_cast<int>(strlen(buf)));
                 }
                 if (event.key.code == sf::Keyboard::A) {
-                    functionAFinish(Direction::Left);
+                    char buf[2] = "a";
+                    sender.send(buf, static_cast<int>(strlen(buf)));
                 }
                 if (event.key.code == sf::Keyboard::S) {
-                    functionAFinish(Direction::Backward);
+                    char buf[2] = "s";
+                    sender.send(buf, static_cast<int>(strlen(buf)));
                 }
                 if (event.key.code == sf::Keyboard::D) {
-                    functionAFinish(Direction::Right);
+                    char buf[2] = "d";
+                    sender.send(buf, static_cast<int>(strlen(buf)));
                 }
             }
         }

@@ -1172,10 +1172,9 @@ private:
 
 extern std::chrono::milliseconds FPS_INTERVAL;
 
-void receiveReport() {
-    startWinsock();
-    UDPReceive6 receiver;
-    receiver.init(51337);
+void receiveReport(UDPReceive6& receiver) {
+    //UDPReceive6 receiver;
+    //receiver.init(51337);
 
     while (true) {
         char buf[65000];
@@ -1207,14 +1206,28 @@ void receiveReport() {
 
         std::this_thread::sleep_for(std::chrono::seconds(3));
     }
-    WSACleanup();
+}
+
+void getMovementUDP(UDPReceive6& receiver) {
+
+    while (true) {
+        char buf[65000];
+        double ptime;
+        auto ret = receiver.receive(buf, sizeof buf, &ptime);
+        buf[ret] = '\0';
+        printf("\n\nMovement: \n% s", buf);
+    }
 }
 
 int main() {
-
+    startWinsock();
     HelloTriangleApplication app;
 
-    std::thread receiveThread(receiveReport);
+    UDPReceive6 receiver;
+    receiver.init(51337);
+
+    std::thread receiveThread(receiveReport, std::ref(receiver));
+    std::thread getMovement(getMovementUDP, std::ref(receiver));
 
     try {
         app.run();
@@ -1225,6 +1238,8 @@ int main() {
     }
 
     receiveThread.join();
+    getMovement.join();
+    WSACleanup();
 
     return EXIT_SUCCESS;
 }
