@@ -121,10 +121,10 @@
     <None Include="media\shaders\vertBP.spv">
       <Filter>Resource Files\media\shaders</Filter>
     </None>
-    <None Include="skybox_shader.vert">
+    <None Include="skybox_shader.frag">
       <Filter>Resource Files\media\shaders</Filter>
     </None>
-    <None Include="skybox_shader.frag">
+    <None Include="media\shaders\skybox_shader.vert">
       <Filter>Resource Files\media\shaders</Filter>
     </None>
   </ItemGroup>
