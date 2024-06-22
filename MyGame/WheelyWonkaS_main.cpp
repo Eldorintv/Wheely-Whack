@@ -163,8 +163,9 @@ private:
         textures.push_back(Texture::Load("../MyGame/media/textures/viking_room.png"));
         textures.push_back(Texture::Load("../MyGame/media/textures/water.png"));
         textures.push_back(Texture::Load("../MyGame/media/textures/paper.jpg"));
+        textures.push_back(Texture::Load("../MyGame/media/textures/bluecloud_bk.jpg"));
 
-        models.push_back(Model::LoadSkybox("../MyGame/media/models/skybox_cube.obj", 1));
+        models.push_back(Model::LoadSkybox("../MyGame/media/models/skybox_cube.obj", 3));
 
         models.push_back(Model::Load("../MyGame/media/models/viking_room.obj", 0));
         models.push_back(Model::Load("../MyGame/media/models/cube_small.obj", 1));
@@ -917,6 +918,7 @@ private:
             transitionImageLayout(swapChainImages[imageIndex], VK_FORMAT_B8G8R8A8_SRGB, VK_IMAGE_LAYOUT_PRESENT_SRC_KHR, VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL);
 
             vkCmdCopyImageToBuffer(commandBufferImageCopy, swapChainImages[imageIndex], VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL, stagingBuffer, 1, &region);
+
             endSingleTimeCommands(commandBufferImageCopy);
 
             void* data;
