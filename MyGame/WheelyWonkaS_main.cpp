@@ -948,6 +948,13 @@ private:
                 std::lock_guard<std::mutex> lock(encQueueMutex);
                 encQueue.push(std::move(mappedData));
                 std::cout << "in draw and encoding now: " << encQueue.size() << "\n";
+                // this is a baindaid for now
+                if (encQueue.size() > 15) {
+                    FPS_INTERVAL += std::chrono::milliseconds(2);
+                }
+                else if (encQueue.size() < 2) {
+                    FPS_INTERVAL -= std::chrono::milliseconds(5);
+                }
             }
             encQueueCondition.notify_one();
 
