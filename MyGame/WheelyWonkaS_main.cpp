@@ -184,6 +184,9 @@ private:
         models[3].translateModelMatrix(glm::vec3(0.0f, -2.0f, -1.0f));
         models[4].translateModelMatrix(glm::vec3(0.0f, -3.0f, -1.0f));
 
+        models[1].rotateModelMatrix(180.0f, glm::vec3(0.0f, 1.0f, 0.0f));
+        models[1].rotateModelMatrix(90.0f, glm::vec3(-1.0f, 0.0f, 0.0f));
+
         createUniformBuffers();
         createDescriptorPool();
 
