@@ -72,9 +72,11 @@
     <None Include="media\shaders\compile_shaders.bat" />
     <None Include="media\shaders\frag.spv" />
     <None Include="media\shaders\fragBP.spv" />
+    <None Include="media\shaders\fragSkyBox.spv" />
     <None Include="media\shaders\skybox_shader.vert" />
     <None Include="media\shaders\vert.spv" />
     <None Include="media\shaders\vertBP.spv" />
+    <None Include="media\shaders\vertSkyBox.spv" />
     <None Include="skybox_shader.frag" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

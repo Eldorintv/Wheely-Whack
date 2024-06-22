@@ -127,5 +127,11 @@
     <None Include="media\shaders\skybox_shader.vert">
       <Filter>Resource Files\media\shaders</Filter>
     </None>
+    <None Include="media\shaders\fragSkyBox.spv">
+      <Filter>Resource Files\media\shaders</Filter>
+    </None>
+    <None Include="media\shaders\vertSkyBox.spv">
+      <Filter>Resource Files\media\shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>

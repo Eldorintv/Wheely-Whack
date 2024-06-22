@@ -22,6 +22,9 @@ public:
     uint32_t textureIndex;
     glm::mat4 modelMatrix;
 
+    const char* vertexShaderPath = "../MyGame/media/shaders/vertBP.spv";
+    const char* fragmentShaderPath = "../MyGame/media/shaders/fragBP.spv";
+
     static Model Load(const char* path, uint32_t textureIndex) {
         Model model;
 
@@ -30,6 +33,20 @@ public:
         model.createIndexBuffer();
         model.textureIndex = textureIndex;
         model.modelMatrix = glm::mat4(1.0f);
+        model.createGraphicsPipeline();
+        return model;
+    }
+
+    static Model LoadSkybox(const char* path, uint32_t textureIndex) {
+        Model model;
+
+        model.loadModel(path);
+        model.createVertexBuffer();
+        model.createIndexBuffer();
+        model.textureIndex = textureIndex;
+        model.modelMatrix = glm::mat4(1.0f);
+        model.vertexShaderPath = "../MyGame/media/shaders/vertSkyBox.spv";
+        model.fragmentShaderPath = "../MyGame/media/shaders/fragSkyBox.spv";
         model.createGraphicsPipeline();
         return model;
     }
@@ -150,8 +167,8 @@ private:
     }
 
     void createGraphicsPipeline() {
-        auto vertShaderCode = readFile("../MyGame/media/shaders/vertBP.spv");
-        auto fragShaderCode = readFile("../MyGame/media/shaders/fragBP.spv");
+        auto vertShaderCode = readFile(vertexShaderPath);
+        auto fragShaderCode = readFile(fragmentShaderPath);
 
         VkShaderModule vertShaderModule = createShaderModule(vertShaderCode);
         VkShaderModule fragShaderModule = createShaderModule(fragShaderCode);
