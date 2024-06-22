@@ -9,7 +9,7 @@ layout(binding = 0) uniform UniformBufferObject {
 
 layout(location = 0) in vec3 inPosition;
 layout(location = 1) in vec3 inNormal;
-layout(location = 2) in vec3 inTexCoord;
+layout(location = 2) in vec2 inTexCoord;
 
 
 layout(location = 0) out vec3 fragColor;
@@ -20,5 +20,5 @@ void main()
     vec4 pos = ubo.proj * ubo.view * vec4(inPosition, 1.0);
     gl_Position = pos.xyww; // z is not here on purpose, no depth testing
     //fragColor = inColor;
-    fragTexCoord = inTexCoord;
+    fragTexCoord = vec3(inTexCoord, 1.0); // not correct, maybe fix later
 }
