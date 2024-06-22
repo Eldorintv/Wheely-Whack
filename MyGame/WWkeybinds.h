@@ -24,17 +24,18 @@ static glm::mat4 viewMatrix = glm::lookAt(glm::vec3(0.0f, 0.5f, 0.0f), glm::vec3
 
 
 // camera movement
-static void translateViewMatrix() {
+static void translateViewMatrix(double deltaTime) {
     glm::mat4 translate(1.0f);
     glm::mat4 rotation(1.0f);
 
-    constexpr float angle = glm::radians(0.01f);
+    float drivingSpeed = 1.5f * static_cast<float>(deltaTime);
+    float angle = glm::radians(35.0f) * static_cast<float>(deltaTime);
 
     if (wIsPressed) {
-        translate = glm::translate(translate, glm::vec3(0.0f, 0.0f, 0.0004));
+        translate = glm::translate(translate, glm::vec3(0.0f, 0.0f, drivingSpeed));
     }
     if (sIsPressed) {
-        translate = glm::translate(translate, glm::vec3(0.0f, 0.0f, -0.0004));
+        translate = glm::translate(translate, glm::vec3(0.0f, 0.0f, -drivingSpeed));
     }
     if (aIsPressed) {
         //translate = glm::translate(translate, glm::vec3(0.0002f, 0.0f, 0.0f));

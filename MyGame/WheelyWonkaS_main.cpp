@@ -199,10 +199,16 @@ private:
         //encoder.codecReady = encoder.setUpCodec(swapChainExtent.width, swapChainExtent.height);
     }
 
+    double lastFrameTime = 0.0;
+    double deltaTime = 0.0;
+
     void mainLoop() {
         while (!glfwWindowShouldClose(window)) {
+            double currentFrameTime = glfwGetTime();
+            deltaTime = currentFrameTime - lastFrameTime;
+            lastFrameTime = currentFrameTime;
             glfwPollEvents();
-            translateViewMatrix();
+            translateViewMatrix(deltaTime);
             drawFrame();
         }
 
