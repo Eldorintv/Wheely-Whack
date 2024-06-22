@@ -164,14 +164,17 @@ private:
         textures.push_back(Texture::Load("../MyGame/media/textures/water.png"));
         textures.push_back(Texture::Load("../MyGame/media/textures/paper.jpg"));
 
-        models.push_back(Model::Load("../MyGame/media/models/viking_room.obj", 0));
-        models.push_back(Model::Load("../MyGame/media/models/cube_small.obj", 1));
-        //models.push_back(Model::Load("../MyGame/media/models/sphere.obj", 2));
         models.push_back(Model::LoadSkybox("../MyGame/media/models/skybox_cube.obj", 1));
 
-        // sone test translations
-        models[1].translateModelMatrix(glm::vec3(0.0f, 1.2f, -0.5f));
-        models[2].translateModelMatrix(glm::vec3(0.0f, -3.0f, -1.0f));
+        models.push_back(Model::Load("../MyGame/media/models/viking_room.obj", 0));
+        models.push_back(Model::Load("../MyGame/media/models/cube_small.obj", 1));
+        models.push_back(Model::Load("../MyGame/media/models/sphere.obj", 2));
+        models.push_back(Model::Load("../MyGame/media/models/sphere.obj", 2));
+
+        // some test translations
+        models[2].translateModelMatrix(glm::vec3(0.0f, 1.2f, -0.5f));
+        models[3].translateModelMatrix(glm::vec3(0.0f, -2.0f, -1.0f));
+        models[4].translateModelMatrix(glm::vec3(0.0f, -3.0f, -1.0f));
 
         createUniformBuffers();
         createDescriptorPool();
@@ -653,13 +656,13 @@ private:
         poolSizes[0].type = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
         poolSizes[0].descriptorCount = static_cast<uint32_t>(MAX_FRAMES_IN_FLIGHT);
         poolSizes[1].type = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
-        poolSizes[1].descriptorCount = static_cast<uint32_t>(MAX_FRAMES_IN_FLIGHT * textures.size());
+        poolSizes[1].descriptorCount = static_cast<uint32_t>(MAX_FRAMES_IN_FLIGHT * models.size());
 
         VkDescriptorPoolCreateInfo poolInfo{};
         poolInfo.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO;
         poolInfo.poolSizeCount = static_cast<uint32_t>(poolSizes.size());
         poolInfo.pPoolSizes = poolSizes.data();
-        poolInfo.maxSets = static_cast<uint32_t>(MAX_FRAMES_IN_FLIGHT * textures.size());
+        poolInfo.maxSets = static_cast<uint32_t>(MAX_FRAMES_IN_FLIGHT * models.size());
 
         if (vkCreateDescriptorPool(device, &poolInfo, nullptr, &descriptorPool) != VK_SUCCESS) {
             throw std::runtime_error("failed to create descriptor pool!");
