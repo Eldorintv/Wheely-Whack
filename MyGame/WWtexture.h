@@ -27,7 +27,7 @@ public:
         faces.push_back(front); faces.push_back(back); faces.push_back(up); faces.push_back(down); faces.push_back(right); faces.push_back(left);
 
         texture.createTextureImageCubeMap(faces);
-        texture.createTextureImageView();
+        texture.createTextureImageView(6);
         texture.createTextureSampler();
 
         return texture;
@@ -121,7 +121,7 @@ private:
         vkFreeMemory(device, stagingBufferMemory, nullptr);
     }
 
-    void createTextureImageView(int layerCount = 1) {
+    void createTextureImageView(uint32_t layerCount = 1) {
         textureImageView = createImageView(textureImage, VK_FORMAT_R8G8B8A8_SRGB, VK_IMAGE_ASPECT_COLOR_BIT, layerCount);
     }
 
