@@ -31,9 +31,57 @@ private:
     void createTextureImage(const char* path) {
         int texWidth, texHeight, texChannels;
 
-        std::string textureFile = path;
+        //std::string textureFile = path;
 
-        stbi_uc* pixels = stbi_load(textureFile.c_str(), &texWidth, &texHeight, &texChannels, STBI_rgb_alpha);
+        stbi_uc* pixels = stbi_load(std::string(path).c_str(), &texWidth, &texHeight, &texChannels, STBI_rgb_alpha);
+        VkDeviceSize imageSize = static_cast<VkDeviceSize>(texWidth) * texHeight * 4;
+
+        if (!pixels) {
+            throw std::runtime_error("failed to load texture image!");
+        }
+
+        VkBuffer stagingBuffer;
+        VkDeviceMemory stagingBufferMemory;
+        createBuffer(imageSize, VK_BUFFER_USAGE_TRANSFER_SRC_BIT, VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT, stagingBuffer, stagingBufferMemory);
+
+        void* data;
+        vkMapMemory(device, stagingBufferMemory, 0, imageSize, 0, &data);
+        memcpy(data, pixels, static_cast<size_t>(imageSize));
+        vkUnmapMemory(device, stagingBufferMemory);
+
+        stbi_image_free(pixels);
+
+        createImage(texWidth, texHeight, VK_FORMAT_R8G8B8A8_SRGB, VK_IMAGE_TILING_OPTIMAL, VK_IMAGE_USAGE_TRANSFER_DST_BIT | VK_IMAGE_USAGE_SAMPLED_BIT, VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT, textureImage, textureImageMemory);
+
+        transitionImageLayout(textureImage, VK_FORMAT_R8G8B8A8_SRGB, VK_IMAGE_LAYOUT_UNDEFINED, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL);
+        copyBufferToImage(stagingBuffer, textureImage, static_cast<uint32_t>(texWidth), static_cast<uint32_t>(texHeight));
+        transitionImageLayout(textureImage, VK_FORMAT_R8G8B8A8_SRGB, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+
+        vkDestroyBuffer(device, stagingBuffer, nullptr);
+        vkFreeMemory(device, stagingBufferMemory, nullptr);
+    }
+
+    std::vector<stbi_uc*> loadCubeMapImages(const char* front, const char* back, const char* up, const char* down, const char* right, const char* left, int& texWidth, int& texHeight, int& texChannels) {
+        std::vector<stbi_uc*> cubeMapImages;
+        std::vector<const char* > faces;
+        faces.push_back(front); faces.push_back(back); faces.push_back(up); faces.push_back(down); faces.push_back(right); faces.push_back(left);
+        
+        for (const auto& face : faces) {
+            stbi_uc* pixels = stbi_load(std::string(face).c_str(), &texWidth, &texHeight, &texChannels, STBI_rgb_alpha);
+            if (!pixels) {
+                throw std::runtime_error("failed to load texture image!" + *face);
+            }
+            cubeMapImages.push_back(pixels);
+        }
+        
+        return cubeMapImages;
+    }
+
+    void createTextureImageCubeMap(const char* path) {
+        int texWidth, texHeight, texChannels;
+
+
+        stbi_uc* pixels = stbi_load(std::string(path).c_str(), &texWidth, &texHeight, &texChannels, STBI_rgb_alpha);
         VkDeviceSize imageSize = static_cast<VkDeviceSize>(texWidth) * texHeight * 4;
 
         if (!pixels) {
