@@ -167,7 +167,7 @@ private:
         models.push_back(Model::Load("../MyGame/media/models/viking_room.obj", 0));
         models.push_back(Model::Load("../MyGame/media/models/cube_small.obj", 1));
         //models.push_back(Model::Load("../MyGame/media/models/sphere.obj", 2));
-        models.push_back(Model::LoadSkybox("../MyGame/media/models/skybox_cube.obj", 2));
+        models.push_back(Model::LoadSkybox("../MyGame/media/models/skybox_cube.obj", 1));
 
         // sone test translations
         models[1].translateModelMatrix(glm::vec3(0.0f, 1.2f, -0.5f));

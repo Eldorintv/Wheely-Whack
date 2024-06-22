@@ -17,7 +17,8 @@ layout(location = 1) out vec2 fragTexCoord;
 
 void main()
 {
-    gl_Position = ubo.view * vec4(inPosition, 1.0);
+    vec4 pos = ubo.proj * ubo.view * vec4(inPosition, 1.0);
+    gl_Position = pos.xyww; // z is not here on purpose, no depth testing
     //fragColor = inColor;
     fragTexCoord = inTexCoord;
 }

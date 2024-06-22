@@ -81,6 +81,9 @@
     <Object Include="media\models\viking_room.obj">
       <Filter>Resource Files\media\models</Filter>
     </Object>
+    <Object Include="media\models\skybox_cube.obj">
+      <Filter>Resource Files\media\models</Filter>
+    </Object>
   </ItemGroup>
   <ItemGroup>
     <Image Include="media\textures\paper.jpg">
