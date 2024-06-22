@@ -62,7 +62,7 @@ public:
         vkFreeMemory(device, vertexBufferMemory, nullptr);
     }
 
-    void Render(VkCommandBuffer commandBuffer) {
+    void Render(VkCommandBuffer& commandBuffer) {
         VkBuffer vertexBuffers[] = { vertexBuffer };
         VkDeviceSize offsets[] = { 0 };
         vkCmdBindVertexBuffers(commandBuffer, 0, 1, vertexBuffers, offsets);
