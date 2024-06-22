@@ -36,15 +36,25 @@ static void translateViewMatrix(double deltaTime) {
     }
     if (sIsPressed) {
         translate = glm::translate(translate, glm::vec3(0.0f, 0.0f, -drivingSpeed));
+
+        if (aIsPressed) {
+            rotation *= glm::rotate(rotation, angle, glm::vec3(0.0f, 1.0f, 0.0f));
+        }
+        if (dIsPressed) {
+            rotation *= glm::rotate(rotation, -angle, glm::vec3(0.0f, 1.0f, 0.0f));
+        }
     }
-    if (aIsPressed) {
-        //translate = glm::translate(translate, glm::vec3(0.0002f, 0.0f, 0.0f));
-        rotation = glm::rotate(rotation, -angle, glm::vec3(0.0f, 1.0f, 0.0f));
+    else {
+        if (aIsPressed) {
+            //translate = glm::translate(translate, glm::vec3(0.0002f, 0.0f, 0.0f));
+            rotation = glm::rotate(rotation, -angle, glm::vec3(0.0f, 1.0f, 0.0f));
+        }
+        if (dIsPressed) {
+            //translate = glm::translate(translate, glm::vec3(-0.0002f, 0.0f, 0.0f));
+            rotation = glm::rotate(rotation, angle, glm::vec3(0.0f, 1.0f, 0.0f));
+        }
     }
-    if (dIsPressed) {
-        //translate = glm::translate(translate, glm::vec3(-0.0002f, 0.0f, 0.0f));
-        rotation = glm::rotate(rotation, angle, glm::vec3(0.0f, 1.0f, 0.0f));
-    }
+    
 
     //if (leftMouseButtonIsPressed) {
     //    rotation = glm::rotate(rotation, glm::radians(angledx), glm::vec3(0.0f, 1.0f, 0.0f));
