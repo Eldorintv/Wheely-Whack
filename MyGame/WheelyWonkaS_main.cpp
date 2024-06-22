@@ -163,6 +163,7 @@ private:
         textures.push_back(Texture::Load("../MyGame/media/textures/viking_room.png"));
         textures.push_back(Texture::Load("../MyGame/media/textures/water.png"));
         textures.push_back(Texture::Load("../MyGame/media/textures/paper.jpg"));
+        // not working as expected yet:
         textures.push_back(Texture::LoadCubeMap("../MyGame/media/textures/sky/front.jpg", 
             "../MyGame/media/textures/sky/back.jpg", 
             "../MyGame/media/textures/sky/up.jpg",
@@ -176,6 +177,7 @@ private:
         models.push_back(Model::Load("../MyGame/media/models/cube_small.obj", 1));
         models.push_back(Model::Load("../MyGame/media/models/sphere.obj", 2));
         models.push_back(Model::Load("../MyGame/media/models/sphere.obj", 2));
+        models.push_back(Model::Load("../MyGame/media/models/small_plane.obj", 1));
 
         // some test translations
         models[2].translateModelMatrix(glm::vec3(0.0f, 1.2f, -0.5f));
@@ -821,7 +823,7 @@ private:
         float time = std::chrono::duration<float, std::chrono::seconds::period>(currentTime - startTime).count();
 
         for (size_t i = 0; i < models.size(); ++i) {
-            models[i].updateModelMatrix(time);
+            //models[i].updateModelMatrix(time);
 
             UniformBufferObject ubo{};
             ubo.model = models[i].modelMatrix;
