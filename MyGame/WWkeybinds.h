@@ -4,10 +4,10 @@
 #include "WWhelpers.h"
 
 
-static bool wIsPressed{ false };
-static bool sIsPressed{ false };
-static bool aIsPressed{ false };
-static bool dIsPressed{ false };
+extern bool wIsPressed;
+extern bool sIsPressed;
+extern bool aIsPressed;
+extern bool dIsPressed;
 
 static bool leftMouseButtonIsPressed{ false };
 

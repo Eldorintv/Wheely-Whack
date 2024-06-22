@@ -8,6 +8,11 @@
 const uint32_t WIDTH = 800;
 const uint32_t HEIGHT = 600;
 
+bool wIsPressed = false;
+bool sIsPressed = false;;
+bool aIsPressed = false;;
+bool dIsPressed = false;;
+
 VkCommandPool commandPool;
 VkDevice device;
 VkQueue graphicsQueue;
@@ -847,7 +852,7 @@ private:
 
     void createStagingBuffer() {
         //commandBuffer = beginSingleTimeCommands();
-        bufferSize = swapChainExtent.width * swapChainExtent.height * 4;
+        bufferSize = static_cast<VkDeviceSize>(swapChainExtent.width) * swapChainExtent.height * 4;
 
         createBuffer(bufferSize, VK_BUFFER_USAGE_TRANSFER_DST_BIT, VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT, stagingBuffer, stagingBufferMemory);
 
@@ -1172,12 +1177,12 @@ private:
 
 extern std::chrono::milliseconds FPS_INTERVAL;
 
-void receiveReport(UDPReceive6& receiver) {
-    //UDPReceive6 receiver;
-    //receiver.init(51337);
+void receiveReport() {
+    UDPReceive6 receiver;
+    receiver.init(51337);
 
     while (true) {
-        char buf[65000];
+        char buf[5000];
         double ptime;
         auto ret = receiver.receive(buf, sizeof buf, &ptime);
         buf[ret] = '\0';
@@ -1208,14 +1213,41 @@ void receiveReport(UDPReceive6& receiver) {
     }
 }
 
-void getMovementUDP(UDPReceive6& receiver) {
+void getMovementUDP() {
+    UDPReceive6 receiver;
+    receiver.init(51338);
 
     while (true) {
-        char buf[65000];
+        char buf[25];
         double ptime;
         auto ret = receiver.receive(buf, sizeof buf, &ptime);
         buf[ret] = '\0';
-        printf("\n\nMovement: \n% s", buf);
+        //printf("\n\nMovement: \n% s", buf);
+
+        if (buf[0] == 'W') {
+            wIsPressed = true;
+        }
+        else if (buf[0] == 'A') {
+            aIsPressed = true;
+        }
+        else if (buf[0] == 'S') {
+            sIsPressed = true;
+        }
+        else if (buf[0] == 'D') {
+            dIsPressed = true;
+        }
+        else if (buf[0] == 'w') {
+            wIsPressed = false;
+        }
+        else if (buf[0] == 'a') {
+            aIsPressed = false;
+        }
+        else if (buf[0] == 's') {
+            sIsPressed = false;
+        }
+        else if (buf[0] == 'd') {
+            dIsPressed = false;
+        }
     }
 }
 
@@ -1223,11 +1255,8 @@ int main() {
     startWinsock();
     HelloTriangleApplication app;
 
-    UDPReceive6 receiver;
-    receiver.init(51337);
-
-    std::thread receiveThread(receiveReport, std::ref(receiver));
-    std::thread getMovement(getMovementUDP, std::ref(receiver));
+    std::thread receiveThread(receiveReport);
+    std::thread getMovement(getMovementUDP);
 
     try {
         app.run();

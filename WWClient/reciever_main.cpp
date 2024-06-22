@@ -211,12 +211,15 @@ int main() {
 	UDPSend6 sender;
 	sender.init("::1", SEND_PORT_NUMBER);
 
+	UDPSend6 senderMovement;
+	senderMovement.init("::1", SEND_PORT_NUMBER + 1);
+
 
 	// Threads A -> Receiver, Thread B -> Presenter
 	std::thread A(receiveFrames, std::ref(receiver), std::ref(sender));
 	//std::thread B(queueToPNG);
 	std::thread B(queueToUINT8);
-	std::thread C(displayWindow, std::ref(sender));
+	std::thread C(displayWindow, std::ref(senderMovement));
 
 	A.join();
 	B.join();
