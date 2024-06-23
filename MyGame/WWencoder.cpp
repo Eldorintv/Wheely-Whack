@@ -27,13 +27,13 @@ bool Encoder::setUpCodec(uint32_t extentWidth, uint32_t extentHeight) {
 		exit(1);
 
 	/* put sample parameters */
-	c->bit_rate = 100000;
+	c->bit_rate = 4000000;
 	/* resolution must be a multiple of two */
 	c->width = extentWidth;
 	c->height = extentHeight;
 	/* frames per second */
-	c->time_base = { 1, 25 };
-	c->framerate = { 25, 1 };
+	c->time_base = { 1, 30 };
+	c->framerate = { 30, 1 };
 
 	/* emit one intra frame every ten frames
 	 * check frame pict_type before passing frame
@@ -83,7 +83,7 @@ bool Encoder::setUpCodec(uint32_t extentWidth, uint32_t extentHeight) {
 	sender.init("::1", 50000);
 	//receiver.init(51337);
 
-	ctx = sws_getContext(c->width, c->height, AV_PIX_FMT_BGRA, c->width, c->height, AV_PIX_FMT_YUV420P, SWS_FAST_BILINEAR, 0, 0, 0);
+	ctx = sws_getContext(c->width, c->height, AV_PIX_FMT_BGRA, c->width, c->height, AV_PIX_FMT_YUV420P, 0, 0, 0, 0);
 
 	return true;
 }

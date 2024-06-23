@@ -174,12 +174,12 @@ private:
             "../MyGame/media/textures/sky/down.jpg",
             "../MyGame/media/textures/sky/right.jpg",
             "../MyGame/media/textures/sky/left.jpg"));
-        textures.push_back(Texture::Load("../MyGame/media/textures/grass.png"));
+        textures.push_back(Texture::Load("../MyGame/media/textures/road.jpg"));
         textures.push_back(Texture::Load("../MyGame/media/textures/paper.jpg"));
 
         models.push_back(Model::LoadSkybox("../MyGame/media/models/skybox_cube.obj", 0));
         models.push_back(Model::Load("../MyGame/media/models/cube_small.obj", 2));
-        models.push_back(Model::Load("../MyGame/media/models/grass.obj", 1));
+        models.push_back(Model::Load("../MyGame/media/models/small_plane.obj", 1));
 
         // some test translations
         models[2].translateModelMatrix(glm::vec3(3.0f, 0.25f, -0.5f));

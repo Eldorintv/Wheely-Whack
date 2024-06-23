@@ -107,6 +107,12 @@
     <Image Include="media\textures\grass.jpg">
       <Filter>Resource Files\media\textures</Filter>
     </Image>
+    <Image Include="media\textures\grass.png">
+      <Filter>Resource Files\media\textures</Filter>
+    </Image>
+    <Image Include="media\textures\road.jpg">
+      <Filter>Resource Files\media\textures</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <None Include="media\shaders\26_shader_depth.frag">

@@ -74,7 +74,9 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="media\textures\grass.jpg" />
+    <Image Include="media\textures\grass.png" />
     <Image Include="media\textures\paper.jpg" />
+    <Image Include="media\textures\road.jpg" />
     <Image Include="media\textures\viking_room.png" />
     <Image Include="media\textures\water.png" />
   </ItemGroup>
