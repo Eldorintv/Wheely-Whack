@@ -5,13 +5,30 @@
 
 class Camera {
 public:
-	glm::vec3 position = glm::vec3(0.0f, 0.5f, 0.0f);
-	glm::vec3 front = glm::vec3(1.0f, 0.5, 0.0f);
-	glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
 
-	glm::mat4 getViewMatrix() {
-		return glm::lookAt(position, position + front, up);
+	Camera(const glm::vec3& position, const glm::vec3& target, const glm::vec3& up) {
+		this->viewMatrix = glm::lookAt(position, target, up);
 	}
+
+	Camera() {
+		this->viewMatrix = glm::lookAt(glm::vec3(0.0f, 0.5f, 0.0f), glm::vec3(1.0f, 0.5f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+	}
+
+	glm::mat4 getViewMatrix() const {
+		return this->viewMatrix;
+	}
+
+	void updateCamera(const glm::mat4& transform) {
+		viewMatrix = transform * viewMatrix;
+	}
+
+	glm::vec3 getPosition() {
+		glm::mat4 viewInverse = glm::inverse(viewMatrix);
+		return glm::vec3(viewInverse[3]);
+	}
+
+private:
+	glm::mat4 viewMatrix;
 };
 
 

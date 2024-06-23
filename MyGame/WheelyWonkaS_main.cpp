@@ -8,6 +8,8 @@
 const uint32_t WIDTH = 800;
 const uint32_t HEIGHT = 600;
 
+Camera camera;
+
 bool wIsPressed = false;
 bool sIsPressed = false;;
 bool aIsPressed = false;;
@@ -227,10 +229,8 @@ private:
     // not working at all
     void checkForHit() {
         glm::vec3 positionCube = glm::vec3(models[2].modelMatrix[3]);
-        glm::mat4 cameraMatrix = glm::inverse(viewMatrix);
-        glm::vec3 positionCamera = glm::vec3(viewMatrix[3]);
 
-        float distance = glm::length(positionCube - positionCamera);
+        float distance = glm::length(positionCube - camera.getPosition());
         std::cout << "distance: " << distance << "\n";
         if (distance < 2) {
             
@@ -859,7 +859,7 @@ private:
 
             UniformBufferObject ubo{};
             ubo.model = models[i].modelMatrix;
-            ubo.view = viewMatrix;
+            ubo.view = camera.getViewMatrix();
             ubo.proj = glm::perspective(glm::radians(45.0f), swapChainExtent.width / (float)swapChainExtent.height, 0.1f, 20.0f);
             ubo.proj[1][1] *= -1;
 

@@ -2,7 +2,9 @@
 #define WWKEYBINDS_H
 
 #include "WWhelpers.h"
+#include "WWcamera.h"
 
+extern Camera camera;
 
 extern bool wIsPressed;
 extern bool sIsPressed;
@@ -20,22 +22,22 @@ static float angledx{ 0 };
 static float angledy{ 0 };
 static bool m_usePrevCursorPosition{ false };
 
-static glm::mat4 viewMatrix = glm::lookAt(glm::vec3(0.0f, 0.5f, 0.0f), glm::vec3(1.0f, 0.5f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+//static glm::mat4 viewMatrix = glm::lookAt(glm::vec3(0.0f, 0.5f, 0.0f), glm::vec3(1.0f, 0.5f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 
 
 // camera movement
 static void translateViewMatrix(double deltaTime) {
-    glm::mat4 translate(1.0f);
+    glm::mat4 translation(1.0f);
     glm::mat4 rotation(1.0f);
 
     float drivingSpeed = 1.5f * static_cast<float>(deltaTime);
     float angle = glm::radians(45.0f) * static_cast<float>(deltaTime);
 
     if (wIsPressed) {
-        translate = glm::translate(translate, glm::vec3(0.0f, 0.0f, drivingSpeed));
+        translation = glm::translate(translation, glm::vec3(0.0f, 0.0f, drivingSpeed));
     }
     if (sIsPressed) {
-        translate = glm::translate(translate, glm::vec3(0.0f, 0.0f, -drivingSpeed));
+        translation = glm::translate(translation, glm::vec3(0.0f, 0.0f, -drivingSpeed));
 
         if (aIsPressed) {
             rotation *= glm::rotate(rotation, angle, glm::vec3(0.0f, 1.0f, 0.0f));
@@ -62,10 +64,13 @@ static void translateViewMatrix(double deltaTime) {
     //if (leftMouseButtonIsPressed) {
     //    rotation = glm::rotate(rotation, glm::radians(angledy), glm::vec3(1.0f, 0.0f, 0.0f));
     //}
-    viewMatrix = translate * viewMatrix;
-    viewMatrix = rotation * viewMatrix;
-    angledx = 0.0;
-    angledy = 0.0;
+    glm::mat4 transform = translation * rotation;
+    camera.updateCamera(transform);
+
+    //viewMatrix = translation * viewMatrix;
+    //viewMatrix = rotation * viewMatrix;
+    //angledx = 0.0;
+    //angledy = 0.0;
 }
 
 
