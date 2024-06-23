@@ -175,17 +175,18 @@ private:
             "../MyGame/media/textures/sky/down.jpg",
             "../MyGame/media/textures/sky/right.jpg",
             "../MyGame/media/textures/sky/left.jpg"));
+        textures.push_back(Texture::Load("../MyGame/media/textures/grass.jpg"));
 
         models.push_back(Model::LoadSkybox("../MyGame/media/models/skybox_cube.obj", 3));
 
         models.push_back(Model::Load("../MyGame/media/models/viking_room.obj", 0));
-        models.push_back(Model::Load("../MyGame/media/models/cube_small.obj", 1));
+        models.push_back(Model::Load("../MyGame/media/models/cube_small.obj", 2));
         models.push_back(Model::Load("../MyGame/media/models/sphere.obj", 2));
         models.push_back(Model::Load("../MyGame/media/models/sphere.obj", 2));
-        models.push_back(Model::Load("../MyGame/media/models/small_plane.obj", 1));
+        models.push_back(Model::Load("../MyGame/media/models/grass.obj", 4));
 
         // some test translations
-        models[2].translateModelMatrix(glm::vec3(0.0f, 1.2f, -0.5f));
+        models[2].translateModelMatrix(glm::vec3(3.0f, 0.25f, -0.5f));
         models[3].translateModelMatrix(glm::vec3(0.0f, -2.0f, -1.0f));
         models[4].translateModelMatrix(glm::vec3(0.0f, -3.0f, -1.0f));
 
@@ -214,10 +215,27 @@ private:
             lastFrameTime = currentFrameTime;
             glfwPollEvents();
             translateViewMatrix(deltaTime);
+
+            // check for hit
+            checkForHit();
             drawFrame();
         }
 
         vkDeviceWaitIdle(device);
+    }
+
+    // not working at all
+    void checkForHit() {
+        glm::vec3 positionCube = glm::vec3(models[2].modelMatrix[3]);
+        glm::mat4 cameraMatrix = glm::inverse(viewMatrix);
+        glm::vec3 positionCamera = glm::vec3(viewMatrix[3]);
+
+        float distance = glm::length(positionCube - positionCamera);
+        std::cout << "distance: " << distance << "\n";
+        if (distance < 2) {
+            
+            models[2].translateModelMatrix(glm::vec3(1.0f, 0.0f, 1.5f));
+        }
     }
 
     void cleanupSwapChain() {
