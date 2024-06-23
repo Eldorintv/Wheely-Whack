@@ -180,12 +180,11 @@ private:
 
         // MODELS
         models.push_back(Model::LoadSkybox("../MyGame/media/models/skybox_cube.obj", 0));
-        models.push_back(Model::Load("../MyGame/media/models/cube_small.obj", 2));
-        models.push_back(Model::Load("../MyGame/media/models/small_plane.obj", 1));
+        models.push_back(Model::Load("../MyGame/media/models/plane_big.obj", 1));
 
         // some test translations
         //models[2].translateModelMatrix(glm::vec3(3.0f, 0.25f, -0.5f));
-
+        glm::vec3 planeNormal = models[1].vertices[0].normal;
 
         createUniformBuffers();
         createDescriptorPool();
