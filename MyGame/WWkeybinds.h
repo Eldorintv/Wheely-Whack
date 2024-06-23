@@ -22,15 +22,13 @@ static float angledx{ 0 };
 static float angledy{ 0 };
 static bool m_usePrevCursorPosition{ false };
 
-//static glm::mat4 viewMatrix = glm::lookAt(glm::vec3(0.0f, 0.5f, 0.0f), glm::vec3(1.0f, 0.5f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-
 
 // camera movement
 static void translateViewMatrix(double deltaTime) {
     glm::mat4 translation(1.0f);
     glm::mat4 rotation(1.0f);
 
-    float drivingSpeed = 1.5f * static_cast<float>(deltaTime);
+    float drivingSpeed = 2.0f * static_cast<float>(deltaTime);
     float angle = glm::radians(45.0f) * static_cast<float>(deltaTime);
 
     if (wIsPressed) {
@@ -48,16 +46,12 @@ static void translateViewMatrix(double deltaTime) {
     }
     else {
         if (aIsPressed) {
-            //translate = glm::translate(translate, glm::vec3(0.0002f, 0.0f, 0.0f));
             rotation = glm::rotate(rotation, -angle, glm::vec3(0.0f, 1.0f, 0.0f));
         }
         if (dIsPressed) {
-            //translate = glm::translate(translate, glm::vec3(-0.0002f, 0.0f, 0.0f));
             rotation = glm::rotate(rotation, angle, glm::vec3(0.0f, 1.0f, 0.0f));
         }
     }
-    
-
     //if (leftMouseButtonIsPressed) {
     //    rotation = glm::rotate(rotation, glm::radians(angledx), glm::vec3(0.0f, 1.0f, 0.0f));
     //}
@@ -66,11 +60,6 @@ static void translateViewMatrix(double deltaTime) {
     //}
     glm::mat4 transform = translation * rotation;
     camera.updateCamera(transform);
-
-    //viewMatrix = translation * viewMatrix;
-    //viewMatrix = rotation * viewMatrix;
-    //angledx = 0.0;
-    //angledy = 0.0;
 }
 
 

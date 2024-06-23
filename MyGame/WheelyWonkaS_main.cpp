@@ -231,8 +231,7 @@ private:
         glm::vec3 positionCube = glm::vec3(models[2].modelMatrix[3]);
 
         float distance = glm::length(positionCube - camera.getPosition());
-        std::cout << "distance: " << distance << "\n";
-        if (distance < 2) {
+        if (distance < 1) {
             
             models[2].translateModelMatrix(glm::vec3(1.0f, 0.0f, 1.5f));
         }
