@@ -26,7 +26,7 @@ enum class Direction {
 
 void displayWindow(UDPSend6& sender) {
     sf::ContextSettings settings;
-    settings.antialiasingLevel = 8;
+    settings.antialiasingLevel = 0;
 
     sf::RenderWindow window(sf::VideoMode(800, 600), "mySimpleGame", sf::Style::Default, settings);
     if (!texture.create(800, 600)) {
