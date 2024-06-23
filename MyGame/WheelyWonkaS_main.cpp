@@ -168,6 +168,7 @@ private:
         createFramebuffers();
 
         // not working as expected yet:
+        // TEXTURES
         textures.push_back(Texture::LoadCubeMap("../MyGame/media/textures/sky/front.jpg",
             "../MyGame/media/textures/sky/back.jpg",
             "../MyGame/media/textures/sky/up.jpg",
@@ -177,12 +178,13 @@ private:
         textures.push_back(Texture::Load("../MyGame/media/textures/road.jpg"));
         textures.push_back(Texture::Load("../MyGame/media/textures/paper.jpg"));
 
+        // MODELS
         models.push_back(Model::LoadSkybox("../MyGame/media/models/skybox_cube.obj", 0));
         models.push_back(Model::Load("../MyGame/media/models/cube_small.obj", 2));
         models.push_back(Model::Load("../MyGame/media/models/small_plane.obj", 1));
 
         // some test translations
-        models[2].translateModelMatrix(glm::vec3(3.0f, 0.25f, -0.5f));
+        //models[2].translateModelMatrix(glm::vec3(3.0f, 0.25f, -0.5f));
 
 
         createUniformBuffers();
@@ -200,6 +202,8 @@ private:
     double lastFrameTime = 0.0;
     double deltaTime = 0.0;
 
+    std::vector<size_t> hittableObjects{ 1 };
+
     void mainLoop() {
         while (!glfwWindowShouldClose(window)) {
             double currentFrameTime = glfwGetTime();
@@ -209,7 +213,7 @@ private:
             translateViewMatrix(deltaTime);
 
             // check for hit
-            checkForHit();
+            checkForHit(hittableObjects);
             drawFrame();
         }
 
@@ -217,14 +221,16 @@ private:
     }
 
     // not working at all
-    void checkForHit() {
-        glm::vec3 positionCube = glm::vec3(models[2].modelMatrix[3]);
+    void checkForHit(std::vector<size_t>& hitables) {
+        for (const auto& object : hitables) {
+            glm::vec3 position = glm::vec3(models[object].modelMatrix[3]);
 
-        float distance = glm::length(positionCube - camera.getPosition());
-        if (distance < 1) {
-            
-            models[2].translateModelMatrix(glm::vec3(1.0f, 0.0f, 1.5f));
-        }
+            float distance = glm::length(position - camera.getPosition());
+            if (distance < 1) {
+
+                models[object].translateModelMatrix(glm::vec3(1.0f, 0.0f, 1.5f));
+            }
+        }  
     }
 
     void cleanupSwapChain() {
