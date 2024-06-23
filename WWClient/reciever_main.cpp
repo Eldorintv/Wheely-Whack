@@ -185,6 +185,7 @@ void queueToUINT8() {
 
 			frame = frameQueue.front();
 			frameQueue.pop();
+			std::cout << frameQueue.size() << "\n";
 		}
 
 		if (!frame.empty()) {

@@ -957,7 +957,11 @@ private:
             vkMapMemory(device, stagingBufferMemory, 0, bufferSize, 0, &data);
 
             // here encode
-            uint8_t* mappedData = static_cast<uint8_t*>(data);
+            
+            uint8_t* mappedData = new uint8_t[bufferSize];
+            std::memcpy(mappedData, data, bufferSize);
+
+            //uint8_t* mappedData = static_cast<uint8_t*>(data);
 
             //encoder.encodeFrameFromDataImage(mappedData);
             {
@@ -968,7 +972,7 @@ private:
                 if (encQueue.size() > 15) {
                     FPS_INTERVAL += std::chrono::milliseconds(2);
                 }
-                else if (encQueue.size() < 2) {
+                else if (encQueue.size() < 2 && FPS_INTERVAL > std::chrono::milliseconds(40)) {
                     FPS_INTERVAL -= std::chrono::milliseconds(5);
                 }
             }
@@ -1174,6 +1178,7 @@ private:
 
             //std::cout << "encoding now\n";
             encoder.encodeFrameFromDataImage(frame);
+            delete[] frame;
 
             // checks queue twice as fast + sanity 1 ms
             //std::this_thread::sleep_for(std::chrono::milliseconds((FPS_INTERVAL / 2) + std::chrono::milliseconds(1)));
@@ -1187,7 +1192,7 @@ private:
 };
 
 
-extern std::chrono::milliseconds FPS_INTERVAL;
+//extern std::chrono::milliseconds FPS_INTERVAL;
 
 void receiveReport() {
     UDPReceive6 receiver;
