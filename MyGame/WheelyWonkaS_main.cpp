@@ -952,7 +952,7 @@ private:
             {
                 std::lock_guard<std::mutex> lock(encQueueMutex);
                 encQueue.push(std::move(mappedData));
-                std::cout << "in draw and encoding now: " << encQueue.size() << "\n";
+                //std::cout << "in draw and encoding now: " << encQueue.size() << "\n";
                 // this is a baindaid for now
                 if (encQueue.size() > 15) {
                     FPS_INTERVAL += std::chrono::milliseconds(2);
@@ -1161,6 +1161,7 @@ private:
                 encQueue.pop();
             }
 
+            //std::cout << "encoding now\n";
             encoder.encodeFrameFromDataImage(frame);
 
             // checks queue twice as fast + sanity 1 ms
