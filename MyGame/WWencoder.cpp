@@ -46,7 +46,7 @@ bool Encoder::setUpCodec(uint32_t extentWidth, uint32_t extentHeight) {
 	c->pix_fmt = AV_PIX_FMT_YUV420P;
 
 	if (codec->id == AV_CODEC_ID_H264)
-		av_opt_set(c->priv_data, "preset", "faster", 0);
+		av_opt_set(c->priv_data, "preset", "slow", 0);
 
 	/* open it */
 	ret = avcodec_open2(c, codec, NULL);

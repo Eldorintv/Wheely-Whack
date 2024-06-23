@@ -24,40 +24,6 @@ enum class Direction {
     Right
 };
 
-//void functionA(Direction d) {
-//    switch (d) {
-//    case Direction::Forward:
-//        std::cout << "Forward Pressed!\n";
-//        break;
-//    case Direction::Left:
-//        std::cout << "Left Pressed!\n";
-//        break;
-//    case Direction::Backward:
-//        std::cout << "Backward Pressed!\n";
-//        break;
-//    case Direction::Right:
-//        std::cout << "Right Pressed!\n";
-//        break;
-//    }
-//}
-//
-//void functionAFinish(Direction d) {
-//    switch (d) {
-//    case Direction::Forward:
-//        std::cout << "Forward Released!\n";
-//        break;
-//    case Direction::Left:
-//        std::cout << "Left Released!\n";
-//        break;
-//    case Direction::Backward:
-//        std::cout << "Backwards Released!\n";
-//        break;
-//    case Direction::Right:
-//        std::cout << "Right Released!\n";
-//        break;
-//    }
-//}
-
 void displayWindow(UDPSend6& sender) {
     sf::ContextSettings settings;
     settings.antialiasingLevel = 8;
@@ -136,7 +102,6 @@ void updateTexture(uint8_t* rgb_buffer) {
     sf::Uint8* pixels = rgb_buffer;
     texture.update(pixels);
 
-    // needs to be freed still, not ideal solution
     free(rgb_buffer);
 }
 
