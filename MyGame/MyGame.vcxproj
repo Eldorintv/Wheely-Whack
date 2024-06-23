@@ -25,6 +25,7 @@
     <ClCompile Include="WWencoder.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="WWcamera.h" />
     <ClInclude Include="WWencoder.h" />
     <ClInclude Include="WWkeybinds.h" />
     <ClInclude Include="WWmodel.h" />
@@ -50,6 +51,10 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </Object>
+    <Object Include="media\models\grass.obj">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </Object>
     <Object Include="media\models\skybox_cube.obj">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
@@ -68,6 +73,7 @@
     </Object>
   </ItemGroup>
   <ItemGroup>
+    <Image Include="media\textures\grass.jpg" />
     <Image Include="media\textures\paper.jpg" />
     <Image Include="media\textures\viking_room.png" />
     <Image Include="media\textures\water.png" />

@@ -175,7 +175,7 @@ private:
             "../MyGame/media/textures/sky/down.jpg",
             "../MyGame/media/textures/sky/right.jpg",
             "../MyGame/media/textures/sky/left.jpg"));
-        textures.push_back(Texture::Load("../MyGame/media/textures/grass.jpg"));
+        textures.push_back(Texture::Load("../MyGame/media/textures/grass.png"));
 
         models.push_back(Model::LoadSkybox("../MyGame/media/models/skybox_cube.obj", 3));
 

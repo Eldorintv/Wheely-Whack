@@ -62,6 +62,9 @@
     <ClInclude Include="WWencoder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="WWcamera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="glfw\glfw-3.2.1.bin.WIN64\lib-vc2015\glfw3.dll">
@@ -87,6 +90,9 @@
     <Object Include="media\models\small_plane.obj">
       <Filter>Resource Files\media\models</Filter>
     </Object>
+    <Object Include="media\models\grass.obj">
+      <Filter>Resource Files\media\models</Filter>
+    </Object>
   </ItemGroup>
   <ItemGroup>
     <Image Include="media\textures\paper.jpg">
@@ -96,6 +102,9 @@
       <Filter>Resource Files\media\textures</Filter>
     </Image>
     <Image Include="media\textures\water.png">
+      <Filter>Resource Files\media\textures</Filter>
+    </Image>
+    <Image Include="media\textures\grass.jpg">
       <Filter>Resource Files\media\textures</Filter>
     </Image>
   </ItemGroup>

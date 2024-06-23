@@ -8,6 +8,7 @@
 #include "WWkeybinds.h"
 #include "WWmodel.h"
 #include "WWtexture.h"
+#include "WWcamera.h"
 
 extern "C" {
 #include "libavutil/imgutils.h"
