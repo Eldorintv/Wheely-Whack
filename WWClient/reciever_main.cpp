@@ -185,7 +185,6 @@ void queueToUINT8() {
 
 			frame = frameQueue.front();
 			frameQueue.pop();
-			std::cout << frameQueue.size() << "\n";
 		}
 
 		if (!frame.empty()) {
@@ -194,7 +193,7 @@ void queueToUINT8() {
 			updateTexture(pixels);
 		}
 
-		std::this_thread::sleep_for(std::chrono::milliseconds(pauseBetweenQueuePopInMiliseconds));
+		//std::this_thread::sleep_for(std::chrono::milliseconds(pauseBetweenQueuePopInMiliseconds));
 	}
 
 	// delete decoder on heap
