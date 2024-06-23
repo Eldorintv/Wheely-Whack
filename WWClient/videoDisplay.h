@@ -59,7 +59,10 @@ enum class Direction {
 //}
 
 void displayWindow(UDPSend6& sender) {
-    sf::RenderWindow window(sf::VideoMode(800, 600), "mySimpleGame");
+    sf::ContextSettings settings;
+    settings.antialiasingLevel = 8;
+
+    sf::RenderWindow window(sf::VideoMode(800, 600), "mySimpleGame", sf::Style::Default, settings);
     if (!texture.create(800, 600)) {
         fprintf(stderr, "VIDEO_DISPLAY: Error creating a texture\n");
         exit(1);
@@ -68,6 +71,8 @@ void displayWindow(UDPSend6& sender) {
 
     // keyboard input - W-A-S-D
     std::array<bool, MaxKeys> keyStates = { false };
+
+    texture.setSmooth(true);
 
     while (window.isOpen())
     {

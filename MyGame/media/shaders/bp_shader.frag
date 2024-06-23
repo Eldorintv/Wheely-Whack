@@ -16,12 +16,12 @@ layout(location = 2) in vec3 fragWorldPos;
 
 layout(location = 0) out vec4 outColor;
 
-const float lightPower = 20.0;
+const float lightPower = 25.0;
 const vec3 ambientColor = vec3(0.1, 0.1, 0.1);
 const vec3 diffuseColor = vec3(0.2, 0.2, 0.2);
 const vec3 specColor = vec3(1.0, 1.0, 1.0);
 const float shininess = 16.0;
-const vec3 lightPos = vec3(1.0, 5.0, 1.0);
+const vec3 lightPos = vec3(-5.0, 8.0, 1.0);
 const vec3 lightColor = vec3(1.0, 1.0, 1.0);
 
 void main() {

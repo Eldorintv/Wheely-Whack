@@ -2,11 +2,11 @@ echo off
 
 REM Paths to shaders
 set VERTEX_SHADER=skybox_shader.vert
-set FRAGMENT_SHADER=skybox_shader.frag
+set FRAGMENT_SHADER=bp_shader.frag
 
 REM Output SPIR-V files
 set VERTEX_SPIRV=vertSkyBox.spv
-set FRAGMENT_SPIRV=fragSkyBox.spv
+set FRAGMENT_SPIRV=fragBP.spv
 
 REM Compile vertex shader
 glslangValidator -V %VERTEX_SHADER% -o %VERTEX_SPIRV%
