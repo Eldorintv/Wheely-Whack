@@ -42,6 +42,9 @@
     <ClCompile Include="..\WWClient\UDP6receive.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="WWboundingbox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WWInclude.h">
@@ -63,6 +66,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="WWcamera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WWboundingbox.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -2,10 +2,10 @@
 #define WWMODEL_H
 
 #include "WWhelpers.h"
+#include "WWboundingbox.h"
 
 extern VkRenderPass renderPass;
 extern VkDescriptorSetLayout descriptorSetLayout;
-
 
 class Model : VulkanHelper {
 public:
