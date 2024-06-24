@@ -190,9 +190,17 @@ private:
         models.push_back(Model::Load("../MyGame/media/models/line_road/water_right.obj", 4));
         models.push_back(Model::Load("../MyGame/media/models/line_road/left_iron_fence.obj", 2)); //4
         models.push_back(Model::Load("../MyGame/media/models/line_road/right_iron_fence.obj", 2));//5
-
+        models.push_back(Model::Load("../MyGame/media/models/line_road/road2.obj", 1));//6
+        models.push_back(Model::Load("../MyGame/media/models/line_road/left_fence2.obj", 2));//7
+        models.push_back(Model::Load("../MyGame/media/models/line_road/right_fence2.obj", 2));//8
+        models.push_back(Model::Load("../MyGame/media/models/line_road/road3.obj", 2));//9 rainbow special level
+        models.push_back(Model::Load("../MyGame/media/models/line_road/left_fence3.obj", 2));//10
+        models.push_back(Model::Load("../MyGame/media/models/line_road/right_fence3.obj", 2));//11
+        models.push_back(Model::Load("../MyGame/media/models/line_road/road4.obj", 2));//12 rainbow special level
+        models.push_back(Model::Load("../MyGame/media/models/line_road/left_fence4.obj", 2));//13
+        models.push_back(Model::Load("../MyGame/media/models/line_road/right_fence4.obj", 2));//14
         // some test translations
-        models[4].translateModelMatrix(glm::vec3(0.1f, 0.0f, 0.0f));
+        //models[4].translateModelMatrix(glm::vec3(0.1f, 0.0f, 0.0f));
 
         createUniformBuffers();
         createDescriptorPool();
@@ -209,7 +217,7 @@ private:
     double lastFrameTime = 0.0;
     double deltaTime = 0.0;
 
-    std::vector<size_t> hittableObjects{4, 5};
+    std::vector<size_t> hittableObjects{4, 5, 7, 8, 10, 11, 13, 14};
 
     void mainLoop() {
         while (!glfwWindowShouldClose(window)) {

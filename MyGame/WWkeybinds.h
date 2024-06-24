@@ -28,7 +28,7 @@ static void translateViewMatrix(double deltaTime) {
     glm::mat4 rotation(1.0f);
 
     //float drivingSpeed = 5.0f * static_cast<float>(deltaTime);
-    float acceleration = 0.2f * static_cast<float>(deltaTime);
+    float acceleration = 0.1f * static_cast<float>(deltaTime);
     float angle = glm::radians(45.0f) * static_cast<float>(deltaTime);
 
     if (wIsPressed && !camera.carStarted) {

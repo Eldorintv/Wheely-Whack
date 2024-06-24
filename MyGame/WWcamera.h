@@ -6,8 +6,8 @@
 class Camera {
 public:
 	bool carStarted = false;
-	float maxSpeed = 0.01f;
-	float velocity = 0.0f;
+	float maxSpeed = 0.05f;
+	float velocity = 0.005f;
 
 	Camera(const glm::vec3& position, const glm::vec3& target, const glm::vec3& up) {
 		this->viewMatrix = glm::lookAt(position, target, up);
