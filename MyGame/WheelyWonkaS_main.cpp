@@ -216,32 +216,32 @@ private:
         models.push_back(Model::Load("../MyGame/media/models/rock.obj", 5));//28
         models.push_back(Model::Load("../MyGame/media/models/rock.obj", 5));//29
 
-        // rocks can be on x 25 - 600, z from -5 to 5
-        std::random_device rd;
-        std::mt19937 gen(rd()); // my random generator
-        // x plus modifer
-        std::uniform_real_distribution<> xRange(20.0, 50);
-        std::uniform_real_distribution<> zRange(-0.5, 5.0);
-        float random_x = static_cast<float>(xRange(gen)) + 15;
-        float random_z = static_cast<float>(zRange(gen));
-        models[15].translateModelMatrix(glm::vec3(random_x, 0.0f, random_z)); random_x += static_cast<float>(xRange(gen)); random_z = static_cast<float>(zRange(gen));
-        models[16].translateModelMatrix(glm::vec3(random_x, 0.0f, random_z)); random_x += static_cast<float>(xRange(gen)); random_z = static_cast<float>(zRange(gen));
-        models[17].translateModelMatrix(glm::vec3(random_x, 0.0f, random_z)); random_x += static_cast<float>(xRange(gen)); random_z = static_cast<float>(zRange(gen));
-        models[18].translateModelMatrix(glm::vec3(random_x, 0.0f, random_z)); random_x += static_cast<float>(xRange(gen)); random_z = static_cast<float>(zRange(gen));
-        models[19].translateModelMatrix(glm::vec3(random_x, 0.0f, random_z)); random_x += static_cast<float>(xRange(gen)); random_z = static_cast<float>(zRange(gen));
+        //// rocks can be on x 25 - 600, z from -5 to 5
+        //std::random_device rd;
+        //std::mt19937 gen(rd()); // my random generator
+        //// x plus modifer
+        //std::uniform_real_distribution<> xRange(20.0, 50);
+        //std::uniform_real_distribution<> zRange(-0.5, 5.0);
+        //float random_x = static_cast<float>(xRange(gen)) + 15;
+        //float random_z = static_cast<float>(zRange(gen));
+        //models[15].translateModelMatrix(glm::vec3(random_x, 0.0f, random_z)); random_x += static_cast<float>(xRange(gen)); random_z = static_cast<float>(zRange(gen));
+        //models[16].translateModelMatrix(glm::vec3(random_x, 0.0f, random_z)); random_x += static_cast<float>(xRange(gen)); random_z = static_cast<float>(zRange(gen));
+        //models[17].translateModelMatrix(glm::vec3(random_x, 0.0f, random_z)); random_x += static_cast<float>(xRange(gen)); random_z = static_cast<float>(zRange(gen));
+        //models[18].translateModelMatrix(glm::vec3(random_x, 0.0f, random_z)); random_x += static_cast<float>(xRange(gen)); random_z = static_cast<float>(zRange(gen));
+        //models[19].translateModelMatrix(glm::vec3(random_x, 0.0f, random_z)); random_x += static_cast<float>(xRange(gen)); random_z = static_cast<float>(zRange(gen));
 
-        models[20].translateModelMatrix(glm::vec3(random_x, 0.0f, random_z)); random_x += static_cast<float>(xRange(gen)); random_z = static_cast<float>(zRange(gen));
-        models[21].translateModelMatrix(glm::vec3(random_x, 0.0f, random_z)); random_x += static_cast<float>(xRange(gen)); random_z = static_cast<float>(zRange(gen));
-        models[22].translateModelMatrix(glm::vec3(random_x, 0.0f, random_z)); random_x += static_cast<float>(xRange(gen)); random_z = static_cast<float>(zRange(gen));
-        models[23].translateModelMatrix(glm::vec3(random_x, 0.0f, random_z)); random_x += static_cast<float>(xRange(gen)); random_z = static_cast<float>(zRange(gen));
-        models[24].translateModelMatrix(glm::vec3(random_x, 0.0f, random_z)); random_x += static_cast<float>(xRange(gen)); random_z = static_cast<float>(zRange(gen));
+        //models[20].translateModelMatrix(glm::vec3(random_x, 0.0f, random_z)); random_x += static_cast<float>(xRange(gen)); random_z = static_cast<float>(zRange(gen));
+        //models[21].translateModelMatrix(glm::vec3(random_x, 0.0f, random_z)); random_x += static_cast<float>(xRange(gen)); random_z = static_cast<float>(zRange(gen));
+        //models[22].translateModelMatrix(glm::vec3(random_x, 0.0f, random_z)); random_x += static_cast<float>(xRange(gen)); random_z = static_cast<float>(zRange(gen));
+        //models[23].translateModelMatrix(glm::vec3(random_x, 0.0f, random_z)); random_x += static_cast<float>(xRange(gen)); random_z = static_cast<float>(zRange(gen));
+        //models[24].translateModelMatrix(glm::vec3(random_x, 0.0f, random_z)); random_x += static_cast<float>(xRange(gen)); random_z = static_cast<float>(zRange(gen));
 
-        models[25].translateModelMatrix(glm::vec3(random_x, 0.0f, random_z)); random_x += static_cast<float>(xRange(gen)); random_z = static_cast<float>(zRange(gen));
-        models[26].translateModelMatrix(glm::vec3(random_x, 0.0f, random_z)); random_x += static_cast<float>(xRange(gen)); random_z = static_cast<float>(zRange(gen));
-        models[27].translateModelMatrix(glm::vec3(random_x, 0.0f, random_z)); random_x += static_cast<float>(xRange(gen)); random_z = static_cast<float>(zRange(gen));
-        models[28].translateModelMatrix(glm::vec3(random_x, 0.0f, random_z)); random_x += static_cast<float>(xRange(gen)); random_z = static_cast<float>(zRange(gen));
-        models[29].translateModelMatrix(glm::vec3(random_x, 0.0f, random_z)); random_x += static_cast<float>(xRange(gen)); random_z = static_cast<float>(zRange(gen));
-
+        //models[25].translateModelMatrix(glm::vec3(random_x, 0.0f, random_z)); random_x += static_cast<float>(xRange(gen)); random_z = static_cast<float>(zRange(gen));
+        //models[26].translateModelMatrix(glm::vec3(random_x, 0.0f, random_z)); random_x += static_cast<float>(xRange(gen)); random_z = static_cast<float>(zRange(gen));
+        //models[27].translateModelMatrix(glm::vec3(random_x, 0.0f, random_z)); random_x += static_cast<float>(xRange(gen)); random_z = static_cast<float>(zRange(gen));
+        //models[28].translateModelMatrix(glm::vec3(random_x, 0.0f, random_z)); random_x += static_cast<float>(xRange(gen)); random_z = static_cast<float>(zRange(gen));
+        //models[29].translateModelMatrix(glm::vec3(random_x, 0.0f, random_z)); random_x += static_cast<float>(xRange(gen)); random_z = static_cast<float>(zRange(gen));
+        resetRockPositions(true);
 
         createUniformBuffers();
         createDescriptorPool();
@@ -271,10 +271,20 @@ private:
 
             // check for hit
             checkForHit(hittableObjects);
+            checkForRockDisplacement();
             drawFrame();
         }
 
         vkDeviceWaitIdle(device);
+    }
+
+    void checkForRockDisplacement() {
+        if (camera.getPosition().x > models[29].modelMatrix[3].x) {
+            // this means we have reached the last rock, and all rocks are gonna be replaced
+
+            // maybe some sort of huhiiii, I replace, dont wonder
+            resetRockPositions(false); // false means not to origin
+        }
     }
 
     // not working at all
@@ -1248,14 +1258,21 @@ private:
         encoder.encoderFinishProcess();
     }
 
-    void resetRockPositions() {
+    void resetRockPositions(bool reset = true) {
         // rocks can be on x 25 - 600, z from -5 to 5
         std::random_device rd;
         std::mt19937 gen(rd()); // my random generator
         // x plus modifer
-        std::uniform_real_distribution<> xRange(20.0, 50);
-        std::uniform_real_distribution<> zRange(-0.5, 5.0);
-        float random_x = static_cast<float>(xRange(gen)) + 15;
+        std::uniform_real_distribution<> xRange(20.0, 40.0);
+        std::uniform_real_distribution<> zRange(-4.0, 4.0);
+        float random_x = 0.0f;
+        if (reset) {
+            random_x = static_cast<float>(xRange(gen)) + 15;
+        }
+        else {
+            random_x += static_cast<float>(xRange(gen)) + 15;
+        }
+        
         float random_z = static_cast<float>(zRange(gen));
         models[15].translateModelMatrix(glm::vec3(random_x, 0.0f, random_z)); random_x += static_cast<float>(xRange(gen)); random_z = static_cast<float>(zRange(gen));
         models[16].translateModelMatrix(glm::vec3(random_x, 0.0f, random_z)); random_x += static_cast<float>(xRange(gen)); random_z = static_cast<float>(zRange(gen));
