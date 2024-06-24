@@ -174,10 +174,11 @@ private:
             "../MyGame/media/textures/sky/bluecloud_dn.jpg",
             "../MyGame/media/textures/sky/bluecloud_rt.jpg",
             "../MyGame/media/textures/sky/bluecloud_lf.jpg"));
-        textures.push_back(Texture::Load("../MyGame/media/textures/road.jpg"));
-        textures.push_back(Texture::Load("../MyGame/media/textures/rainbowMarmor.jpg"));
-        textures.push_back(Texture::Load("../MyGame/media/textures/grass_small.jpg"));
-        textures.push_back(Texture::Load("../MyGame/media/textures/water.png"));
+        textures.push_back(Texture::Load("../MyGame/media/textures/road.jpg")); //1
+        textures.push_back(Texture::Load("../MyGame/media/textures/rainbowMarmor.jpg"));//2
+        textures.push_back(Texture::Load("../MyGame/media/textures/grass_small.jpg"));//3
+        textures.push_back(Texture::Load("../MyGame/media/textures/water.png"));//4
+        textures.push_back(Texture::Load("../MyGame/media/textures/rock.jpg"));//5
 
         // MODELS
         models.push_back(Model::LoadSkybox("../MyGame/media/models/skybox_cube.obj", 0));
@@ -192,9 +193,15 @@ private:
         models.push_back(Model::Load("../MyGame/media/models/line_road/road3.obj", 2));//9 rainbow special level
         models.push_back(Model::Load("../MyGame/media/models/line_road/left_fence3.obj", 2));//10
         models.push_back(Model::Load("../MyGame/media/models/line_road/right_fence3.obj", 2));//11
-        models.push_back(Model::Load("../MyGame/media/models/line_road/road4.obj", 2));//12 rainbow special level
+        models.push_back(Model::Load("../MyGame/media/models/line_road/road4.obj", 2));//12
         models.push_back(Model::Load("../MyGame/media/models/line_road/left_fence4.obj", 2));//13
         models.push_back(Model::Load("../MyGame/media/models/line_road/right_fence4.obj", 2));//14
+
+        // the rock xD
+        models.push_back(Model::Load("../MyGame/media/models/rock.obj", 5));//16
+
+        models[15].translateModelMatrix(glm::vec3(20.0f, 0.0f, 0.0f));
+
 
         createUniformBuffers();
         createDescriptorPool();
