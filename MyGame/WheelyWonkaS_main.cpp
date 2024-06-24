@@ -181,9 +181,10 @@ private:
         // MODELS
         models.push_back(Model::LoadSkybox("../MyGame/media/models/skybox_cube.obj", 0));
         models.push_back(Model::Load("../MyGame/media/models/plane_big.obj", 1));
+        models.push_back(Model::Load("../MyGame/media/models/sphere.obj", 2));
 
         // some test translations
-        //models[2].translateModelMatrix(glm::vec3(3.0f, 0.25f, -0.5f));
+        models[2].translateModelMatrix(glm::vec3(5.0f, 0.5f, 0.0f));
         glm::vec3 planeNormal = models[1].vertices[0].normal;
 
         glm::min(planeNormal, glm::vec3(0.0f, 1.0f, 2.0f));
@@ -203,7 +204,7 @@ private:
     double lastFrameTime = 0.0;
     double deltaTime = 0.0;
 
-    std::vector<size_t> hittableObjects{ 1 };
+    std::vector<size_t> hittableObjects{ 1, 2};
 
     void mainLoop() {
         while (!glfwWindowShouldClose(window)) {
@@ -224,12 +225,12 @@ private:
     // not working at all
     void checkForHit(std::vector<size_t>& hitables) {
         for (const auto& object : hitables) {
-            glm::vec3 position = glm::vec3(models[object].modelMatrix[3]);
+            //glm::vec3 position = glm::vec3(models[object].modelMatrix[3]);
 
-            float distance = glm::length(position - camera.getPosition());
-            if (distance < 1) {
+            //float distance = glm::length(position - camera.getPosition());
+            if (models[object].boundingBox.isInside(camera.getPosition()) ) {
 
-                models[object].translateModelMatrix(glm::vec3(1.0f, 0.0f, 1.5f));
+                models[object].translateModelMatrix(glm::vec3(2.0f, 0.0f, 0.0f));
             }
         }  
     }

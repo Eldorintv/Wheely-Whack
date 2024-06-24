@@ -22,6 +22,8 @@ public:
     uint32_t textureIndex;
     glm::mat4 modelMatrix;
 
+    BoundingBox boundingBox;
+
     const char* vertexShaderPath = "../MyGame/media/shaders/vertBP.spv";
     const char* fragmentShaderPath = "../MyGame/media/shaders/fragBP.spv";
 
@@ -34,6 +36,9 @@ public:
         model.textureIndex = textureIndex;
         model.modelMatrix = glm::mat4(1.0f);
         model.createGraphicsPipeline();
+        //bounding box test stuff
+        model.boundingBox = computeBoundingBox(model.vertices);
+        
         return model;
     }
 
@@ -48,6 +53,7 @@ public:
         model.vertexShaderPath = "../MyGame/media/shaders/vertSkyBox.spv";
         model.fragmentShaderPath = "../MyGame/media/shaders/fragSkyBox.spv";
         model.createGraphicsPipeline(false);
+        //bounding box is basically infinity
         return model;
     }
 
@@ -72,19 +78,35 @@ public:
         vkCmdDrawIndexed(commandBuffer, static_cast<uint32_t>(indices.size()), 1, 0, 0, 0);
     }
 
-    void updateModelMatrix(float time) {
-        modelMatrix = glm::rotate(modelMatrix, glm::radians(0.01f), glm::vec3(0.0f, 0.0f, 1.0f));
-    }
+    //void updateModelMatrix(float time) {
+    //    modelMatrix = glm::rotate(modelMatrix, glm::radians(0.01f), glm::vec3(0.0f, 0.0f, 1.0f));
+    //}
 
     void translateModelMatrix(glm::vec3 v) {
-        modelMatrix = glm::translate(modelMatrix, v);
+        glm::mat4 transform = glm::translate(glm::mat4(1.0f), v);
+        modelMatrix = transform * modelMatrix;
+        boundingBox = computeBoundingBox(transformedVertices(vertices, modelMatrix));
     }
 
     void rotateModelMatrix(float angle, glm::vec3 axis) {
-        modelMatrix = glm::rotate(modelMatrix, glm::radians(angle), axis);
+        glm::mat4 transform = glm::rotate(modelMatrix, glm::radians(angle), axis);
+        modelMatrix = transform * modelMatrix;
+        boundingBox = computeBoundingBox(transformedVertices(vertices, modelMatrix));
     }
 
 private:
+
+    std::vector<glm::vec3> transformedVertices(const std::vector<Vertex> vertices, const glm::mat4& transform) {
+        std::vector<glm::vec3> transformedVertices;
+        transformedVertices.reserve(vertices.size());
+
+        for (const auto& vertex : vertices) {
+            glm::vec4 transformedVert = transform * glm::vec4(vertex.pos, 1.0f);
+            transformedVertices.push_back(glm::vec3(transformedVert));
+        }
+
+        return transformedVertices;
+    }
 
     void loadModel(const char* path) {
 
