@@ -22,14 +22,18 @@ public:
 		viewMatrix = transform * viewMatrix;
 	}
 
-	glm::vec3 getPosition() {
+	void resetViewMatrix() {
+		viewMatrix = glm::lookAt(glm::vec3(0.1f, 0.5f, 0.1f), glm::vec3(1.0f, 0.5f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+	}
+
+	glm::vec3 getPosition() const{
 		glm::mat4 viewInverse = glm::inverse(viewMatrix);
 		return glm::vec3(viewInverse[3]);
 	}
 
+
 private:
 	glm::mat4 viewMatrix;
-	glm::vec3 velocity;
 };
 
 

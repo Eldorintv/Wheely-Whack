@@ -230,21 +230,12 @@ private:
     // not working at all
     void checkForHit(std::vector<size_t>& hitables) {
         for (const auto& object : hitables) {
-            //glm::vec3 position = glm::vec3(models[object].modelMatrix[3]);
 
-            //float distance = glm::length(position - camera.getPosition());
+            // if camera hits one of the objects in hittableObjects this evaluates to true
             if (models[object].boundingBox.isInside(camera.getPosition())) {
-
-                //models[object].translateModelMatrix(glm::vec3(2.0f, 0.0f, 0.0f));
-                std::cout << "Camera: " << camera.getPosition().x << "\n";
-                std::cout << "Camera: " << camera.getPosition().y << "\n";
-                std::cout << "Camera: " << camera.getPosition().z << "\n";
-                std::cout << "Min: " << models[object].boundingBox.min.x << "\t\tMax: " << models[object].boundingBox.max.x << std::endl;
-                std::cout << "Min: " << models[object].boundingBox.min.y << "\t\tMax: " << models[object].boundingBox.max.y << std::endl;
-                std::cout << "Min: " << models[object].boundingBox.min.z << "\t\tMax: " << models[object].boundingBox.max.z << std::endl << std::endl;
+                camera.resetViewMatrix();
             }
         }
-        //hittableObjects.clear();
     }
 
     void cleanupSwapChain() {
