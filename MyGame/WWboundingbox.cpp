@@ -1,7 +1,8 @@
 #include "WWhelpers.h"
 #include "WWboundingbox.h"
 
-bool BoundingBox::isInside(const glm::vec3& vert, const float err) const {
+bool BoundingBox::isInside(const glm::vec3& vert, float err) const {
+
 	return (vert.x + err >= min.x
 		&& vert.y + err >= min.y
 		&& vert.z + err >= min.z
@@ -10,7 +11,7 @@ bool BoundingBox::isInside(const glm::vec3& vert, const float err) const {
 		&& vert.z - err <= max.z);
 }
 
-BoundingBox::BoundingBox() : min(FLT_MAX), max(FLT_MIN) {}
+BoundingBox::BoundingBox() : min(std::numeric_limits<float>::max()), max(std::numeric_limits<float>::lowest()) {}
 
 BoundingBox::BoundingBox(const glm::vec3& min, const glm::vec3& max) : min(min), max(max) {}
 
@@ -20,7 +21,7 @@ void BoundingBox::expand(const glm::vec3& vert) {
 }
 
 BoundingBox computeBoundingBox(const std::vector<glm::vec3>& vertices) {
-	if (vertices.empty()) return BoundingBox{ glm::vec3(0.0f), glm::vec3(0.0f) };
+	//if (vertices.empty()) return BoundingBox{ glm::vec3(0.0f), glm::vec3(0.0f) };
 	
 	BoundingBox box;
 
@@ -31,7 +32,7 @@ BoundingBox computeBoundingBox(const std::vector<glm::vec3>& vertices) {
 }
 
 BoundingBox computeBoundingBox(const std::vector<Vertex>& vertices) {
-	if (vertices.empty()) return BoundingBox{ glm::vec3(0.0f), glm::vec3(0.0f) };
+	//if (vertices.empty()) return BoundingBox{ glm::vec3(0.0f), glm::vec3(0.0f) };
 
 	BoundingBox box;
 

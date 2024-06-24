@@ -84,18 +84,6 @@
     </CopyFileToFolders>
   </ItemGroup>
   <ItemGroup>
-    <Object Include="media\models\road_z0_v2.obj">
-      <Filter>Resource Files\media\models</Filter>
-    </Object>
-    <Object Include="media\models\road_fence_left.obj">
-      <Filter>Resource Files\media\models</Filter>
-    </Object>
-    <Object Include="media\models\road_fence_right.obj">
-      <Filter>Resource Files\media\models</Filter>
-    </Object>
-    <Object Include="media\models\plane_v2.obj">
-      <Filter>Resource Files\media\models</Filter>
-    </Object>
     <Object Include="media\models\skybox_cube.obj">
       <Filter>Resource Files\media\models\sky</Filter>
     </Object>
@@ -110,6 +98,21 @@
     </Object>
     <Object Include="media\models\cube_small.obj">
       <Filter>Resource Files\media\models\unused</Filter>
+    </Object>
+    <Object Include="media\models\line_road\water_left.obj">
+      <Filter>Resource Files\media\models</Filter>
+    </Object>
+    <Object Include="media\models\line_road\water_right.obj">
+      <Filter>Resource Files\media\models</Filter>
+    </Object>
+    <Object Include="media\models\line_road\left_iron_fence.obj">
+      <Filter>Resource Files\media\models</Filter>
+    </Object>
+    <Object Include="media\models\line_road\right_iron_fence.obj">
+      <Filter>Resource Files\media\models</Filter>
+    </Object>
+    <Object Include="media\models\line_road\road.obj">
+      <Filter>Resource Files\media\models</Filter>
     </Object>
   </ItemGroup>
   <ItemGroup>

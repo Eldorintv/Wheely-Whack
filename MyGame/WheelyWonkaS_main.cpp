@@ -186,11 +186,13 @@ private:
         //models.push_back(Model::Load("../MyGame/media/models/road_fence_left.obj", 2));
         //models.push_back(Model::Load("../MyGame/media/models/road_fence_right.obj", 2));
         models.push_back(Model::Load("../MyGame/media/models/line_road/road.obj", 1));
-        models.push_back(Model::Load("../MyGame/media/models/line_road/fence_left.obj", 4));
-        models.push_back(Model::Load("../MyGame/media/models/line_road/fence_right.obj", 4));
+        models.push_back(Model::Load("../MyGame/media/models/line_road/water_left.obj", 4));
+        models.push_back(Model::Load("../MyGame/media/models/line_road/water_right.obj", 4));
+        models.push_back(Model::Load("../MyGame/media/models/line_road/left_iron_fence.obj", 2)); //4
+        models.push_back(Model::Load("../MyGame/media/models/line_road/right_iron_fence.obj", 2));//5
 
         // some test translations
-        //models[2].translateModelMatrix(glm::vec3(5.0f, 0.5f, 0.0f));
+        models[4].translateModelMatrix(glm::vec3(0.1f, 0.0f, 0.0f));
 
         createUniformBuffers();
         createDescriptorPool();
@@ -207,7 +209,7 @@ private:
     double lastFrameTime = 0.0;
     double deltaTime = 0.0;
 
-    std::vector<size_t> hittableObjects{ 1, 2};
+    std::vector<size_t> hittableObjects{4, 5};
 
     void mainLoop() {
         while (!glfwWindowShouldClose(window)) {
@@ -231,11 +233,18 @@ private:
             //glm::vec3 position = glm::vec3(models[object].modelMatrix[3]);
 
             //float distance = glm::length(position - camera.getPosition());
-            if (models[object].boundingBox.isInside(camera.getPosition()) ) {
+            if (models[object].boundingBox.isInside(camera.getPosition())) {
 
-                models[object].translateModelMatrix(glm::vec3(2.0f, 0.0f, 0.0f));
+                //models[object].translateModelMatrix(glm::vec3(2.0f, 0.0f, 0.0f));
+                std::cout << "Camera: " << camera.getPosition().x << "\n";
+                std::cout << "Camera: " << camera.getPosition().y << "\n";
+                std::cout << "Camera: " << camera.getPosition().z << "\n";
+                std::cout << "Min: " << models[object].boundingBox.min.x << "\t\tMax: " << models[object].boundingBox.max.x << std::endl;
+                std::cout << "Min: " << models[object].boundingBox.min.y << "\t\tMax: " << models[object].boundingBox.max.y << std::endl;
+                std::cout << "Min: " << models[object].boundingBox.min.z << "\t\tMax: " << models[object].boundingBox.max.z << std::endl << std::endl;
             }
-        }  
+        }
+        //hittableObjects.clear();
     }
 
     void cleanupSwapChain() {
