@@ -2,7 +2,7 @@
 #include "WWboundingbox.h"
 
 bool BoundingBox::isInside(const glm::vec3& vert) const {
-	const float er = 0.2;
+	constexpr float er = 0.2f;
 	return (vert.x + er >= min.x
 		&& vert.y + er >= min.y
 		&& vert.z + er >= min.z
