@@ -169,20 +169,22 @@ private:
 
         // not working as expected yet:
         // TEXTURES
-        textures.push_back(Texture::LoadCubeMap("../MyGame/media/textures/sky/front.jpg",
-            "../MyGame/media/textures/sky/back.jpg",
-            "../MyGame/media/textures/sky/up.jpg",
-            "../MyGame/media/textures/sky/down.jpg",
-            "../MyGame/media/textures/sky/right.jpg",
-            "../MyGame/media/textures/sky/left.jpg"));
+        textures.push_back(Texture::LoadCubeMap("../MyGame/media/textures/sky/bluecloud_ft.jpg",
+            "../MyGame/media/textures/sky/bluecloud_bk.jpg",
+            "../MyGame/media/textures/sky/bluecloud_up.jpg",
+            "../MyGame/media/textures/sky/bluecloud_dn.jpg",
+            "../MyGame/media/textures/sky/bluecloud_rt.jpg",
+            "../MyGame/media/textures/sky/bluecloud_lf.jpg"));
         textures.push_back(Texture::Load("../MyGame/media/textures/road.jpg"));
         textures.push_back(Texture::Load("../MyGame/media/textures/rainbowMarmor.jpg"));
+        textures.push_back(Texture::Load("../MyGame/media/textures/grass_small.jpg"));
 
         // MODELS
         models.push_back(Model::LoadSkybox("../MyGame/media/models/skybox_cube.obj", 0));
         models.push_back(Model::Load("../MyGame/media/models/road_z0_v2.obj", 1));
-        models.push_back(Model::Load("../MyGame/media/models/road_fence_left.obj", 2));
-        models.push_back(Model::Load("../MyGame/media/models/road_fence_right.obj", 2));
+        //models.push_back(Model::Load("../MyGame/media/models/road_fence_left.obj", 2));
+        //models.push_back(Model::Load("../MyGame/media/models/road_fence_right.obj", 2));
+        models.push_back(Model::Load("../MyGame/media/models/plane_v2.obj", 3));
 
         // some test translations
         //models[2].translateModelMatrix(glm::vec3(5.0f, 0.5f, 0.0f));
@@ -213,7 +215,7 @@ private:
             translateViewMatrix(deltaTime);
 
             // check for hit
-            //checkForHit(hittableObjects);
+            checkForHit(hittableObjects);
             drawFrame();
         }
 

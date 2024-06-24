@@ -28,6 +28,12 @@
     <Filter Include="Resource Files\media\shaders">
       <UniqueIdentifier>{7de05cee-17b5-405c-92e6-e42ad4fc8a08}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\media\models\sky">
+      <UniqueIdentifier>{fb41ceb2-fb8c-4a61-ad12-5c4ba077d3a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\media\models\unused">
+      <UniqueIdentifier>{bb5d9014-7627-4d6d-a8cd-e623f6103e6f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WheelyWonkaS_main.cpp">
@@ -78,45 +84,6 @@
     </CopyFileToFolders>
   </ItemGroup>
   <ItemGroup>
-    <Object Include="media\models\cube_medium.obj">
-      <Filter>Resource Files\media\models</Filter>
-    </Object>
-    <Object Include="media\models\cube_small.obj">
-      <Filter>Resource Files\media\models</Filter>
-    </Object>
-    <Object Include="media\models\sphere.obj">
-      <Filter>Resource Files\media\models</Filter>
-    </Object>
-    <Object Include="media\models\viking_room.obj">
-      <Filter>Resource Files\media\models</Filter>
-    </Object>
-    <Object Include="media\models\skybox_cube.obj">
-      <Filter>Resource Files\media\models</Filter>
-    </Object>
-    <Object Include="media\models\small_plane.obj">
-      <Filter>Resource Files\media\models</Filter>
-    </Object>
-    <Object Include="media\models\grass.obj">
-      <Filter>Resource Files\media\models</Filter>
-    </Object>
-    <Object Include="media\models\plane_big.obj">
-      <Filter>Resource Files\media\models</Filter>
-    </Object>
-    <Object Include="media\models\plane_v1.obj">
-      <Filter>Resource Files\media\models</Filter>
-    </Object>
-    <Object Include="media\models\fence_back.obj">
-      <Filter>Resource Files\media\models</Filter>
-    </Object>
-    <Object Include="media\models\fence_left.obj">
-      <Filter>Resource Files\media\models</Filter>
-    </Object>
-    <Object Include="media\models\fence_right.obj">
-      <Filter>Resource Files\media\models</Filter>
-    </Object>
-    <Object Include="media\models\road_z0.obj">
-      <Filter>Resource Files\media\models</Filter>
-    </Object>
     <Object Include="media\models\road_z0_v2.obj">
       <Filter>Resource Files\media\models</Filter>
     </Object>
@@ -125,6 +92,24 @@
     </Object>
     <Object Include="media\models\road_fence_right.obj">
       <Filter>Resource Files\media\models</Filter>
+    </Object>
+    <Object Include="media\models\plane_v2.obj">
+      <Filter>Resource Files\media\models</Filter>
+    </Object>
+    <Object Include="media\models\skybox_cube.obj">
+      <Filter>Resource Files\media\models\sky</Filter>
+    </Object>
+    <Object Include="media\models\viking_room.obj">
+      <Filter>Resource Files\media\models\unused</Filter>
+    </Object>
+    <Object Include="media\models\sphere.obj">
+      <Filter>Resource Files\media\models\unused</Filter>
+    </Object>
+    <Object Include="media\models\cube_medium.obj">
+      <Filter>Resource Files\media\models\unused</Filter>
+    </Object>
+    <Object Include="media\models\cube_small.obj">
+      <Filter>Resource Files\media\models\unused</Filter>
     </Object>
   </ItemGroup>
   <ItemGroup>
@@ -137,13 +122,13 @@
     <Image Include="media\textures\water.png">
       <Filter>Resource Files\media\textures</Filter>
     </Image>
-    <Image Include="media\textures\grass.jpg">
-      <Filter>Resource Files\media\textures</Filter>
-    </Image>
     <Image Include="media\textures\grass.png">
       <Filter>Resource Files\media\textures</Filter>
     </Image>
     <Image Include="media\textures\road.jpg">
+      <Filter>Resource Files\media\textures</Filter>
+    </Image>
+    <Image Include="media\textures\grass_small.jpg">
       <Filter>Resource Files\media\textures</Filter>
     </Image>
   </ItemGroup>
