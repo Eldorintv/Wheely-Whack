@@ -176,11 +176,12 @@ private:
             "../MyGame/media/textures/sky/right.jpg",
             "../MyGame/media/textures/sky/left.jpg"));
         textures.push_back(Texture::Load("../MyGame/media/textures/road.jpg"));
-        textures.push_back(Texture::Load("../MyGame/media/textures/paper.jpg"));
+        textures.push_back(Texture::Load("../MyGame/media/textures/rainbowMarmor.jpg"));
 
         // MODELS
         models.push_back(Model::LoadSkybox("../MyGame/media/models/skybox_cube.obj", 0));
         models.push_back(Model::Load("../MyGame/media/models/road_z0_v2.obj", 1));
+        models.push_back(Model::Load("../MyGame/media/models/road_fence_left.obj", 2));
 
         // some test translations
         //models[2].translateModelMatrix(glm::vec3(5.0f, 0.5f, 0.0f));
