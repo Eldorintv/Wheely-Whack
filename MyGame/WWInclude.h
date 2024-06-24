@@ -24,4 +24,6 @@ extern "C" {
 #include <mutex>
 #include <condition_variable>
 
+#include <random>
+
 #endif

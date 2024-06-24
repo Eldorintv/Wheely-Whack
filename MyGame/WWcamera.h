@@ -14,7 +14,7 @@ public:
 	}
 
 	Camera() {
-		this->viewMatrix = glm::lookAt(glm::vec3(0.1f, 0.5f, 0.1f), glm::vec3(1.0f, 0.5f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		this->viewMatrix = glm::lookAt(glm::vec3(0.0f, 0.5f, 0.0f), glm::vec3(1.0f, 0.5f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 	}
 
 	glm::mat4 getViewMatrix() const {
@@ -26,7 +26,7 @@ public:
 	}
 
 	void resetViewMatrix() {
-		viewMatrix = glm::lookAt(glm::vec3(0.1f, 0.5f, 0.1f), glm::vec3(1.0f, 0.5f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		viewMatrix = glm::lookAt(glm::vec3(0.0f, 0.5f, 0.0f), glm::vec3(1.0f, 0.5f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 	}
 
 	glm::vec3 getPosition() const{
