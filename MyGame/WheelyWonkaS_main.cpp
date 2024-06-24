@@ -178,13 +178,16 @@ private:
         textures.push_back(Texture::Load("../MyGame/media/textures/road.jpg"));
         textures.push_back(Texture::Load("../MyGame/media/textures/rainbowMarmor.jpg"));
         textures.push_back(Texture::Load("../MyGame/media/textures/grass_small.jpg"));
+        textures.push_back(Texture::Load("../MyGame/media/textures/water.png"));
 
         // MODELS
         models.push_back(Model::LoadSkybox("../MyGame/media/models/skybox_cube.obj", 0));
-        models.push_back(Model::Load("../MyGame/media/models/road_z0_v2.obj", 1));
+        //models.push_back(Model::Load("../MyGame/media/models/road_z0_v2.obj", 1));
         //models.push_back(Model::Load("../MyGame/media/models/road_fence_left.obj", 2));
         //models.push_back(Model::Load("../MyGame/media/models/road_fence_right.obj", 2));
-        models.push_back(Model::Load("../MyGame/media/models/plane_v2.obj", 3));
+        models.push_back(Model::Load("../MyGame/media/models/line_road/road.obj", 1));
+        models.push_back(Model::Load("../MyGame/media/models/line_road/fence_left.obj", 4));
+        models.push_back(Model::Load("../MyGame/media/models/line_road/fence_right.obj", 4));
 
         // some test translations
         //models[2].translateModelMatrix(glm::vec3(5.0f, 0.5f, 0.0f));
@@ -857,7 +860,7 @@ private:
             UniformBufferObject ubo{};
             ubo.model = models[i].modelMatrix;
             ubo.view = camera.getViewMatrix();
-            ubo.proj = glm::perspective(glm::radians(45.0f), swapChainExtent.width / (float)swapChainExtent.height, 0.1f, 200.0f);
+            ubo.proj = glm::perspective(glm::radians(45.0f), swapChainExtent.width / (float)swapChainExtent.height, 0.1f, 100.0f);
             ubo.proj[1][1] *= -1;
 
             void* dest = static_cast<char*>(uniformBuffersMapped[currentImage]) + i * sizeof(UniformBufferObject);
