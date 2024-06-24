@@ -29,6 +29,7 @@ public:
 
 private:
 	glm::mat4 viewMatrix;
+	glm::vec3 velocity;
 };
 
 

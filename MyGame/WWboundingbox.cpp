@@ -1,14 +1,13 @@
 #include "WWhelpers.h"
 #include "WWboundingbox.h"
 
-bool BoundingBox::isInside(const glm::vec3& vert) const {
-	constexpr float er = 0.2f;
-	return (vert.x + er >= min.x
-		&& vert.y + er >= min.y
-		&& vert.z + er >= min.z
-		&& vert.x - er <= max.x
-		&& vert.y - er <= max.y
-		&& vert.z - er <= max.z);
+bool BoundingBox::isInside(const glm::vec3& vert, const float err) const {
+	return (vert.x + err >= min.x
+		&& vert.y + err >= min.y
+		&& vert.z + err >= min.z
+		&& vert.x - err <= max.x
+		&& vert.y - err <= max.y
+		&& vert.z - err <= max.z);
 }
 
 BoundingBox::BoundingBox() : min(FLT_MAX), max(FLT_MIN) {}

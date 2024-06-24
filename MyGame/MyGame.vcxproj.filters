@@ -102,6 +102,21 @@
     <Object Include="media\models\plane_big.obj">
       <Filter>Resource Files\media\models</Filter>
     </Object>
+    <Object Include="media\models\plane_v1.obj">
+      <Filter>Resource Files\media\models</Filter>
+    </Object>
+    <Object Include="media\models\fence_back.obj">
+      <Filter>Resource Files\media\models</Filter>
+    </Object>
+    <Object Include="media\models\fence_left.obj">
+      <Filter>Resource Files\media\models</Filter>
+    </Object>
+    <Object Include="media\models\fence_right.obj">
+      <Filter>Resource Files\media\models</Filter>
+    </Object>
+    <Object Include="media\models\road_z0.obj">
+      <Filter>Resource Files\media\models</Filter>
+    </Object>
   </ItemGroup>
   <ItemGroup>
     <Image Include="media\textures\paper.jpg">

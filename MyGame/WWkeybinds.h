@@ -28,7 +28,7 @@ static void translateViewMatrix(double deltaTime) {
     glm::mat4 translation(1.0f);
     glm::mat4 rotation(1.0f);
 
-    float drivingSpeed = 2.0f * static_cast<float>(deltaTime);
+    float drivingSpeed = 5.0f * static_cast<float>(deltaTime);
     float angle = glm::radians(45.0f) * static_cast<float>(deltaTime);
 
     if (wIsPressed) {

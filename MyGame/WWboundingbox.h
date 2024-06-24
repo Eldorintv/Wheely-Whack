@@ -13,7 +13,7 @@ public:
 
 	void expand(const glm::vec3& vert);
 
-	bool isInside(const glm::vec3& vert) const;
+	bool isInside(const glm::vec3& vert, const float err = 0.2f) const;
 };
 
 BoundingBox computeBoundingBox(const std::vector<glm::vec3>& vertices);

@@ -180,14 +180,13 @@ private:
 
         // MODELS
         models.push_back(Model::LoadSkybox("../MyGame/media/models/skybox_cube.obj", 0));
-        models.push_back(Model::Load("../MyGame/media/models/plane_big.obj", 1));
-        models.push_back(Model::Load("../MyGame/media/models/sphere.obj", 2));
+        models.push_back(Model::Load("../MyGame/media/models/plane_v1.obj", 1));
+        models.push_back(Model::Load("../MyGame/media/models/fence_left.obj", 2));
+        models.push_back(Model::Load("../MyGame/media/models/fence_back.obj", 2));
+        models.push_back(Model::Load("../MyGame/media/models/fence_right.obj", 2));
 
         // some test translations
-        models[2].translateModelMatrix(glm::vec3(5.0f, 0.5f, 0.0f));
-        glm::vec3 planeNormal = models[1].vertices[0].normal;
-
-        glm::min(planeNormal, glm::vec3(0.0f, 1.0f, 2.0f));
+        //models[2].translateModelMatrix(glm::vec3(5.0f, 0.5f, 0.0f));
 
         createUniformBuffers();
         createDescriptorPool();
@@ -215,7 +214,7 @@ private:
             translateViewMatrix(deltaTime);
 
             // check for hit
-            checkForHit(hittableObjects);
+            //checkForHit(hittableObjects);
             drawFrame();
         }
 
@@ -857,7 +856,7 @@ private:
             UniformBufferObject ubo{};
             ubo.model = models[i].modelMatrix;
             ubo.view = camera.getViewMatrix();
-            ubo.proj = glm::perspective(glm::radians(45.0f), swapChainExtent.width / (float)swapChainExtent.height, 0.1f, 20.0f);
+            ubo.proj = glm::perspective(glm::radians(45.0f), swapChainExtent.width / (float)swapChainExtent.height, 0.1f, 200.0f);
             ubo.proj[1][1] *= -1;
 
             void* dest = static_cast<char*>(uniformBuffersMapped[currentImage]) + i * sizeof(UniformBufferObject);
