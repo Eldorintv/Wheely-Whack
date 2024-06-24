@@ -180,10 +180,7 @@ private:
 
         // MODELS
         models.push_back(Model::LoadSkybox("../MyGame/media/models/skybox_cube.obj", 0));
-        models.push_back(Model::Load("../MyGame/media/models/plane_v1.obj", 1));
-        models.push_back(Model::Load("../MyGame/media/models/fence_left.obj", 2));
-        models.push_back(Model::Load("../MyGame/media/models/fence_back.obj", 2));
-        models.push_back(Model::Load("../MyGame/media/models/fence_right.obj", 2));
+        models.push_back(Model::Load("../MyGame/media/models/road_z0_v2.obj", 1));
 
         // some test translations
         //models[2].translateModelMatrix(glm::vec3(5.0f, 0.5f, 0.0f));
