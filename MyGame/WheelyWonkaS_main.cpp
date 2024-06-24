@@ -162,7 +162,6 @@ private:
         createImageViews();
         createRenderPass();
         createDescriptorSetLayout();
-        //createGraphicsPipeline();
         createCommandPool();
         createDepthResources();
         createFramebuffers();
@@ -182,9 +181,6 @@ private:
 
         // MODELS
         models.push_back(Model::LoadSkybox("../MyGame/media/models/skybox_cube.obj", 0));
-        //models.push_back(Model::Load("../MyGame/media/models/road_z0_v2.obj", 1));
-        //models.push_back(Model::Load("../MyGame/media/models/road_fence_left.obj", 2));
-        //models.push_back(Model::Load("../MyGame/media/models/road_fence_right.obj", 2));
         models.push_back(Model::Load("../MyGame/media/models/line_road/road.obj", 1));
         models.push_back(Model::Load("../MyGame/media/models/line_road/water_left.obj", 4));
         models.push_back(Model::Load("../MyGame/media/models/line_road/water_right.obj", 4));
@@ -199,8 +195,6 @@ private:
         models.push_back(Model::Load("../MyGame/media/models/line_road/road4.obj", 2));//12 rainbow special level
         models.push_back(Model::Load("../MyGame/media/models/line_road/left_fence4.obj", 2));//13
         models.push_back(Model::Load("../MyGame/media/models/line_road/right_fence4.obj", 2));//14
-        // some test translations
-        //models[4].translateModelMatrix(glm::vec3(0.1f, 0.0f, 0.0f));
 
         createUniformBuffers();
         createDescriptorPool();
@@ -210,8 +204,6 @@ private:
         createSyncObjects();
 
         createStagingBuffer();
-        // start process of encoder
-        //encoder.codecReady = encoder.setUpCodec(swapChainExtent.width, swapChainExtent.height);
     }
 
     double lastFrameTime = 0.0;
