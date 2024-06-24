@@ -22,42 +22,51 @@ static float angledx{ 0 };
 static float angledy{ 0 };
 static bool m_usePrevCursorPosition{ false };
 
-
 // camera movement
 static void translateViewMatrix(double deltaTime) {
     glm::mat4 translation(1.0f);
     glm::mat4 rotation(1.0f);
 
-    float drivingSpeed = 5.0f * static_cast<float>(deltaTime);
+    //float drivingSpeed = 5.0f * static_cast<float>(deltaTime);
+    float acceleration = 0.2f * static_cast<float>(deltaTime);
     float angle = glm::radians(45.0f) * static_cast<float>(deltaTime);
 
-    if (wIsPressed) {
-        translation = glm::translate(translation, glm::vec3(0.0f, 0.0f, drivingSpeed));
+    if (wIsPressed && !camera.carStarted) {
+        camera.carStarted = true;
+        //translation = glm::translate(translation, glm::vec3(0.0f, 0.0f, drivingSpeed));
     }
-    if (sIsPressed) {
-        translation = glm::translate(translation, glm::vec3(0.0f, 0.0f, -drivingSpeed));
+    /* The "S" key is disabled, as you should not be able to stop the speed once started, 
+    like a flying dart with increased difficulty*/
 
-        if (aIsPressed) {
-            rotation *= glm::rotate(rotation, angle, glm::vec3(0.0f, 1.0f, 0.0f));
-        }
-        if (dIsPressed) {
-            rotation *= glm::rotate(rotation, -angle, glm::vec3(0.0f, 1.0f, 0.0f));
-        }
-    }
+    //if (sIsPressed) {
+    //    translation = glm::translate(translation, glm::vec3(0.0f, 0.0f, -drivingSpeed));
+
+    //    if (aIsPressed) {
+    //        rotation *= glm::rotate(rotation, angle, glm::vec3(0.0f, 1.0f, 0.0f));
+    //    }
+    //    if (dIsPressed) {
+    //        rotation *= glm::rotate(rotation, -angle, glm::vec3(0.0f, 1.0f, 0.0f));
+    //    }
+    //}
     else {
-        if (aIsPressed) {
+        if (aIsPressed && camera.carStarted) {
             rotation = glm::rotate(rotation, -angle, glm::vec3(0.0f, 1.0f, 0.0f));
         }
-        if (dIsPressed) {
+        if (dIsPressed && camera.carStarted) {
             rotation = glm::rotate(rotation, angle, glm::vec3(0.0f, 1.0f, 0.0f));
         }
     }
-    //if (leftMouseButtonIsPressed) {
-    //    rotation = glm::rotate(rotation, glm::radians(angledx), glm::vec3(0.0f, 1.0f, 0.0f));
-    //}
-    //if (leftMouseButtonIsPressed) {
-    //    rotation = glm::rotate(rotation, glm::radians(angledy), glm::vec3(1.0f, 0.0f, 0.0f));
-    //}
+
+    if (camera.carStarted) {
+        camera.velocity += acceleration * static_cast<float>(deltaTime);
+        if (camera.velocity > camera.maxSpeed) {
+            translation = glm::translate(translation, glm::vec3(0.0f, 0.0f, camera.maxSpeed));
+        }
+        else {
+            translation = glm::translate(translation, glm::vec3(0.0f, 0.0f, camera.velocity));
+        }
+    }
+
     glm::mat4 transform = translation * rotation;
     camera.updateCamera(transform);
 }
