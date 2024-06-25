@@ -32,6 +32,7 @@
     <ClCompile Include="WWboundingbox.cpp" />
     <ClCompile Include="WWcamera.cpp" />
     <ClCompile Include="WWencoder.cpp" />
+    <ClCompile Include="WWhelpers.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imgui-master\backends\imgui_impl_glfw.h" />
