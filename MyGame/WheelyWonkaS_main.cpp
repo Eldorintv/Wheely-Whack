@@ -191,7 +191,7 @@ private:
         models.push_back(Model::Load("../MyGame/media/models/line_road/road2.obj", 1));//6
         models.push_back(Model::Load("../MyGame/media/models/line_road/left_fence2.obj", 2));//7
         models.push_back(Model::Load("../MyGame/media/models/line_road/right_fence2.obj", 2));//8
-        models.push_back(Model::Load("../MyGame/media/models/line_road/road3.obj", 6));//9 rainbow special level
+        models.push_back(Model::Load("../MyGame/media/models/line_road/road3.obj", 1));//9 rainbow special level
         models.push_back(Model::Load("../MyGame/media/models/line_road/left_fence3.obj", 2));//10
         models.push_back(Model::Load("../MyGame/media/models/line_road/right_fence3.obj", 2));//11
         models.push_back(Model::Load("../MyGame/media/models/line_road/road4.obj", 2));//12
@@ -292,8 +292,9 @@ private:
 
             // finish line reached
             if (models[30].boundingBox.isInside(camera.getPosition())) {
-                camera.velocity = 0.005f;
+                camera.resetViewMatrix();
                 camera.carStarted = false;
+                camera.velocity = 0.005f;
                 resetRockPositions();
 
                 // TO DO: option to restart
@@ -1304,7 +1305,7 @@ private:
             models[29].modelMatrix = glm::mat4(1.0f);
         }
         else {
-            random_x += static_cast<float>(xRange(gen)) + 100;
+            random_x += camera.getPosition().x + 40;
 
             // PLAY WUHUUUU OR SOMETHING HERE
         }
