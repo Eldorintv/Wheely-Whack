@@ -145,13 +145,6 @@ private:
         glfwSetCursorPosCallback(window, cursorPosition_callback);
         glfwSetMouseButtonCallback(window, mouseButton_callback);
 
-        IMGUI_CHECKVERSION();
-        ImGui::CreateContext();
-        ImGuiIO& io = ImGui::GetIO(); (void)io;
-        ImGui::StyleColorsDark();
-        ImGui_ImplGlfw_InitForOpenGL(window, true);
-        ImGui_ImplOpenGL3_Init("#version 330");
-
     }
 
     static void framebufferResizeCallback(GLFWwindow* window, int width, int height) {
@@ -259,8 +252,6 @@ private:
             glfwPollEvents();
             translateViewMatrix(deltaTime);
 
-            // check for hit
-            
             checkForGameMechanics();
             drawFrame();
         }
@@ -374,6 +365,10 @@ private:
 
         vkDestroySurfaceKHR(instance, surface, nullptr);
         vkDestroyInstance(instance, nullptr);
+
+        // Delete imGui stuff here
+
+
 
         glfwDestroyWindow(window);
 
