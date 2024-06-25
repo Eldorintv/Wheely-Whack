@@ -76,7 +76,7 @@ static void sendReceiverReport(int len, UDPReceive6& receiver, UDPSend6& sender)
 		// to make last 10 seconds rather than overall
 		receiver.recvPacketCount = receiver.lastPacketNum;
 
-		sprintf_s(msg, "<< ! >>\ncurrent byte rate: %zu\ncurrent fps: %.2f\npacket loss rate: %.2f\n<< ! >>\n", byteRate, fps, packetLossRate);
+		sprintf_s(msg, "current byte rate: %zu\ncurrent fps: %.2f\npacket loss rate: %.2f\n", byteRate, fps, packetLossRate);
 
 		sendMessage(msg, sender);
 
