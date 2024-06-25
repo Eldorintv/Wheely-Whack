@@ -174,7 +174,7 @@ uint8_t* Decoder::decode(AVCodecContext* dec_ctx, AVFrame* frame, AVPacket* pkt)
 
 		uint8_t* rgba_buffer = (uint8_t*)malloc(frame->width * frame->height * 4);
 
-		// Converting back to RBGA ( from: endocde.cpp; Encoder::encodeFrameFromDataImage(uint8_t* dataImage))
+		// Converting back to RGBA ( from: endocde.cpp; Encoder::encodeFrameFromDataImage(uint8_t* dataImage))
 		SwsContext* sws_ctx = sws_getContext(frame->width, frame->height, dec_ctx->pix_fmt, frame->width, frame->height, AV_PIX_FMT_RGBA, 0, NULL, NULL, NULL);
 		int inLinesize[1] = { 4 * frame->width };
 		sws_scale(sws_ctx, frame->data, frame->linesize, 0, frame->height, &rgba_buffer, inLinesize);
