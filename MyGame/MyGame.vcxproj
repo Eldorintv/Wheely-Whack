@@ -34,6 +34,7 @@
     <ClCompile Include="WWencoder.cpp" />
     <ClCompile Include="WWhelpers.cpp" />
     <ClCompile Include="WWkeybinds.cpp" />
+    <ClCompile Include="WWmodel.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imgui-master\backends\imgui_impl_glfw.h" />
