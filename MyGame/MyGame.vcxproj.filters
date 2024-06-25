@@ -42,7 +42,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="WheelyWonkaS_main.cpp">
+    <ClCompile Include="WheelyWhack.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="WWencoder.cpp">
@@ -178,6 +178,63 @@
       <Filter>Resource Files\media\models</Filter>
     </Object>
     <Object Include="media\models\line_road\road.obj">
+      <Filter>Resource Files\media\models</Filter>
+    </Object>
+    <Object Include="media\models\line_road\left_fence2.obj">
+      <Filter>Resource Files\media\models</Filter>
+    </Object>
+    <Object Include="media\models\line_road\left_fence3.obj">
+      <Filter>Resource Files\media\models</Filter>
+    </Object>
+    <Object Include="media\models\line_road\left_fence4.obj">
+      <Filter>Resource Files\media\models</Filter>
+    </Object>
+    <Object Include="media\models\line_road\right_fence2.obj">
+      <Filter>Resource Files\media\models</Filter>
+    </Object>
+    <Object Include="media\models\line_road\right_fence3.obj">
+      <Filter>Resource Files\media\models</Filter>
+    </Object>
+    <Object Include="media\models\line_road\right_fence4.obj">
+      <Filter>Resource Files\media\models</Filter>
+    </Object>
+    <Object Include="media\models\line_road\road2.obj">
+      <Filter>Resource Files\media\models</Filter>
+    </Object>
+    <Object Include="media\models\line_road\road3.obj">
+      <Filter>Resource Files\media\models</Filter>
+    </Object>
+    <Object Include="media\models\line_road\road4.obj">
+      <Filter>Resource Files\media\models</Filter>
+    </Object>
+    <Object Include="media\models\line_road\water_left2.obj">
+      <Filter>Resource Files\media\models</Filter>
+    </Object>
+    <Object Include="media\models\line_road\water_left3.obj">
+      <Filter>Resource Files\media\models</Filter>
+    </Object>
+    <Object Include="media\models\line_road\water_left4.obj">
+      <Filter>Resource Files\media\models</Filter>
+    </Object>
+    <Object Include="media\models\line_road\water_right2.obj">
+      <Filter>Resource Files\media\models</Filter>
+    </Object>
+    <Object Include="media\models\line_road\water_right3.obj">
+      <Filter>Resource Files\media\models</Filter>
+    </Object>
+    <Object Include="media\models\line_road\water_right4.obj">
+      <Filter>Resource Files\media\models</Filter>
+    </Object>
+    <Object Include="media\models\cone.obj">
+      <Filter>Resource Files\media\models</Filter>
+    </Object>
+    <Object Include="media\models\finish_line.obj">
+      <Filter>Resource Files\media\models</Filter>
+    </Object>
+    <Object Include="media\models\rock.obj">
+      <Filter>Resource Files\media\models</Filter>
+    </Object>
+    <Object Include="media\models\star.obj">
       <Filter>Resource Files\media\models</Filter>
     </Object>
   </ItemGroup>
