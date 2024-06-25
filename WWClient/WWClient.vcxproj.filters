@@ -44,6 +44,9 @@
     <ClCompile Include="UDP6send.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="videoDisplay.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="external\ffmpeg\bin\avcodec-60.dll">

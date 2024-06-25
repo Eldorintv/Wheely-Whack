@@ -143,6 +143,7 @@
     <ClCompile Include="reciever_main.cpp" />
     <ClCompile Include="UDP6receive.cpp" />
     <ClCompile Include="UDP6send.cpp" />
+    <ClCompile Include="videoDisplay.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="external\ffmpeg\bin\avcodec-60.dll">
