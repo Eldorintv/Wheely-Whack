@@ -78,6 +78,9 @@
     <ClCompile Include="imgui-master\backends\imgui_impl_vulkan.cpp">
       <Filter>Source Files\imgui</Filter>
     </ClCompile>
+    <ClCompile Include="WWcamera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WWInclude.h">

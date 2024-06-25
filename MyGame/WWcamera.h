@@ -9,30 +9,17 @@ public:
 	float maxSpeed = 0.2f;
 	float velocity = 0.005f;
 
-	Camera(const glm::vec3& position, const glm::vec3& target, const glm::vec3& up) {
-		this->viewMatrix = glm::lookAt(position, target, up);
-	}
+	Camera(const glm::vec3& position, const glm::vec3& target, const glm::vec3& up);
 
-	Camera() {
-		this->viewMatrix = glm::lookAt(glm::vec3(0.0f, 0.5f, 0.0f), glm::vec3(1.0f, 0.5f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-	}
+	Camera();
 
-	glm::mat4 getViewMatrix() const {
-		return this->viewMatrix;
-	}
+	glm::mat4 getViewMatrix() const;
 
-	void updateCamera(const glm::mat4& transform) {
-		viewMatrix = transform * viewMatrix;
-	}
+	void updateCamera(const glm::mat4& transform);
 
-	void resetViewMatrix(const glm::vec3& newPosition = glm::vec3(0.0f, 0.5f, 0.0f)) {
-		viewMatrix = glm::lookAt(newPosition, glm::vec3(newPosition.x + 1, 0.5f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-	}
+	void resetViewMatrix(const glm::vec3& newPosition = glm::vec3(0.0f, 0.5f, 0.0f));
 
-	glm::vec3 getPosition() const{
-		glm::mat4 viewInverse = glm::inverse(viewMatrix);
-		return glm::vec3(viewInverse[3]);
-	}
+	glm::vec3 getPosition() const;
 
 
 private:

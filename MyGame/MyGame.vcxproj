@@ -30,6 +30,7 @@
     <ClCompile Include="imgui-master\imgui_widgets.cpp" />
     <ClCompile Include="WheelyWonkaS_main.cpp" />
     <ClCompile Include="WWboundingbox.cpp" />
+    <ClCompile Include="WWcamera.cpp" />
     <ClCompile Include="WWencoder.cpp" />
   </ItemGroup>
   <ItemGroup>
