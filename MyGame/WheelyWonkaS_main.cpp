@@ -180,6 +180,7 @@ private:
         textures.push_back(Texture::Load("../MyGame/media/textures/water.png"));//4
         textures.push_back(Texture::Load("../MyGame/media/textures/rock.jpg"));//5
         textures.push_back(Texture::Load("../MyGame/media/textures/yellow_star.png"));//6
+        textures.push_back(Texture::Load("../MyGame/media/textures/cone.png"));//7
 
         // MODELS
         models.push_back(Model::LoadSkybox("../MyGame/media/models/skybox_cube.obj", 0)); // 0
@@ -199,7 +200,7 @@ private:
         models.push_back(Model::Load("../MyGame/media/models/line_road/right_fence4.obj", 2));//14
 
         // the rock(s) xD
-        models.push_back(Model::Load("../MyGame/media/models/rock.obj", 5));//15
+        models.push_back(Model::Load("../MyGame/media/models/cone.obj", 7));//15
         models.push_back(Model::Load("../MyGame/media/models/rock.obj", 5));//16
         models.push_back(Model::Load("../MyGame/media/models/rock.obj", 5));//17
         models.push_back(Model::Load("../MyGame/media/models/rock.obj", 5));//18
