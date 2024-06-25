@@ -6,7 +6,7 @@
 class Camera {
 public:
 	bool carStarted = false;
-	float maxSpeed = 0.1f;
+	float maxSpeed = 0.2f;
 	float velocity = 0.005f;
 
 	Camera(const glm::vec3& position, const glm::vec3& target, const glm::vec3& up) {

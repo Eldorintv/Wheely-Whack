@@ -176,9 +176,10 @@ private:
             "../MyGame/media/textures/sky/bluecloud_lf.jpg"));
         textures.push_back(Texture::Load("../MyGame/media/textures/road.jpg")); //1
         textures.push_back(Texture::Load("../MyGame/media/textures/rainbowMarmor.jpg"));//2
-        textures.push_back(Texture::Load("../MyGame/media/textures/grass_small.jpg"));//3
+        textures.push_back(Texture::Load("../MyGame/media/textures/paper.jpg"));//3
         textures.push_back(Texture::Load("../MyGame/media/textures/water.png"));//4
         textures.push_back(Texture::Load("../MyGame/media/textures/rock.jpg"));//5
+        textures.push_back(Texture::Load("../MyGame/media/textures/gravel_road.jpg"));//6
 
         // MODELS
         models.push_back(Model::LoadSkybox("../MyGame/media/models/skybox_cube.obj", 0));
@@ -190,7 +191,7 @@ private:
         models.push_back(Model::Load("../MyGame/media/models/line_road/road2.obj", 1));//6
         models.push_back(Model::Load("../MyGame/media/models/line_road/left_fence2.obj", 2));//7
         models.push_back(Model::Load("../MyGame/media/models/line_road/right_fence2.obj", 2));//8
-        models.push_back(Model::Load("../MyGame/media/models/line_road/road3.obj", 2));//9 rainbow special level
+        models.push_back(Model::Load("../MyGame/media/models/line_road/road3.obj", 6));//9 rainbow special level
         models.push_back(Model::Load("../MyGame/media/models/line_road/left_fence3.obj", 2));//10
         models.push_back(Model::Load("../MyGame/media/models/line_road/right_fence3.obj", 2));//11
         models.push_back(Model::Load("../MyGame/media/models/line_road/road4.obj", 2));//12
@@ -216,31 +217,8 @@ private:
         models.push_back(Model::Load("../MyGame/media/models/rock.obj", 5));//28
         models.push_back(Model::Load("../MyGame/media/models/rock.obj", 5));//29
 
-        //// rocks can be on x 25 - 600, z from -5 to 5
-        //std::random_device rd;
-        //std::mt19937 gen(rd()); // my random generator
-        //// x plus modifer
-        //std::uniform_real_distribution<> xRange(20.0, 50);
-        //std::uniform_real_distribution<> zRange(-0.5, 5.0);
-        //float random_x = static_cast<float>(xRange(gen)) + 15;
-        //float random_z = static_cast<float>(zRange(gen));
-        //models[15].translateModelMatrix(glm::vec3(random_x, 0.0f, random_z)); random_x += static_cast<float>(xRange(gen)); random_z = static_cast<float>(zRange(gen));
-        //models[16].translateModelMatrix(glm::vec3(random_x, 0.0f, random_z)); random_x += static_cast<float>(xRange(gen)); random_z = static_cast<float>(zRange(gen));
-        //models[17].translateModelMatrix(glm::vec3(random_x, 0.0f, random_z)); random_x += static_cast<float>(xRange(gen)); random_z = static_cast<float>(zRange(gen));
-        //models[18].translateModelMatrix(glm::vec3(random_x, 0.0f, random_z)); random_x += static_cast<float>(xRange(gen)); random_z = static_cast<float>(zRange(gen));
-        //models[19].translateModelMatrix(glm::vec3(random_x, 0.0f, random_z)); random_x += static_cast<float>(xRange(gen)); random_z = static_cast<float>(zRange(gen));
+        models.push_back(Model::Load("../MyGame/media/models/finish_line.obj", 3)); // 30 finish line
 
-        //models[20].translateModelMatrix(glm::vec3(random_x, 0.0f, random_z)); random_x += static_cast<float>(xRange(gen)); random_z = static_cast<float>(zRange(gen));
-        //models[21].translateModelMatrix(glm::vec3(random_x, 0.0f, random_z)); random_x += static_cast<float>(xRange(gen)); random_z = static_cast<float>(zRange(gen));
-        //models[22].translateModelMatrix(glm::vec3(random_x, 0.0f, random_z)); random_x += static_cast<float>(xRange(gen)); random_z = static_cast<float>(zRange(gen));
-        //models[23].translateModelMatrix(glm::vec3(random_x, 0.0f, random_z)); random_x += static_cast<float>(xRange(gen)); random_z = static_cast<float>(zRange(gen));
-        //models[24].translateModelMatrix(glm::vec3(random_x, 0.0f, random_z)); random_x += static_cast<float>(xRange(gen)); random_z = static_cast<float>(zRange(gen));
-
-        //models[25].translateModelMatrix(glm::vec3(random_x, 0.0f, random_z)); random_x += static_cast<float>(xRange(gen)); random_z = static_cast<float>(zRange(gen));
-        //models[26].translateModelMatrix(glm::vec3(random_x, 0.0f, random_z)); random_x += static_cast<float>(xRange(gen)); random_z = static_cast<float>(zRange(gen));
-        //models[27].translateModelMatrix(glm::vec3(random_x, 0.0f, random_z)); random_x += static_cast<float>(xRange(gen)); random_z = static_cast<float>(zRange(gen));
-        //models[28].translateModelMatrix(glm::vec3(random_x, 0.0f, random_z)); random_x += static_cast<float>(xRange(gen)); random_z = static_cast<float>(zRange(gen));
-        //models[29].translateModelMatrix(glm::vec3(random_x, 0.0f, random_z)); random_x += static_cast<float>(xRange(gen)); random_z = static_cast<float>(zRange(gen));
         resetRockPositions(true);
 
         createUniformBuffers();
@@ -293,10 +271,10 @@ private:
         }
 
         // When x > 1150 reset to 750
-        if (camera.getPosition().x > 1150) {
-            camera.resetViewMatrix(glm::vec3(800.0f, 0.5f, 0.0f));
-            camera.maxSpeed += 0.1f;
-        }
+        //if (camera.getPosition().x > 1150) {
+        //    camera.resetViewMatrix(glm::vec3(800.0f, 0.5f, 0.0f));
+        //    camera.maxSpeed += 0.1f;
+        //}
     }
 
     // not working at all
