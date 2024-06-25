@@ -57,11 +57,11 @@ void cursorPosition_callback(GLFWwindow* window, double xPos, double yPos) {
 
 void mouseButton_callback(GLFWwindow* window, int button, int action, int mods) {
     if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS) {
-        std::cout << "Left mouse button pressed\n";
+        //std::cout << "Left mouse button pressed\n";
         leftMouseButtonIsPressed = true;
     }
     if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_RELEASE) {
-        std::cout << "Left mouse button released\n";
+        //std::cout << "Left mouse button released\n";
         leftMouseButtonIsPressed = false;
     }
 }
