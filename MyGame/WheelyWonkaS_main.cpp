@@ -179,7 +179,7 @@ private:
         textures.push_back(Texture::Load("../MyGame/media/textures/paper.jpg"));//3
         textures.push_back(Texture::Load("../MyGame/media/textures/water.png"));//4
         textures.push_back(Texture::Load("../MyGame/media/textures/rock.jpg"));//5
-        textures.push_back(Texture::Load("../MyGame/media/textures/gravel_road.jpg"));//6
+        textures.push_back(Texture::Load("../MyGame/media/textures/yellow_star.png"));//6
 
         // MODELS
         models.push_back(Model::LoadSkybox("../MyGame/media/models/skybox_cube.obj", 0)); // 0
@@ -225,6 +225,10 @@ private:
         models.push_back(Model::Load("../MyGame/media/models/line_road/water_right3.obj", 4)); // 34
         models.push_back(Model::Load("../MyGame/media/models/line_road/water_left4.obj", 4)); // 35
         models.push_back(Model::Load("../MyGame/media/models/line_road/water_right4.obj", 4)); // 36
+
+        // star
+        models.push_back(Model::Load("../MyGame/media/models/star.obj", 6)); // 37
+        models[37].translateModelMatrix(glm::vec3(1170.0f, 0.0f, 0.0));
 
         resetRockPositions(true);
 
@@ -287,7 +291,7 @@ private:
     }
 
     // not working at all
-    bool checkForHit(std::vector<size_t>& hitables) {
+    void checkForHit(std::vector<size_t>& hitables) {
         for (const auto& object : hitables) {
 
             // finish line reached
@@ -298,7 +302,7 @@ private:
                 resetRockPositions();
 
                 // TO DO: option to restart
-                return true;
+                return;
             }
 
             // if camera hits one of the objects in hittableObjects this evaluates to true
@@ -307,11 +311,13 @@ private:
                 camera.carStarted = false;
                 camera.velocity = 0.005f;
                 resetRockPositions();
+
+                return;
             }
         }
         
 
-        return false;
+        return;
     }
 
     void cleanupSwapChain() {
@@ -1305,7 +1311,7 @@ private:
             models[29].modelMatrix = glm::mat4(1.0f);
         }
         else {
-            random_x += camera.getPosition().x + 40;
+            random_x = static_cast<float>(xRange(gen)) + 40;
 
             // PLAY WUHUUUU OR SOMETHING HERE
         }
