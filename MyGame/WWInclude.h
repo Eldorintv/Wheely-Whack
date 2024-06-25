@@ -26,4 +26,7 @@ extern "C" {
 
 #include <random>
 
+#include "nuklear.h"
+#include "nuklear_internal.h"
+
 #endif
