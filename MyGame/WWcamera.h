@@ -6,7 +6,7 @@
 class Camera {
 public:
 	bool carStarted = false;
-	float maxSpeed = 0.05f;
+	float maxSpeed = 0.1f;
 	float velocity = 0.005f;
 
 	Camera(const glm::vec3& position, const glm::vec3& target, const glm::vec3& up) {
@@ -25,8 +25,8 @@ public:
 		viewMatrix = transform * viewMatrix;
 	}
 
-	void resetViewMatrix() {
-		viewMatrix = glm::lookAt(glm::vec3(0.0f, 0.5f, 0.0f), glm::vec3(1.0f, 0.5f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+	void resetViewMatrix(const glm::vec3& newPosition = glm::vec3(0.0f, 0.5f, 0.0f)) {
+		viewMatrix = glm::lookAt(newPosition, glm::vec3(newPosition.x + 1, 0.5f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 	}
 
 	glm::vec3 getPosition() const{

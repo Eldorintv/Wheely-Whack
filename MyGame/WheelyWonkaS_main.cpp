@@ -256,7 +256,9 @@ private:
     double lastFrameTime = 0.0;
     double deltaTime = 0.0;
 
-    std::vector<size_t> hittableObjects{4, 5, 7, 8, 10, 11, 13, 14, 
+    std::vector<size_t> hittableObjects{
+        /*fences*/
+        4, 5, 7, 8, 10, 11, 13, 14, 
         /*rocks*/
         15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29
     };
@@ -270,20 +272,30 @@ private:
             translateViewMatrix(deltaTime);
 
             // check for hit
-            checkForHit(hittableObjects);
-            checkForRockDisplacement();
+            
+            checkForGameMechanics();
             drawFrame();
         }
 
         vkDeviceWaitIdle(device);
     }
 
-    void checkForRockDisplacement() {
+    void checkForGameMechanics() {
+        // check if something is being hit
+        checkForHit(hittableObjects);
+
+        // this means we have reached the last rock, and all rocks are gonna be replaced
         if (camera.getPosition().x > models[29].modelMatrix[3].x) {
             // this means we have reached the last rock, and all rocks are gonna be replaced
 
             // maybe some sort of huhiiii, I replace, dont wonder
             resetRockPositions(false); // false means not to origin
+        }
+
+        // When x > 1150 reset to 750
+        if (camera.getPosition().x > 1150) {
+            camera.resetViewMatrix(glm::vec3(800.0f, 0.5f, 0.0f));
+            camera.maxSpeed += 0.1f;
         }
     }
 
@@ -296,6 +308,7 @@ private:
                 camera.resetViewMatrix();
                 camera.carStarted = false;
                 camera.velocity = 0.005f;
+                resetRockPositions();
             }
         }
     }
@@ -1263,14 +1276,33 @@ private:
         std::random_device rd;
         std::mt19937 gen(rd()); // my random generator
         // x plus modifer
-        std::uniform_real_distribution<> xRange(20.0, 40.0);
+        std::uniform_real_distribution<> xRange(10.0, 30.0);
         std::uniform_real_distribution<> zRange(-4.0, 4.0);
         float random_x = 0.0f;
         if (reset) {
             random_x = static_cast<float>(xRange(gen)) + 15;
+            models[15].modelMatrix = glm::mat4(1.0f);
+            models[16].modelMatrix = glm::mat4(1.0f);
+            models[17].modelMatrix = glm::mat4(1.0f);
+            models[18].modelMatrix = glm::mat4(1.0f);
+            models[19].modelMatrix = glm::mat4(1.0f);
+
+            models[20].modelMatrix = glm::mat4(1.0f);
+            models[21].modelMatrix = glm::mat4(1.0f);
+            models[22].modelMatrix = glm::mat4(1.0f);
+            models[23].modelMatrix = glm::mat4(1.0f);
+            models[24].modelMatrix = glm::mat4(1.0f);
+
+            models[25].modelMatrix = glm::mat4(1.0f);
+            models[26].modelMatrix = glm::mat4(1.0f);
+            models[27].modelMatrix = glm::mat4(1.0f);
+            models[28].modelMatrix = glm::mat4(1.0f);
+            models[29].modelMatrix = glm::mat4(1.0f);
         }
         else {
-            random_x += static_cast<float>(xRange(gen)) + 15;
+            random_x += static_cast<float>(xRange(gen)) + 100;
+
+            // PLAY WUHUUUU OR SOMETHING HERE
         }
         
         float random_z = static_cast<float>(zRange(gen));
