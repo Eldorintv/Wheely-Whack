@@ -33,8 +33,6 @@ bld/
 [Ll]og/
 [Ll]ogs/
 
-!*WWClient/external/Assimp/lib/x64/*
-
 # Visual Studio 2015/2017 cache/options directory
 .vs/
 # Uncomment if you have tasks that create the project's static files in wwwroot
@@ -367,3 +365,6 @@ FodyWeavers.xsd
 # my models - .obj files
 !MyGame/media/models/*.obj
 
+
+!WWClient/external/Assimp/lib/x64/Debug/*
+!WWClient/external/*
