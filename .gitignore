@@ -364,3 +364,5 @@ FodyWeavers.xsd
 
 # my models - .obj files
 !MyGame/media/models/*.obj
+
+!WWClient/external/Assimp/lib
