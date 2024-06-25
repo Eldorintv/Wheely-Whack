@@ -1315,7 +1315,9 @@ private:
             random_x = static_cast<float>(xRange(gen)) + 40;
             for (size_t i{ 15 }; i < 29; ++i) {
                 models[i].modelMatrix = models[29].modelMatrix;
+                models[i].modelMatrix[3].z = 0.0f;
             }
+            models[15].modelMatrix[3].z = 0.0f;
 
             // PLAY WUHUUUU OR SOMETHING HERE
         }
