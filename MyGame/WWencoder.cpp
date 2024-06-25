@@ -2,7 +2,6 @@
 
 
 UDPSend6 sender;
-//UDPReceive6 receiver;
 SwsContext* ctx = nullptr;
 
 // size of the chunks that get cut out of the ffmpeg output
@@ -51,7 +50,6 @@ bool Encoder::setUpCodec(uint32_t extentWidth, uint32_t extentHeight) {
 	/* open it */
 	ret = avcodec_open2(c, codec, NULL);
 	if (ret < 0) {
-		//std::cout << "Could not open codec:" << av_err2str(ret) << "\n";
 		//fprintf(stderr, "Could not open codec: %s\n", av_err2str(ret));
 		exit(1);
 	}
@@ -81,7 +79,6 @@ bool Encoder::setUpCodec(uint32_t extentWidth, uint32_t extentHeight) {
 		exit(1);
 
 	sender.init("::1", 50000);
-	//receiver.init(51337);
 
 	ctx = sws_getContext(c->width, c->height, AV_PIX_FMT_BGRA, c->width, c->height, AV_PIX_FMT_YUV420P, 0, 0, 0, 0);
 
@@ -116,10 +113,8 @@ void encode(AVCodecContext* enc_ctx, AVFrame* frame, AVPacket* pkt,
 			exit(1);
 		}
 
-
 		//std::cout << "Sending with UDP: packet " << pkt->pts << " size:" << pkt->size << "\n";
 		sender.send((char*)pkt->data, pkt->size);
-
 
 		av_packet_unref(pkt);
 	}
@@ -141,12 +136,6 @@ void Encoder::encoderFinishProcess() {
 	/* flush the encoder */
 	encode(c, NULL, pkt, f);
 
-	/* Add sequence end code to have a real MPEG file.
-	   It makes only sense because this tiny examples writes packets
-	   directly. This is called "elementary stream" and only works for some
-	   codecs. To create a valid file, you usually need to write packets
-	   into a proper file format or protocol; see muxing.c.
-	 */
 	 /*if (codec->id == AV_CODEC_ID_MPEG1VIDEO || codec->id == AV_CODEC_ID_MPEG2VIDEO)
 		 fwrite(endcode, 1, sizeof(endcode), f);
 	 fclose(f);*/
@@ -155,10 +144,8 @@ void Encoder::encoderFinishProcess() {
 	av_frame_free(&frame);
 	av_packet_free(&pkt);
 
+	// frees sws again
 	sws_freeContext(ctx);
-
-	// UDP Send socket clean up
-	//WSACleanup();
 
 	std::cout << " done!\n";
 }

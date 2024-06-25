@@ -57,18 +57,10 @@ void Decoder::setUpDecoder() {
 		exit(1);
 	}
 
-	/* For some codecs, such as msmpeg4 and mpeg4, width and height
-	   MUST be initialized there because this information is not
-	   available in the bitstream. */
-
-	   /* open it */
 	if (avcodec_open2(c, codec, NULL) < 0) {
 		fprintf(stderr, "Could not open codec\n");
 		exit(1);
 	}
-
-	// TO DO 
-	// Here was file opening
 
 	frame = av_frame_alloc();
 	if (!frame) {
@@ -134,16 +126,13 @@ void Decoder::decode(AVCodecContext* dec_ctx, AVFrame* frame, AVPacket* pkt, con
 }
 
 void Decoder::readParseDecode(char* buffer, int len) {
-	//printf("In Decoder::readParseDecode\n");
 	size_t offset{ 0 };
 
 	do {
-		//printf("Entering Do While\n");
 		data_size = MIN(INBUF_SIZE, len - offset);
 		memcpy(inbuf, buffer + offset, data_size);
 		offset += data_size;
 		eof = !data_size;
-		//printf("right before decoding, eof %i\n", eof);
 
 		data = inbuf;
 		while (data_size > 0 || eof) {
@@ -155,8 +144,6 @@ void Decoder::readParseDecode(char* buffer, int len) {
 			data += ret;
 			data_size -= ret;
 
-			//printf("right before decoding, data_size %i\n", data_size);
-			//printf("pkt size: %i ret: %i\n", pkt->size, ret);
 			if (pkt->size)
 				decode(c, frame, pkt, outfilename);
 			else if (eof)
@@ -168,7 +155,6 @@ void Decoder::readParseDecode(char* buffer, int len) {
 
 
 uint8_t* Decoder::decode(AVCodecContext* dec_ctx, AVFrame* frame, AVPacket* pkt) {
-	//char buf[1024];
 	int ret;
 
 	ret = avcodec_send_packet(dec_ctx, pkt);
@@ -176,8 +162,6 @@ uint8_t* Decoder::decode(AVCodecContext* dec_ctx, AVFrame* frame, AVPacket* pkt)
 		fprintf(stderr, "Error sending a packet for decoding\n");
 		exit(1);
 	}
-
-	//printf("In Decoder::decode , ret: %i\n", ret);
 
 	while (ret >= 0) {
 		ret = avcodec_receive_frame(dec_ctx, frame);
@@ -203,16 +187,13 @@ uint8_t* Decoder::decode(AVCodecContext* dec_ctx, AVFrame* frame, AVPacket* pkt)
 }
 
 uint8_t* Decoder::readParseDecodeDisplay(char* buffer, int len) {
-	//printf("In Decoder::readParseDecode\n");
 	size_t offset{ 0 };
 
 	do {
-		//printf("Entering Do While\n");
 		data_size = MIN(INBUF_SIZE, len - offset);
 		memcpy(inbuf, buffer + offset, data_size);
 		offset += data_size;
 		eof = !data_size;
-		//printf("right before decoding, eof %i\n", eof);
 
 		data = inbuf;
 		while (data_size > 0 || eof) {
@@ -224,8 +205,6 @@ uint8_t* Decoder::readParseDecodeDisplay(char* buffer, int len) {
 			data += ret;
 			data_size -= ret;
 
-			//printf("right before decoding, data_size %i\n", data_size);
-			//printf("pkt size: %i ret: %i\n", pkt->size, ret);
 			if (pkt->size)
 				return decode(c, frame, pkt);
 			else if (eof)

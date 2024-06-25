@@ -11,7 +11,6 @@ Model Model::Load(const char* path, uint32_t textureIndex) {
     model.textureIndex = textureIndex;
     model.modelMatrix = glm::mat4(1.0f);
     model.createGraphicsPipeline();
-    //bounding box test stuff
     model.boundingBox = computeBoundingBox(model.vertices);
 
     return model;
@@ -28,7 +27,7 @@ Model Model::LoadSkybox(const char* path, uint32_t textureIndex) {
     model.vertexShaderPath = "../MyGame/media/shaders/vertSkyBox.spv";
     model.fragmentShaderPath = "../MyGame/media/shaders/fragSkyBox.spv";
     model.createGraphicsPipeline(false);
-    //bounding box is basically infinity
+    //bounding box irrelevant
     return model;
 }
 

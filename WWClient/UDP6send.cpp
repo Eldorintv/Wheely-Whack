@@ -57,7 +57,6 @@ int UDPSend6::send(char* buffer, int len) {
 	RTHeader_t header;
 	header.time = clock() / (double)CLOCKS_PER_SEC;
 	header.packetnum = packetnum;
-	//header.packetCount = 1;
 
 	int ret{ 0 };
 	size_t bytesSent{ 0 };

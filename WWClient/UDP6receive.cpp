@@ -38,7 +38,6 @@ void UDPReceive6::init(int port) {
 	printf("Startup of receiver done\n");
 }
 
-//bool isUndefined = true;
 int UDPReceive6::receive(char* buffer, int len, double* ptime) {
 	struct sockaddr_in6 si_other;
 	socklen_t slen = sizeof(si_other);

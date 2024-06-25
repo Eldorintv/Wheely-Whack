@@ -25,10 +25,10 @@ VkDescriptorSetLayout descriptorSetLayout;
 
 const int MAX_FRAMES_IN_FLIGHT = 2;
 
-//Encoder encoder;
 std::chrono::milliseconds FPS_INTERVAL(30);
 auto lastExecuted = std::chrono::system_clock::now();
-// encoder and gpu copy queue
+
+// encoder and gpu queue
 std::queue<uint8_t*> encQueue;
 std::mutex encQueueMutex;
 std::condition_variable encQueueCondition;
@@ -279,8 +279,6 @@ private:
         // this means we have reached the last rock, and all rocks are gonna be replaced
         if (camera.getPosition().x > models[29].modelMatrix[3].x) {
             // this means we have reached the last rock, and all rocks are gonna be replaced
-
-            // maybe some sort of huhiiii, I replace, dont wonder
             resetRockPositions(false); // false means not to origin
         }
 
@@ -316,8 +314,6 @@ private:
                 return;
             }
         }
-        
-
         return;
     }
 
@@ -365,8 +361,7 @@ private:
             vkDestroyFence(device, inFlightFences[i], nullptr);
         }
 
-
-        // stagingBuffer
+        // stagingBuffer for copying image out of gpu
         vkDestroyBuffer(device, stagingBuffer, nullptr);
         vkFreeMemory(device, stagingBufferMemory, nullptr);
 
@@ -380,9 +375,6 @@ private:
 
         vkDestroySurfaceKHR(instance, surface, nullptr);
         vkDestroyInstance(instance, nullptr);
-
-        // Delete imGui stuff here
-
 
 
         glfwDestroyWindow(window);
@@ -542,7 +534,6 @@ private:
 
         vkGetDeviceQueue(device, indices.graphicsFamily.value(), 0, &graphicsQueue);
         vkGetDeviceQueue(device, indices.presentFamily.value(), 0, &presentQueue);
-        // SEARCH::QUEUE
     }
 
     void createSwapChain() {
@@ -956,7 +947,6 @@ private:
     }
 
     void createStagingBuffer() {
-        //commandBuffer = beginSingleTimeCommands();
         bufferSize = static_cast<VkDeviceSize>(swapChainExtent.width) * swapChainExtent.height * 4;
 
         createBuffer(bufferSize, VK_BUFFER_USAGE_TRANSFER_DST_BIT, VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT, stagingBuffer, stagingBufferMemory);
@@ -1035,11 +1025,12 @@ private:
             throw std::runtime_error("failed to present swap chain image!");
         }
 
+
+        // copy image to host and put into encoder queue magic here
         auto now = std::chrono::system_clock::now();
         if (now - lastExecuted >= FPS_INTERVAL && encodeOn) {
             lastExecuted = now;
-            // TO DO
-            // maybe make multi - use command buffer?
+
             commandBufferImageCopy = beginSingleTimeCommands();
             transitionImageLayout(swapChainImages[imageIndex], VK_FORMAT_B8G8R8A8_SRGB, VK_IMAGE_LAYOUT_PRESENT_SRC_KHR, VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL);
 
@@ -1049,20 +1040,14 @@ private:
 
             void* data;
             vkMapMemory(device, stagingBufferMemory, 0, bufferSize, 0, &data);
-
-            // here encode
             
             uint8_t* mappedData = new uint8_t[bufferSize];
             std::memcpy(mappedData, data, bufferSize);
 
-            //uint8_t* mappedData = static_cast<uint8_t*>(data);
-
-            //encoder.encodeFrameFromDataImage(mappedData);
             {
                 std::lock_guard<std::mutex> lock(encQueueMutex);
                 encQueue.push(std::move(mappedData));
-                //std::cout << "in draw and encoding now: " << encQueue.size() << "\n";
-                // this is a baindaid for now
+
                 if (encQueue.size() > 15) {
                     FPS_INTERVAL += std::chrono::milliseconds(2);
                 }
@@ -1071,8 +1056,6 @@ private:
                 }
             }
             encQueueCondition.notify_one();
-
-            //lastExecuted = std::chrono::system_clock::now();
 
             vkUnmapMemory(device, stagingBufferMemory);
 
@@ -1259,7 +1242,6 @@ private:
         Encoder encoder;
         encoder.codecReady = encoder.setUpCodec(swapChainExtent.width, swapChainExtent.height);
 
-        //encoder.encodeFrameFromDataImage(uint8_t* dataImage);
         while (encodeOn) {
             uint8_t* frame;
             {
@@ -1270,13 +1252,8 @@ private:
                 encQueue.pop();
             }
 
-            //std::cout << "encoding now\n";
             encoder.encodeFrameFromDataImage(frame);
             delete[] frame;
-
-            // checks queue twice as fast + sanity 1 ms
-            //std::this_thread::sleep_for(std::chrono::milliseconds((FPS_INTERVAL / 2) + std::chrono::milliseconds(1)));
-
         }
 
         // clean up
@@ -1343,9 +1320,6 @@ private:
     }
     
 };
-
-
-//extern std::chrono::milliseconds FPS_INTERVAL;
 
 void receiveReport() {
     UDPReceive6 receiver;

@@ -38,20 +38,15 @@ bool isFirstReport{ true };
 size_t bytesReceivedLast10Seconds{ 0 };
 auto last = std::chrono::system_clock::now();
 int framesReceived{ 0 };
+const std::chrono::seconds updateTimer(5);
 
 
 static void sendMessage(char byteRate[], UDPSend6& sender) {
-
-
 	std::cout << "Sending receiver report\n";
-	//char buf[100] = "My Receiver sends something back!\n";
 	sender.send(byteRate, static_cast<int>(strlen(byteRate)));
-
-	//std::this_thread::sleep_for(std::chrono::seconds(5));
-
 }
 
-const std::chrono::seconds updateTimer(5);
+
 
 static void sendReceiverReport(int len, UDPReceive6& receiver, UDPSend6& sender) {
 	bytesReceivedLast10Seconds += len;
@@ -97,7 +92,6 @@ void receiveFrames(UDPReceive6& receiver, UDPSend6& sender) {
 		fprintf(stderr, "Could not allocate tempBuffer\n");
 	} _Analysis_assume_(tempBuffer != NULL);
 
-	//int packetCounter{ 1 };
 
 	while (true) {
 		double ptime;
@@ -217,7 +211,6 @@ int main() {
 
 	// Threads A -> Receiver, Thread B -> Presenter
 	std::thread A(receiveFrames, std::ref(receiver), std::ref(sender));
-	//std::thread B(queueToPNG);
 	std::thread B(queueToUINT8);
 	std::thread C(displayWindow, std::ref(senderMovement));
 

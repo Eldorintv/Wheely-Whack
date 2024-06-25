@@ -36,16 +36,6 @@ bool Vertex::operator==(const Vertex& other) const {
 }
 
 
-//namespace std {
-//    template<> struct hash<Vertex> {
-//        size_t operator()(Vertex const& vertex) const {
-//            return ((hash<glm::vec3>()(vertex.pos) ^ (hash<glm::vec3>()(vertex.normal) << 1)) >> 1) ^ (hash<glm::vec2>()(vertex.texCoord) << 1);
-//        }
-//    };
-//}
-
-
-
 bool QueueFamilyIndices::isComplete() const {
     return graphicsFamily.has_value() && presentFamily.has_value();
 }
@@ -135,7 +125,6 @@ uint32_t VulkanHelper::findMemoryType(uint32_t typeFilter, VkMemoryPropertyFlags
 }
 
 VkImageView VulkanHelper::createImageView(VkImage image, VkFormat format, VkImageAspectFlags aspectFlags, uint32_t layerCount) {
-    //std::cout << "layerCount in createImageView: " << layerCount << "\n";
     VkImageViewCreateInfo viewInfo{};
     viewInfo.sType = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO;
     viewInfo.image = image;
@@ -143,9 +132,7 @@ VkImageView VulkanHelper::createImageView(VkImage image, VkFormat format, VkImag
         viewInfo.viewType = VK_IMAGE_VIEW_TYPE_2D;
     }
     else {
-        // This should be on but doesnt work
         viewInfo.viewType = VK_IMAGE_VIEW_TYPE_CUBE;
-        //viewInfo.viewType = VK_IMAGE_VIEW_TYPE_2D;
     }
     viewInfo.format = format;
     viewInfo.subresourceRange.aspectMask = aspectFlags;
