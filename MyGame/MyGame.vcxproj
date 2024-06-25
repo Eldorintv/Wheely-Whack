@@ -28,6 +28,7 @@
     <ClCompile Include="imgui-master\imgui_draw.cpp" />
     <ClCompile Include="imgui-master\imgui_tables.cpp" />
     <ClCompile Include="imgui-master\imgui_widgets.cpp" />
+    <ClCompile Include="WWtexture.cpp" />
     <ClCompile Include="WheelyWonkaS_main.cpp" />
     <ClCompile Include="WWboundingbox.cpp" />
     <ClCompile Include="WWcamera.cpp" />
