@@ -202,21 +202,21 @@ private:
         // the rock(s) xD
         models.push_back(Model::Load("../MyGame/media/models/cone.obj", 7));//15
         models.push_back(Model::Load("../MyGame/media/models/rock.obj", 5));//16
-        models.push_back(Model::Load("../MyGame/media/models/rock.obj", 5));//17
+        models.push_back(Model::Load("../MyGame/media/models/cone.obj", 7));//17
         models.push_back(Model::Load("../MyGame/media/models/rock.obj", 5));//18
-        models.push_back(Model::Load("../MyGame/media/models/rock.obj", 5));//19
+        models.push_back(Model::Load("../MyGame/media/models/cone.obj", 7));//19
 
         models.push_back(Model::Load("../MyGame/media/models/rock.obj", 5));//20
-        models.push_back(Model::Load("../MyGame/media/models/rock.obj", 5));//21
+        models.push_back(Model::Load("../MyGame/media/models/cone.obj", 7));//21
         models.push_back(Model::Load("../MyGame/media/models/rock.obj", 5));//22
-        models.push_back(Model::Load("../MyGame/media/models/rock.obj", 5));//23
+        models.push_back(Model::Load("../MyGame/media/models/cone.obj", 7));//23
         models.push_back(Model::Load("../MyGame/media/models/rock.obj", 5));//24
 
-        models.push_back(Model::Load("../MyGame/media/models/rock.obj", 5));//25
+        models.push_back(Model::Load("../MyGame/media/models/cone.obj", 7));//25
         models.push_back(Model::Load("../MyGame/media/models/rock.obj", 5));//26
-        models.push_back(Model::Load("../MyGame/media/models/rock.obj", 5));//27
+        models.push_back(Model::Load("../MyGame/media/models/cone.obj", 7));//27
         models.push_back(Model::Load("../MyGame/media/models/rock.obj", 5));//28
-        models.push_back(Model::Load("../MyGame/media/models/rock.obj", 5));//29
+        models.push_back(Model::Load("../MyGame/media/models/cone.obj", 7));//29
 
         models.push_back(Model::Load("../MyGame/media/models/finish_line.obj", 3)); // 30 finish line
         // water fixes
@@ -1288,8 +1288,8 @@ private:
         std::random_device rd;
         std::mt19937 gen(rd()); // my random generator
         // x plus modifer
-        std::uniform_real_distribution<> xRange(10.0, 30.0);
-        std::uniform_real_distribution<> zRange(-4.0, 4.0);
+        std::uniform_real_distribution<> xRange(10.0, 20.0);
+        std::uniform_real_distribution<> zRange(-4.5, 4.5);
         float random_x = 0.0f;
         if (reset) {
             random_x = static_cast<float>(xRange(gen)) + 15;
@@ -1313,6 +1313,9 @@ private:
         }
         else {
             random_x = static_cast<float>(xRange(gen)) + 40;
+            for (size_t i{ 15 }; i < 29; ++i) {
+                models[i].modelMatrix = models[29].modelMatrix;
+            }
 
             // PLAY WUHUUUU OR SOMETHING HERE
         }
