@@ -218,6 +218,13 @@ private:
         models.push_back(Model::Load("../MyGame/media/models/rock.obj", 5));//29
 
         models.push_back(Model::Load("../MyGame/media/models/finish_line.obj", 3)); // 30 finish line
+        // water fixes
+        models.push_back(Model::Load("../MyGame/media/models/line_road/water_left2.obj", 4)); // 31
+        models.push_back(Model::Load("../MyGame/media/models/line_road/water_right2.obj", 4)); // 32
+        models.push_back(Model::Load("../MyGame/media/models/line_road/water_left3.obj", 4)); // 33
+        models.push_back(Model::Load("../MyGame/media/models/line_road/water_right3.obj", 4)); // 34
+        models.push_back(Model::Load("../MyGame/media/models/line_road/water_left4.obj", 4)); // 35
+        models.push_back(Model::Load("../MyGame/media/models/line_road/water_right4.obj", 4)); // 36
 
         resetRockPositions(true);
 
@@ -283,8 +290,8 @@ private:
     bool checkForHit(std::vector<size_t>& hitables) {
         for (const auto& object : hitables) {
 
+            // finish line reached
             if (models[30].boundingBox.isInside(camera.getPosition())) {
-                // finish line reached
                 camera.velocity = 0.005f;
                 camera.carStarted = false;
                 resetRockPositions();
