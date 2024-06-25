@@ -229,6 +229,8 @@ private:
         createSyncObjects();
 
         createStagingBuffer();
+
+        // Nuklear GUI stuff
     }
 
     double lastFrameTime = 0.0;

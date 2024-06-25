@@ -196,7 +196,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>..\WWClient\external\SFML\SFML-2.6.1\include;..\WWClient\external\threadpool;..\WWClient\external\Assimp\include;..\WWClient\external\ffmpeg\include;..\WWClient\external\irrKlang\include;glfw\glfw-3.2.1.bin.WIN64\include;glm;stb;$(VULKAN_SDK)\include;..\WWClient\external\glfw\include;nuklear-master\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\WWClient\external\SFML\SFML-2.6.1\include;..\WWClient\external\threadpool;..\WWClient\external\Assimp\include;..\WWClient\external\ffmpeg\include;..\WWClient\external\irrKlang\include;glfw\glfw-3.2.1.bin.WIN64\include;glm;stb;$(VULKAN_SDK)\include;..\WWClient\external\glfw\include;nuklear-master;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -216,7 +216,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>..\WWClient\external\SFML\SFML-2.6.1\include;..\WWClient\external\threadpool;..\WWClient\external\Assimp\include;..\WWClient\external\ffmpeg\include;..\WWClient\external\irrKlang\include;glfw\glfw-3.2.1.bin.WIN64\include;glm;stb;$(VULKAN_SDK)\include;..\WWClient\external\glfw\include;nuklear-master\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\WWClient\external\SFML\SFML-2.6.1\include;..\WWClient\external\threadpool;..\WWClient\external\Assimp\include;..\WWClient\external\ffmpeg\include;..\WWClient\external\irrKlang\include;glfw\glfw-3.2.1.bin.WIN64\include;glm;stb;$(VULKAN_SDK)\include;..\WWClient\external\glfw\include;nuklear-master;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <DebugInformationFormat>None</DebugInformationFormat>
     </ClCompile>
