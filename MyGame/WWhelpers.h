@@ -33,6 +33,10 @@
 #include <unordered_map>
 #include <thread>
 
+#include "imgui.h"
+#include "imgui-master/backends/imgui_impl_glfw.h"
+#include "imgui-master/backends/imgui_impl_opengl3.h"
+
 #define GLFW_INCLUDE_VULKAN
 #include <GLFW/glfw3.h>
 

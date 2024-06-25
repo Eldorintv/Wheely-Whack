@@ -145,6 +145,13 @@ private:
         glfwSetCursorPosCallback(window, cursorPosition_callback);
         glfwSetMouseButtonCallback(window, mouseButton_callback);
 
+        IMGUI_CHECKVERSION();
+        ImGui::CreateContext();
+        ImGuiIO& io = ImGui::GetIO(); (void)io;
+        ImGui::StyleColorsDark();
+        ImGui_ImplGlfw_InitForOpenGL(window, true);
+        ImGui_ImplOpenGL3_Init("#version 330");
+
     }
 
     static void framebufferResizeCallback(GLFWwindow* window, int width, int height) {
@@ -230,7 +237,6 @@ private:
 
         createStagingBuffer();
 
-        // Nuklear GUI stuff
     }
 
     double lastFrameTime = 0.0;

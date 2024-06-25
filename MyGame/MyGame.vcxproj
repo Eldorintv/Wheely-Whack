@@ -21,11 +21,26 @@
   <ItemGroup>
     <ClCompile Include="..\WWClient\UDP6receive.cpp" />
     <ClCompile Include="..\WWClient\UDP6send.cpp" />
+    <ClCompile Include="imgui-master\backends\imgui_impl_glfw.cpp" />
+    <ClCompile Include="imgui-master\backends\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="imgui-master\imgui.cpp" />
+    <ClCompile Include="imgui-master\imgui_demo.cpp" />
+    <ClCompile Include="imgui-master\imgui_draw.cpp" />
+    <ClCompile Include="imgui-master\imgui_tables.cpp" />
+    <ClCompile Include="imgui-master\imgui_widgets.cpp" />
     <ClCompile Include="WheelyWonkaS_main.cpp" />
     <ClCompile Include="WWboundingbox.cpp" />
     <ClCompile Include="WWencoder.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="imgui-master\backends\imgui_impl_glfw.h" />
+    <ClInclude Include="imgui-master\backends\imgui_impl_opengl3.h" />
+    <ClInclude Include="imgui-master\imconfig.h" />
+    <ClInclude Include="imgui-master\imgui.h" />
+    <ClInclude Include="imgui-master\imgui_internal.h" />
+    <ClInclude Include="imgui-master\imstb_rectpack.h" />
+    <ClInclude Include="imgui-master\imstb_textedit.h" />
+    <ClInclude Include="imgui-master\imstb_truetype.h" />
     <ClInclude Include="WWboundingbox.h" />
     <ClInclude Include="WWcamera.h" />
     <ClInclude Include="WWencoder.h" />
@@ -196,7 +211,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>..\WWClient\external\SFML\SFML-2.6.1\include;..\WWClient\external\threadpool;..\WWClient\external\Assimp\include;..\WWClient\external\ffmpeg\include;..\WWClient\external\irrKlang\include;glfw\glfw-3.2.1.bin.WIN64\include;glm;stb;$(VULKAN_SDK)\include;..\WWClient\external\glfw\include;nuklear-master;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\WWClient\external\SFML\SFML-2.6.1\include;..\WWClient\external\threadpool;..\WWClient\external\Assimp\include;..\WWClient\external\ffmpeg\include;..\WWClient\external\irrKlang\include;glfw\glfw-3.2.1.bin.WIN64\include;glm;stb;$(VULKAN_SDK)\include;..\WWClient\external\glfw\include;imgui-master;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -216,7 +231,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>..\WWClient\external\SFML\SFML-2.6.1\include;..\WWClient\external\threadpool;..\WWClient\external\Assimp\include;..\WWClient\external\ffmpeg\include;..\WWClient\external\irrKlang\include;glfw\glfw-3.2.1.bin.WIN64\include;glm;stb;$(VULKAN_SDK)\include;..\WWClient\external\glfw\include;nuklear-master;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\WWClient\external\SFML\SFML-2.6.1\include;..\WWClient\external\threadpool;..\WWClient\external\Assimp\include;..\WWClient\external\ffmpeg\include;..\WWClient\external\irrKlang\include;glfw\glfw-3.2.1.bin.WIN64\include;glm;stb;$(VULKAN_SDK)\include;..\WWClient\external\glfw\include;imgui-master;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <DebugInformationFormat>None</DebugInformationFormat>
     </ClCompile>

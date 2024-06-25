@@ -34,6 +34,12 @@
     <Filter Include="Resource Files\media\models\unused">
       <UniqueIdentifier>{bb5d9014-7627-4d6d-a8cd-e623f6103e6f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\imgui">
+      <UniqueIdentifier>{d91eeea2-57d3-4136-bd69-3e8e196b260c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\imgui">
+      <UniqueIdentifier>{39c436f3-c013-4515-bf73-76713b2aeefd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WheelyWonkaS_main.cpp">
@@ -50,6 +56,27 @@
     </ClCompile>
     <ClCompile Include="WWboundingbox.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui-master\imgui.cpp">
+      <Filter>Source Files\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui-master\imgui_demo.cpp">
+      <Filter>Source Files\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui-master\imgui_draw.cpp">
+      <Filter>Source Files\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui-master\imgui_widgets.cpp">
+      <Filter>Source Files\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui-master\backends\imgui_impl_glfw.cpp">
+      <Filter>Source Files\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui-master\backends\imgui_impl_opengl3.cpp">
+      <Filter>Source Files\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui-master\imgui_tables.cpp">
+      <Filter>Source Files\imgui</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -76,6 +103,30 @@
     </ClInclude>
     <ClInclude Include="WWboundingbox.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui-master\imconfig.h">
+      <Filter>Header Files\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui-master\imgui.h">
+      <Filter>Header Files\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui-master\imgui_internal.h">
+      <Filter>Header Files\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui-master\imstb_rectpack.h">
+      <Filter>Header Files\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui-master\imstb_textedit.h">
+      <Filter>Header Files\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui-master\imstb_truetype.h">
+      <Filter>Header Files\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui-master\backends\imgui_impl_glfw.h">
+      <Filter>Header Files\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui-master\backends\imgui_impl_opengl3.h">
+      <Filter>Header Files\imgui</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
