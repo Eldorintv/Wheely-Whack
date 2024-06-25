@@ -182,10 +182,10 @@ private:
         textures.push_back(Texture::Load("../MyGame/media/textures/gravel_road.jpg"));//6
 
         // MODELS
-        models.push_back(Model::LoadSkybox("../MyGame/media/models/skybox_cube.obj", 0));
-        models.push_back(Model::Load("../MyGame/media/models/line_road/road.obj", 1));
-        models.push_back(Model::Load("../MyGame/media/models/line_road/water_left.obj", 4));
-        models.push_back(Model::Load("../MyGame/media/models/line_road/water_right.obj", 4));
+        models.push_back(Model::LoadSkybox("../MyGame/media/models/skybox_cube.obj", 0)); // 0
+        models.push_back(Model::Load("../MyGame/media/models/line_road/road.obj", 1)); // 1
+        models.push_back(Model::Load("../MyGame/media/models/line_road/water_left.obj", 4)); // 2
+        models.push_back(Model::Load("../MyGame/media/models/line_road/water_right.obj", 4)); // 3
         models.push_back(Model::Load("../MyGame/media/models/line_road/left_iron_fence.obj", 2)); //4
         models.push_back(Model::Load("../MyGame/media/models/line_road/right_iron_fence.obj", 2));//5
         models.push_back(Model::Load("../MyGame/media/models/line_road/road2.obj", 1));//6
@@ -241,6 +241,8 @@ private:
         15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29
     };
 
+    std::vector<size_t> finishLine{ 30 };
+
     void mainLoop() {
         while (!glfwWindowShouldClose(window)) {
             double currentFrameTime = glfwGetTime();
@@ -261,6 +263,7 @@ private:
     void checkForGameMechanics() {
         // check if something is being hit
         checkForHit(hittableObjects);
+        checkForHit(finishLine);
 
         // this means we have reached the last rock, and all rocks are gonna be replaced
         if (camera.getPosition().x > models[29].modelMatrix[3].x) {
@@ -278,8 +281,18 @@ private:
     }
 
     // not working at all
-    void checkForHit(std::vector<size_t>& hitables) {
+    bool checkForHit(std::vector<size_t>& hitables) {
         for (const auto& object : hitables) {
+
+            if (models[30].boundingBox.isInside(camera.getPosition())) {
+                // finish line reached
+                camera.velocity = 0.005f;
+                camera.carStarted = false;
+                resetRockPositions();
+
+                // TO DO: option to restart
+                return true;
+            }
 
             // if camera hits one of the objects in hittableObjects this evaluates to true
             if (models[object].boundingBox.isInside(camera.getPosition())) {
@@ -289,6 +302,9 @@ private:
                 resetRockPositions();
             }
         }
+        
+
+        return false;
     }
 
     void cleanupSwapChain() {
