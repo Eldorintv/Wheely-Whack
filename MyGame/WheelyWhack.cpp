@@ -283,10 +283,10 @@ private:
         }
 
         // When x > 1150 reset to 750
-        if (camera.getPosition().x > 1150) {
-            camera.resetViewMatrix(glm::vec3(800.0f, 0.5f, 0.0f));
-            camera.maxSpeed += 0.1f;
-        }
+        //if (camera.getPosition().x > 1150) {
+        //    camera.resetViewMatrix(glm::vec3(800.0f, 0.5f, 0.0f));
+        //    camera.maxSpeed += 0.1f;
+        //}
     }
 
     void checkForHit(std::vector<size_t>& hitables) {
