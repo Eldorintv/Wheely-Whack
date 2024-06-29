@@ -283,13 +283,12 @@ private:
         }
 
         // When x > 1150 reset to 750
-        //if (camera.getPosition().x > 1150) {
-        //    camera.resetViewMatrix(glm::vec3(800.0f, 0.5f, 0.0f));
-        //    camera.maxSpeed += 0.1f;
-        //}
+        if (camera.getPosition().x > 1150) {
+            camera.resetViewMatrix(glm::vec3(800.0f, 0.5f, 0.0f));
+            camera.maxSpeed += 0.1f;
+        }
     }
 
-    // not working at all
     void checkForHit(std::vector<size_t>& hitables) {
         for (const auto& object : hitables) {
 
@@ -1270,23 +1269,9 @@ private:
         float random_x = 0.0f;
         if (reset) {
             random_x = static_cast<float>(xRange(gen)) + 15;
-            models[15].modelMatrix = glm::mat4(1.0f);
-            models[16].modelMatrix = glm::mat4(1.0f);
-            models[17].modelMatrix = glm::mat4(1.0f);
-            models[18].modelMatrix = glm::mat4(1.0f);
-            models[19].modelMatrix = glm::mat4(1.0f);
-
-            models[20].modelMatrix = glm::mat4(1.0f);
-            models[21].modelMatrix = glm::mat4(1.0f);
-            models[22].modelMatrix = glm::mat4(1.0f);
-            models[23].modelMatrix = glm::mat4(1.0f);
-            models[24].modelMatrix = glm::mat4(1.0f);
-
-            models[25].modelMatrix = glm::mat4(1.0f);
-            models[26].modelMatrix = glm::mat4(1.0f);
-            models[27].modelMatrix = glm::mat4(1.0f);
-            models[28].modelMatrix = glm::mat4(1.0f);
-            models[29].modelMatrix = glm::mat4(1.0f);
+            for (size_t i = 15; i < 30; ++i) {
+                models[i].modelMatrix = glm::mat4(1.0f);
+            }
         }
         else {
             random_x = static_cast<float>(xRange(gen)) + 40;
@@ -1300,23 +1285,11 @@ private:
         }
         
         float random_z = static_cast<float>(zRange(gen));
-        models[15].translateModelMatrix(glm::vec3(random_x, 0.0f, random_z)); random_x += static_cast<float>(xRange(gen)); random_z = static_cast<float>(zRange(gen));
-        models[16].translateModelMatrix(glm::vec3(random_x, 0.0f, random_z)); random_x += static_cast<float>(xRange(gen)); random_z = static_cast<float>(zRange(gen));
-        models[17].translateModelMatrix(glm::vec3(random_x, 0.0f, random_z)); random_x += static_cast<float>(xRange(gen)); random_z = static_cast<float>(zRange(gen));
-        models[18].translateModelMatrix(glm::vec3(random_x, 0.0f, random_z)); random_x += static_cast<float>(xRange(gen)); random_z = static_cast<float>(zRange(gen));
-        models[19].translateModelMatrix(glm::vec3(random_x, 0.0f, random_z)); random_x += static_cast<float>(xRange(gen)); random_z = static_cast<float>(zRange(gen));
-
-        models[20].translateModelMatrix(glm::vec3(random_x, 0.0f, random_z)); random_x += static_cast<float>(xRange(gen)); random_z = static_cast<float>(zRange(gen));
-        models[21].translateModelMatrix(glm::vec3(random_x, 0.0f, random_z)); random_x += static_cast<float>(xRange(gen)); random_z = static_cast<float>(zRange(gen));
-        models[22].translateModelMatrix(glm::vec3(random_x, 0.0f, random_z)); random_x += static_cast<float>(xRange(gen)); random_z = static_cast<float>(zRange(gen));
-        models[23].translateModelMatrix(glm::vec3(random_x, 0.0f, random_z)); random_x += static_cast<float>(xRange(gen)); random_z = static_cast<float>(zRange(gen));
-        models[24].translateModelMatrix(glm::vec3(random_x, 0.0f, random_z)); random_x += static_cast<float>(xRange(gen)); random_z = static_cast<float>(zRange(gen));
-
-        models[25].translateModelMatrix(glm::vec3(random_x, 0.0f, random_z)); random_x += static_cast<float>(xRange(gen)); random_z = static_cast<float>(zRange(gen));
-        models[26].translateModelMatrix(glm::vec3(random_x, 0.0f, random_z)); random_x += static_cast<float>(xRange(gen)); random_z = static_cast<float>(zRange(gen));
-        models[27].translateModelMatrix(glm::vec3(random_x, 0.0f, random_z)); random_x += static_cast<float>(xRange(gen)); random_z = static_cast<float>(zRange(gen));
-        models[28].translateModelMatrix(glm::vec3(random_x, 0.0f, random_z)); random_x += static_cast<float>(xRange(gen)); random_z = static_cast<float>(zRange(gen));
-        models[29].translateModelMatrix(glm::vec3(random_x, 0.0f, random_z)); random_x += static_cast<float>(xRange(gen)); random_z = static_cast<float>(zRange(gen));
+        for (size_t i{ 15 }; i < 29; ++i) {
+            models[i].translateModelMatrix(glm::vec3(random_x, 0.0f, random_z)); 
+            random_x += static_cast<float>(xRange(gen)); 
+            random_z = static_cast<float>(zRange(gen));
+        }
     }
     
 };
