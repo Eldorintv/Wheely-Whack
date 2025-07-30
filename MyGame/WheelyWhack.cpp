@@ -65,12 +65,12 @@ void DestroyDebugUtilsMessengerEXT(VkInstance instance, VkDebugUtilsMessengerEXT
 }
 
 
-class HelloTriangleApplication : VulkanHelper {
+class Game : VulkanHelper {
 public:
     void run() {
         initWindow();
         initVulkan();
-        std::thread encodingThread(&HelloTriangleApplication::encoderQueueAndUDPSend, this);
+        std::thread encodingThread(&Game::encoderQueueAndUDPSend, this);
         mainLoop();
         encodeOn = false;
         encodingThread.join();
@@ -148,7 +148,7 @@ private:
     }
 
     static void framebufferResizeCallback(GLFWwindow* window, int width, int height) {
-        auto app = reinterpret_cast<HelloTriangleApplication*>(glfwGetWindowUserPointer(window));
+        auto app = reinterpret_cast<Game*>(glfwGetWindowUserPointer(window));
         app->framebufferResized = true;
     }
 
@@ -1370,7 +1370,7 @@ void getMovementUDP() {
 
 int main() {
     startWinsock();
-    HelloTriangleApplication app;
+    Game app;
 
     std::thread receiveThread(receiveReport);
     std::thread getMovement(getMovementUDP);
