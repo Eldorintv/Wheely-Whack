@@ -7,7 +7,7 @@ void displayWindow(UDPSend6& sender) {
     sf::ContextSettings settings;
     settings.antialiasingLevel = 0;
 
-    sf::RenderWindow window(sf::VideoMode(800, 600), "Wheely Wonka - Client", sf::Style::Default, settings);
+    sf::RenderWindow window(sf::VideoMode(800, 600), "Wheely Whack - Client", sf::Style::Default, settings);
     if (!texture.create(800, 600)) {
         fprintf(stderr, "VIDEO_DISPLAY: Error creating a texture\n");
         exit(1);
