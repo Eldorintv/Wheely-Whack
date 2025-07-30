@@ -1285,7 +1285,7 @@ private:
         }
         
         float random_z = static_cast<float>(zRange(gen));
-        for (size_t i{ 15 }; i < 29; ++i) {
+        for (size_t i{ 15 }; i < 30; ++i) {
             models[i].translateModelMatrix(glm::vec3(random_x, 0.0f, random_z)); 
             random_x += static_cast<float>(xRange(gen)); 
             random_z = static_cast<float>(zRange(gen));
