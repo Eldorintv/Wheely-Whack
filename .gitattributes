@@ -62,8 +62,8 @@
 #*.rtf   diff=astextplain
 #*.RTF   diff=astextplain
 
-/WWClient/external linguist-vendored
-/MyGame/glfw linguist-vendored
-/MyGame/glm linguist-vendored
-/MyGame/imgui-master linguist-vendored
-/MyGame/stb linguist-vendored
+/MyGame/glfw/** linguist-vendored
+/MyGame/glm/** linguist-vendored
+/MyGame/imgui-master/** linguist-vendored
+/MyGame/stb/** linguist-vendored
+/WWClient/external/** linguist-vendored
